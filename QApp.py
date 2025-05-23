@@ -35,17 +35,17 @@ def mostrar_cartoes_de_area(textos):
     with col1:
         if st.button("", key="otimizacao_btn"):
             st.session_state['pagina'] = 'otimizacao'
-        st.image("opt.png", use_container_width=True)
+        st.image("opt.png",  width=100, use_container_width=True)
 
     with col2:
         if st.button("", key="monitoramento_btn"):
             st.session_state['pagina'] = 'monitoramento'
-        st.image("ml.png", use_container_width=True)
+        st.image("ml.png",  width=150, use_container_width=True)
 
     with col3:
         if st.button("", key="manutencao_btn"):
             st.session_state['pagina'] = 'manutencao'
-        st.image("infer.png", use_container_width=True)
+        st.image("infer.png",  width=200,  use_container_width=True)
 
 def ler_manualmente(textos):
     valor = st.text_input(textos["instancia_input"])
@@ -60,7 +60,7 @@ def mostrar_instancia(instancia, textos):
 def mostrar_logo_topo():
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
-        st.image("qxplore.png", width=200)
+        st.image("qxplore.png",  use_column_width=True)
 
 def main():
     st.set_page_config(page_title="qxplore", layout="wide")
