@@ -31,24 +31,23 @@ def aplicar_css_botoes():
     st.markdown(
         """
         <style>
-        div.stButton > button {
-            background-color: #0d4376;
-            color: white;
-            width: 180px;
-            height: 50px;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            transition: background-color 0.3s ease;
+        button[data-testid="stButton"] {
+            background-color: #0d4376 !important;
+            color: white !important;
+            width: 180px !important;
+            height: 50px !important;
+            border-radius: 8px !important;
+            font-size: 16px !important;
+            font-weight: 600 !important;
+            transition: background-color 0.3s ease !important;
         }
-        div.stButton > button:hover {
-            background-color: #07294a;
+        button[data-testid="stButton"]:hover {
+            background-color: #07294a !important;
         }
         </style>
         """,
         unsafe_allow_html=True
     )
-
 def mostrar_introducao_e_titulo(textos):
     texto = textos['intro']
     st.markdown(
