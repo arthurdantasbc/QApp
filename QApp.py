@@ -35,8 +35,8 @@ def aplicar_css_botoes():
         div.stButton > button {
             background-color: #0d4376 !important;
             color: white !important;
-            width: 180px !important;
-            height: 50px !important;
+            width: 150px !important;
+            height: 80px !important;
             border-radius: 8px !important;
             font-size: 16px !important;
             font-weight: 600 !important;
