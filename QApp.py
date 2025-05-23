@@ -3,7 +3,7 @@ import streamlit as st
 # Textos multilíngues
 TEXTOS = {
     "pt": {
-        
+        "intro": "Seja bem-vindo ao QXplore!\nEste aplicativo foi criado para incentivar o uso da computação quântica em três áreas distintas, apresentadas a seguir.\nEscolha a área que deseja explorar e descubra as possibilidades oferecidas por essa tecnologia inovadora.",
         "pagina_otimizacao": "Página de Otimização",
         "pagina_monitoramento": "Página de Monitoramento",
         "pagina_manutencao": "Página de Manutenção",
@@ -13,7 +13,7 @@ TEXTOS = {
         "idioma": "Escolha o idioma:"
     },
     "en": {
-        
+        "intro": "Welcome to QXplore!\nThis application was developed to promote the use of quantum computing in three distinct areas, described below.\nSelect the area you want to explore and discover the possibilities offered by this innovative technology.",
         "pagina_otimizacao": "Optimization Page",
         "pagina_monitoramento": "Monitoring Page",
         "pagina_manutencao": "Maintenance Page",
