@@ -1,0 +1,17 @@
+streamlit
+qiskit
+qiskit_optimization
+qiskit_algorithms
+scikit-learn
+numpy
+pyDOE2
+matplotlib
+qiskit[visualization]
+qiskit==1.4.1
+rustworkx==0.16.0
+dill==0.3.9
+stevedore==5.4.1
+symengine==0.13.0
+pbr==6.1.1
+qiskit-optimization==0.6.1
+qiskit-algorithms==0.3.1
