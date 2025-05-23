@@ -1,4 +1,88 @@
 import streamlit as st
+import numpy as np
+from qiskit_algorithms import QAOA, SamplingVQE
+from qiskit_algorithms.optimizers import COBYLA, SPSA
+from qiskit.primitives import Sampler
+from qiskit_optimization.algorithms import MinimumEigenOptimizer
+from qiskit.circuit.library import RealAmplitudes
+from qiskit_optimization import QuadraticProgram
+from qiskit_optimization.converters import InequalityToEquality, IntegerToBinary, LinearEqualityToPenalty
+from qiskit_algorithms.utils import algorithm_globals
+import warnings
+import time
+import sys
+import math
+from math import exp
+from pyDOE2 import lhs
+from sklearn.cluster import KMeans
+
+parametros_treino=[
+    [5.64955258, 5.13768523],
+    [3.61058585, 1.50012797],
+    [4.010099, 3.52868256],
+    [4.11607976, 5.6834854],
+    [0.06207073, 5.94693377],
+    [2.95672097, 2.50510161],
+    [4.5185035, 4.89354295],
+    [0.3059588, 4.61665871],
+    [1.16213395, 2.69425644],
+    [3.2913161, 4.62269263],
+    [5.39444087, 0.93767015],
+    [1.65486403, 3.92155331],
+    [0.9007122, 1.12241408],
+    [3.5433401, 0.36532233],
+    [5.44229483, 0.14221492],
+    [5.59171369, 0.54184375],
+    [5.77141418, 1.36856365],
+    [4.88822815, 4.4179515],
+    [2.21347623, 2.5046945],
+    [5.59580687, 1.93161085],
+    [5.43202626, 4.43408805],
+    [1.74131047, 3.28836299],
+    [1.11717397, 1.40617162],
+    [5.10379713, 4.82242841],
+    [0.94864183, 4.26102119],
+    [1.22151151, 4.17421882],
+    [2.48937933, 2.39064838],
+    [2.43619386, 0.59423984],
+    [5.94310436, 1.3699992],
+    [4.63213223, 0.40957529],
+    [0.75894679, 6.23837798],
+    [2.77578539, 1.436039],
+    [6.26838495, 1.37941869],
+    [0.41929643, 0.24710771],
+    [4.72602909, 2.861201],
+    [5.40509589, 1.68638764],
+    [0.29483925, 0.7874109],
+    [2.33328555, 1.79361212],
+    [5.97029726, 4.83125872],
+    [3.47801, 1.46867375],
+    [3.91608824, 0.71458607],
+    [0.44421512, 3.37681099],
+    [1.94995772, 3.18787309],
+    [5.33968064, 5.06136689],
+    [2.71236618, 4.98453269],
+    [0.66708969, 6.00416504],
+    [0.7003309, 0.18990556],
+    [5.14133123, 1.89366819],
+    [3.84203933, 1.56963872],
+    [3.82093591, 4.77167525],
+    [1.41782966, 2.12239654],
+    [2.20481875, 0.74545343],
+    [4.14560754, 3.93178518],
+    [1.64510614, 2.99335506],
+    [1.48930073, 0.68871199],
+    [2.88094723, 4.14656843]
+]
+
+def generate_lhs_samples(param_intervals, num_samples):
+    lhs_samples = lhs(len(param_intervals), samples=num_samples, criterion='maximin')
+    lhs_scaled = np.zeros((num_samples, len(param_intervals)))
+
+    for i in range(len(param_intervals)):
+        lhs_scaled[:, i] = param_intervals[i][0] + lhs_samples[:, i] * (param_intervals[i][1] - param_intervals[i][0])
+
+    return lhs_scaled
 
 # Textos multilíngues
 TEXTOS = {
@@ -27,6 +111,51 @@ TEXTOS = {
         "referencias_intro": "To learn more about our work in this area, check the references below:"
     }
 }
+
+TEXTOS_OPT = {
+    "pt": {
+        "insira_dados": "Insira os dados solicitados:",
+        "instancia": "Instância fornecida:",
+        "carregar_arquivo": "Carregar arquivo:",
+        "minutos": "minutos",
+        "minutos_e_segundos": "minutos e {segundos} segundos",
+
+        # Textos da ajuda
+        "problema_rap": "Problema de Alocação de Redundâncias (RAP):",
+        "descricao_rap": "O RAP refere-se à otimização da alocação de componentes redundantes em um sistema para aumentar sua confiabilidade e disponibilidade.",
+
+        "algoritmos": "Algoritmos quânticos disponíveis:",
+        "descricao_algoritmos": "Os algoritmos quânticos de otimização são projetados para explorar as propriedades únicas da mecânica quântica, como superposição e entrelaçamento, para resolver problemas de otimização, como o RAP.",
+
+        "qaoa_nome": "QAOA",
+        "qaoa_desc": "Quantum Approximate Optimization Algorithm é um algoritmo quântico projetado para resolver problemas de otimização combinatória, como o RAP, aproximando-se das soluções ótimas utilizando uma sequência parametrizada de operações quânticas.",
+
+        "vqe_nome": "VQE",
+        "vqe_desc": "Variational Quantum Eigensolver é um algoritmo híbrido quântico-clássico que usa um circuito quântico variacional para encontrar o estado de menor energia de um Hamiltoniano, mas requer mais parâmetros e pode demandar mais tempo computacional em comparação com o QAOA."
+    },
+    "en": {
+        "insira_dados": "Enter the requested data:",
+        "instancia": "Provided instance:",
+        "carregar_arquivo": "Upload file:",
+        "minutos": "minutes",
+        "minutos_e_segundos": "minutes and {segundos} seconds",
+
+        # Help section
+        "problema_rap": "Redundancy Allocation Problem (RAP):",
+        "descricao_rap": "RAP refers to the optimization of allocating redundant components in a system to increase its reliability and availability.",
+
+        "algoritmos": "Available quantum algorithms:",
+        "descricao_algoritmos": "Quantum optimization algorithms are designed to leverage the unique properties of quantum mechanics, such as superposition and entanglement, to solve optimization problems like RAP.",
+
+        "qaoa_nome": "QAOA",
+        "qaoa_desc": "Quantum Approximate Optimization Algorithm is a quantum algorithm designed to solve combinatorial optimization problems, such as RAP, by approximating optimal solutions using a parameterized sequence of quantum operations.",
+
+        "vqe_nome": "VQE",
+        "vqe_desc": "Variational Quantum Eigensolver is a hybrid quantum-classical algorithm that uses a variational quantum circuit to find the lowest energy state of a Hamiltonian, but it requires more parameters and may take longer computational time compared to QAOA."
+    }
+}
+
+
 def aplicar_css_botoes():
     st.markdown(
         """
@@ -133,6 +262,66 @@ def mostrar_logo_topo():
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
         st.image("qxplore.png", width=600)
+        
+#Otimização
+def ler_manualmente(textos_otim):
+    st.write(textos_otim["insira_dados"])
+    s = st.number_input("s:", key='s', step=1)
+    nj_max = st.number_input("nj_max:", key='nj_max', step=1)
+    nj_min = st.number_input("nj_min:", key='nj_min', step=1)
+    ctj_of = st.number_input("ctj_of:", key='ctj_of', step=1)
+    
+    Rjk_of, cjk_of = [], []
+    for i in range(int(ctj_of)):
+        Rjk_of.append(st.number_input(f"Rjk_of[{i+1}]:", key=f'Rjk_of_{i}', step=0.01, format="%.8f"))
+        cjk_of.append(st.number_input(f"cjk_of[{i+1}]:", key=f'cjk_of_{i}', step=1))
+
+    C_of = st.number_input("C_of:", key='C_of', step=1)
+    return [[s, nj_max, nj_min, ctj_of, Rjk_of, cjk_of, C_of]]
+
+def mostrar_instancia(instancia, textos_otim):
+    st.subheader(textos_otim["instancia"])
+    st.write("s:", instancia[0][0])
+    st.write("nj_max:", instancia[0][1])
+    st.write("nj_min:", instancia[0][2])
+    st.write("ctj_of:", instancia[0][3])
+    for i in range(int(instancia[0][3])):
+        st.write(f"Rjk_of[{i+1}]:", f"{instancia[0][4][i]:.8f}")
+        st.write(f"cjk_of[{i+1}]:", instancia[0][5][i])
+    st.write("C_of:", instancia[0][6])
+
+def ler_do_drive(textos_otim):
+    arquivo = st.file_uploader(textos_otim["carregar_arquivo"], type=['txt'])
+    if arquivo is not None:
+        dados = arquivo.readlines()
+        return [eval(linha.strip()) for linha in dados]
+    return []
+
+def formatar_tempo(segundos, textos_otim):
+    minutos = math.floor(segundos / 60)
+    segundos_restantes = math.ceil(segundos % 60)
+    if segundos_restantes == 60:
+        segundos_restantes = 0
+        minutos += 1
+    return (
+        f"{minutos} {textos_otim['minutos']}"
+        if segundos_restantes == 0 else
+        f"{minutos} {textos_otim['minutos_e_segundos'].format(segundos=segundos_restantes)}"
+    )
+
+def mostrar_ajuda(textos_otim):
+    st.sidebar.image(r'CM.png', use_container_width=True)
+    st.sidebar.image(r'MA.png', use_container_width=True)
+
+    st.sidebar.markdown(f"**{textos_otim['problema_rap']}**\n{textos_otim['descricao_rap']}")
+    st.sidebar.markdown(f"**{textos_otim['algoritmos']}**\n{textos_otim['descricao_algoritmos']}")
+
+    with st.sidebar.expander(textos_otim["qaoa_nome"]):
+        st.markdown(f"**_{textos_otim['qaoa_nome']}_:** {textos_otim['qaoa_desc']}")
+
+    with st.sidebar.expander(textos_otim["vqe_nome"]):
+        st.markdown(f"**_{textos_otim['vqe_nome']}_:** {textos_otim['vqe_desc']}")
+
 
 def main():
     st.set_page_config(page_title="qxplore", layout="wide")
@@ -146,6 +335,7 @@ def main():
     idioma = st.sidebar.selectbox("🌐 " + TEXTOS["pt"]["idioma"], ("Português", "English"))
     lang = "pt" if idioma == "Português" else "en"
     textos = TEXTOS[lang]
+    textos_otim = TEXTOS_OPT[lang]
 
     # 3 - aviso para clicar na imagem
     st.sidebar.info(textos["ajuda"])
@@ -164,9 +354,104 @@ def main():
 
     elif st.session_state['pagina'] == 'otimizacao':
         st.subheader(textos["pagina_otimizacao"])
-        instancia = ler_manualmente(textos)
-        if instancia:
-            mostrar_instancia(instancia, textos)
+        
+        # Aplica estilos personalizados
+        st.markdown("""
+            <style>
+            div[role="radiogroup"] > label > div:first-child {
+                background-color: #03518C;
+                border-radius: 50%;
+                width: 20px;
+                height: 20px;
+            }
+            body {
+                color: #000000;
+                background-color: #B6D0E4;
+            }
+            .centered-box {
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 20px;
+                background-color: #ffffff;
+                border-radius: 10px;
+                box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            }
+            .loading-gif {
+                width: 100px;
+            }
+            .loading-text {
+                margin-top: 10px;
+                font-size: 18px;
+            }
+            .stButton > button {
+                color: #ffffff !important;
+                background-color: #03518C !important;
+                border-color: #03518C !important;
+            }
+            .stButton > button:active {
+                background-color: #02416B !important;
+            }
+            .st-Radio > div > label {
+                color: #03518C !important;
+            }
+            .st-Radio > div > div {
+                border-color: #03518C !important;
+            }
+            a {
+                color: #03518C !important;
+            }
+            </style>
+        """, unsafe_allow_html=True)
+    
+        # Logo
+        st.image('MB.png', use_container_width=True)
+    
+        # Ajuda
+        mostrar_ajuda(textos_otim)
+    
+        # Leitura de dados
+        modo_leitura = st.radio(
+            textos_otim["modo_leitura_label"],
+            (textos_otim["modo_leitura_manual"], textos_otim["modo_leitura_upload"]),
+            key='modo_leitura'
+        )
+    
+        dados = []
+        if modo_leitura == textos_otim["modo_leitura_manual"]:
+            dados = ler_manualmente(textos_otim)
+        elif modo_leitura == textos_otim["modo_leitura_upload"]:
+            if st.button(textos_otim["ajuda_upload_botao"]):
+                st.markdown(textos_otim["ajuda_upload_texto"], unsafe_allow_html=True)
+            dados = ler_do_drive()
+    
+        # Verifica se os dados estão válidos
+        if (modo_leitura == textos_otim["modo_leitura_manual"] and len(dados[0]) == 7) or \
+           (modo_leitura == textos_otim["modo_leitura_upload"] and dados):
+    
+            if st.button(textos_otim["botao_mostrar_instancia"]):
+                mostrar_instancia(dados, textos_otim)
+    
+            if len(dados[0]) != 1:
+                modo_algoritmo = st.radio(textos_otim["selecionar_algoritmo"], ('QAOA', 'VQE'))
+    
+                if modo_algoritmo == 'VQE':
+                    tipo_inicializacao = st.radio(
+                        textos_otim["tipo_inicializacao"],
+                        ('LHS', 'Randômica', 'Ponto Fixo')
+                    )
+                    if tipo_inicializacao == 'Ponto Fixo':
+                        numero_ponto_fixo = st.number_input(textos_otim["inserir_ponto_fixo"], step=0.1)
+    
+                elif modo_algoritmo == 'QAOA':
+                    tipo_inicializacao = st.radio(
+                        textos_otim["tipo_inicializacao"],
+                        ('Clusterização', 'LHS', 'Randômica', 'Ponto Fixo')
+                    )
+                    if tipo_inicializacao == 'Ponto Fixo':
+                        numero_ponto_fixo = st.number_input(textos_otim["inserir_ponto_fixo"], step=0.1)
+    
+                camadas = st.number_input(textos_otim["inserir_camadas"], min_value=1, max_value=3, value=1)
+                rodadas = st.number_input(textos_otim["inserir_rodadas"], min_value=1, value=1)
 
     elif st.session_state['pagina'] == 'ml':
         st.subheader(textos["pagina_ml"])
