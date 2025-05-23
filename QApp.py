@@ -403,8 +403,6 @@ def main():
             </style>
         """, unsafe_allow_html=True)
     
-        # Logo
-        st.image('MB.png', use_container_width=True)
     
         # Ajuda
         mostrar_ajuda(textos_otim)
