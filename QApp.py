@@ -10,7 +10,11 @@ TEXTOS = {
         "instancia_input": "Digite alguma coisa para testar a instância:",
         "instancia_recebida": "Instância recebida:",
         "ajuda": "Clique em uma imagem para navegar.",
-        "idioma": "Escolha o idioma:"
+        "idioma": "Escolha o idioma:", 
+        "referencias_titulo": "Referências",
+        "referencias_intro": "Para conhecer mais sobre nossos trabalhos na área, consulte as referências abaixo:"
+    },
+    "en": {
     },
     "en": {
         "intro": "Welcome to QXplore!\nThis application was developed to promote the use of quantum computing in three distinct areas, described below.\nSelect the area you want to explore and discover the possibilities offered by this innovative technology.",
@@ -20,7 +24,10 @@ TEXTOS = {
         "instancia_input": "Type something to test the instance:",
         "instancia_recebida": "Received instance:",
         "ajuda": "Click an image to navigate.",
-        "idioma": "Choose the language:"
+        "idioma": "Choose the language:", 
+        "referencias_titulo": "References",
+        "referencias_intro": "To learn more about our work in this area, check the references below:"
+
     }
 }
 
@@ -35,41 +42,44 @@ def mostrar_introducao_e_titulo(textos):
         unsafe_allow_html=True
     )
     
-def mostrar_referencias():
-    with st.sidebar.expander("Referências"):
+def mostrar_referencias(textos):
+    st.sidebar.markdown(f"{textos['referencias_intro']}")
+
+    with st.sidebar.expander(textos.get("referencias_titulo", "Referências")):
         st.markdown("""
-        - **Araújo, L. M. M., Lins, I., Aichele, D., Maior, C., Moura, M., & Droguett, E. (2022).**  
-          *Review of Quantum(-Inspired) Optimization Methods for System Reliability Problems.*  
-          16th International Probabilistic Safety Assessment and Management Conference - PSAM 16.
-        
-        - **Araújo, L. M. M., Lins, I., Maior, C., Aichele, D., & Droguett, E. (2022).**  
-          *A Quantum Optimization Modeling for Redundancy Allocation Problems.*  
-          32nd European Safety and Reliability (ESREL) Conference.
-    
-        - **Araújo, L. M. M., Lins, I., Maior, C. S., Moura, M., & Droguett, E. (2023b).**  
-          *A Linearization Proposal for the Redundancy Allocation Problem.*  
-          INFORMS Annual Meeting.
-    
-        - **Araújo, L. M. M., Raupp, L., Lins, I., & Moura, M. (2024).**  
-          *Quantum Approaches for Reliability Estimation: A Systematic Literature Review.*  
-          34th European Safety and Reliability (ESREL) Conference.
-    
-        - **Bezerra, V., Araújo, L., Lins, I., Maior, C., & Moura, M. (2024a).**  
-          *Exploring initialization strategies for quantum optimization algorithms to solve the redundancy allocation problem.*  
-          34th European Safety and Reliability (ESREL) Conference.
-    
-        - **Bezerra, V., Araújo, L., Lins, I., Maior, C., & Moura, M. (2024b).**  
-          *Quantum optimization applied to the allocation of redundancies in systems in the Oil & Gas industry.*  
-          Anais Do LVI Simpósio Brasileiro de Pesquisa Operacional.
-    
-        - **Bezerra, V. M. A., Araújo, L. M. M., Lins, I. D., Maior, C. B. S., & Moura, M. J. D. C. (2024).**  
-          *Optimization of system reliability based on quantum algorithms considering the redundancy allocation problem.*  
-          [DOI: 10.48072/2525-7579.roge.2024.3481](https://doi.org/10.48072/2525-7579.roge.2024.3481)
-        
-        - **Lins, I., Araújo, L., Maior, C., Teixeira, E., Bezerra, P., Moura, M., & Droguett, E. (2023).**  
-          *Quantum Optimization for Redundancy Allocation Problem Considering Various Subsystems.*  
-          33th European Safety and Reliability (ESREL) Conference.
-    """)
+- **Araújo, L. M. M., Lins, I., Aichele, D., Maior, C., Moura, M., & Droguett, E. (2022).**  
+  *Review of Quantum(-Inspired) Optimization Methods for System Reliability Problems.*  
+  16th International Probabilistic Safety Assessment and Management Conference - PSAM 16.
+
+- **Araújo, L. M. M., Lins, I., Maior, C., Aichele, D., & Droguett, E. (2022).**  
+  *A Quantum Optimization Modeling for Redundancy Allocation Problems.*  
+  32nd European Safety and Reliability (ESREL) Conference.
+
+- **Araújo, L. M. M., Lins, I., Maior, C. S., Moura, M., & Droguett, E. (2023b).**  
+  *A Linearization Proposal for the Redundancy Allocation Problem.*  
+  INFORMS Annual Meeting.
+
+- **Araújo, L. M. M., Raupp, L., Lins, I., & Moura, M. (2024).**  
+  *Quantum Approaches for Reliability Estimation: A Systematic Literature Review.*  
+  34th European Safety and Reliability (ESREL) Conference.
+
+- **Bezerra, V., Araújo, L., Lins, I., Maior, C., & Moura, M. (2024a).**  
+  *Exploring initialization strategies for quantum optimization algorithms to solve the redundancy allocation problem.*  
+  34th European Safety and Reliability (ESREL) Conference.
+
+- **Bezerra, V., Araújo, L., Lins, I., Maior, C., & Moura, M. (2024b).**  
+  *Quantum optimization applied to the allocation of redundancies in systems in the Oil & Gas industry.*  
+  Anais do LVI Simpósio Brasileiro de Pesquisa Operacional.
+
+- **Bezerra, V. M. A., Araújo, L. M. M., Lins, I. D., Maior, C. B. S., & Moura, M. J. D. C. (2024).**  
+  *Optimization of system reliability based on quantum algorithms considering the redundancy allocation problem.*  
+  [DOI: 10.48072/2525-7579.roge.2024.3481](https://doi.org/10.48072/2525-7579.roge.2024.3481)
+
+- **Lins, I., Araújo, L., Maior, C., Teixeira, E., Bezerra, P., Moura, M., & Droguett, E. (2023).**  
+  *Quantum Optimization for Redundancy Allocation Problem Considering Various Subsystems.*  
+  33th European Safety and Reliability (ESREL) Conference.
+        """)
+
 
 def mostrar_cartoes_de_area(textos):
     col1, col2, col3, col4, col5 = st.columns(5)
