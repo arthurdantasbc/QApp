@@ -29,7 +29,6 @@ def mostrar_introducao_e_titulo(textos):
     st.markdown(
         f"""
         <div style="text-align: center; font-size:16px; color: gray; white-space: pre-line; line-height:1.5;">
-            <br>
             {texto}
         </div>
         """,
