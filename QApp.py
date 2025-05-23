@@ -31,6 +31,7 @@ def aplicar_css_botoes():
     st.markdown(
         """
         <style>
+        /* Aplica estilo em todos os botões padrão do Streamlit */
         button[data-testid="stButton"] {
             background-color: #0d4376 !important;
             color: white !important;
@@ -39,6 +40,7 @@ def aplicar_css_botoes():
             border-radius: 8px !important;
             font-size: 16px !important;
             font-weight: 600 !important;
+            margin-top: 10px !important;
             transition: background-color 0.3s ease !important;
         }
         button[data-testid="stButton"]:hover {
@@ -48,6 +50,7 @@ def aplicar_css_botoes():
         """,
         unsafe_allow_html=True
     )
+
 def mostrar_introducao_e_titulo(textos):
     texto = textos['intro']
     st.markdown(
@@ -100,20 +103,58 @@ def mostrar_referencias(textos):
 
 def mostrar_cartoes_de_area(textos):
     col1, col2, col3, col4, col5 = st.columns(5)
+    
     with col1:
         st.write("")
+    
     with col2:
-        st.image("opt2.png", width=150)
+        st.image("opt3.png", width=150)
+        st.markdown(
+            f"""
+            <div style="display: flex; justify-content: center;">
+                <button style="width:180px; height:50px; background-color:#0d4376; color:white; border:none; border-radius:8px; font-size:16px; font-weight:600; cursor:pointer;" 
+                        onclick="document.dispatchEvent(new CustomEvent('streamlit:buttonClick', {{detail: {{key: 'otimizacao_btn'}}}}))">
+                    {textos["pagina_otimizacao"]}
+                </button>
+            </div>
+            """, 
+            unsafe_allow_html=True
+        )
         if st.button(textos["pagina_otimizacao"], key="otimizacao_btn"):
             st.session_state['pagina'] = 'otimizacao'
+    
     with col3:
-        st.image("ml2.png", width=150)
+        st.image("ml3.png", width=150)
+        st.markdown(
+            f"""
+            <div style="display: flex; justify-content: center;">
+                <button style="width:180px; height:50px; background-color:#0d4376; color:white; border:none; border-radius:8px; font-size:16px; font-weight:600; cursor:pointer;" 
+                        onclick="document.dispatchEvent(new CustomEvent('streamlit:buttonClick', {{detail: {{key: 'ml_btn'}}}}))">
+                    {textos["pagina_ml"]}
+                </button>
+            </div>
+            """, 
+            unsafe_allow_html=True
+        )
         if st.button(textos["pagina_ml"], key="ml_btn"):
             st.session_state['pagina'] = 'ml'
+    
     with col4:
-        st.image("infer2.png", width=150)
+        st.image("infer3.png", width=150)
+        st.markdown(
+            f"""
+            <div style="display: flex; justify-content: center;">
+                <button style="width:180px; height:50px; background-color:#0d4376; color:white; border:none; border-radius:8px; font-size:16px; font-weight:600; cursor:pointer;" 
+                        onclick="document.dispatchEvent(new CustomEvent('streamlit:buttonClick', {{detail: {{key: 'inferencia_btn'}}}}))">
+                    {textos["pagina_inferencia"]}
+                </button>
+            </div>
+            """, 
+            unsafe_allow_html=True
+        )
         if st.button(textos["pagina_inferencia"], key="inferencia_btn"):
             st.session_state['pagina'] = 'inferencia'
+    
     with col5:
         st.write("")
 
