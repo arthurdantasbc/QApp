@@ -27,16 +27,6 @@ TEXTOS = {
 def mostrar_ajuda(textos):
     st.sidebar.info(textos["ajuda"])
 
-def mostrar_logo_topo():
-    st.markdown(
-        """
-        <div style='text-align: center; margin-bottom: 20px;'>
-            <img src='qxplore.png' width='200'/>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-
 def mostrar_cartoes_de_area(textos):
     st.subheader(textos["escolha_area"])
 
@@ -66,6 +56,11 @@ def ler_manualmente(textos):
 def mostrar_instancia(instancia, textos):
     st.write(textos["instancia_recebida"])
     st.json(instancia)
+
+def mostrar_logo_topo():
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        st.image("qxplore.png", width=200)
 
 def main():
     st.set_page_config(page_title="qxplore", layout="wide")
