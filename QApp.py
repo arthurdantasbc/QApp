@@ -5,7 +5,7 @@ TEXTOS = {
     "pt": {
         "intro": "Seja bem-vindo ao QXplore!\nEste aplicativo foi criado para incentivar o uso da computação quântica em três áreas distintas, apresentadas a seguir.\nEscolha a área que deseja explorar e descubra as possibilidades oferecidas por essa tecnologia inovadora.",
         "pagina_otimizacao": "Página de Otimização",
-        "pagina_monitoramento": "Página de Monitoramento",
+        "pagina_monitoramento": "Quantum Inference",
         "pagina_manutencao": "Página de Manutenção",
         "instancia_input": "Digite alguma coisa para testar a instância:",
         "instancia_recebida": "Instância recebida:",
@@ -143,7 +143,6 @@ def main():
 
     elif st.session_state['pagina'] == 'manutencao':
         st.subheader(textos["pagina_manutencao"])
-        st.write("Conteúdo da página de manutenção.")
 
 if __name__ == "__main__":
     main()
