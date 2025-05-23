@@ -29,6 +29,15 @@ def mostrar_introducao_e_titulo(textos):
         f"<p style='font-size:16px; color: gray;'>{textos['intro']}</p>", 
         unsafe_allow_html=True
     )
+    texto = textos['intro']
+    st.markdown(
+        f"""
+        <div style="text-align: center; font-size:16px; color: gray; white-space: pre-line; line-height:1.5;">
+            {texto}
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
 def mostrar_referencias():
     with st.sidebar.expander("Referências"):
