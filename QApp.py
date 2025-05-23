@@ -3,7 +3,6 @@ import streamlit as st
 # Textos multilíngues
 TEXTOS = {
     "pt": {
-        "titulo": "qxplore",
         "escolha_area": "Escolha uma área de aplicação:",
         "pagina_otimizacao": "Página de Otimização",
         "pagina_monitoramento": "Página de Monitoramento",
@@ -14,7 +13,6 @@ TEXTOS = {
         "idioma": "Escolha o idioma:"
     },
     "en": {
-        "titulo": "qxplore",
         "escolha_area": "Choose an application area:",
         "pagina_otimizacao": "Optimization Page",
         "pagina_monitoramento": "Monitoring Page",
@@ -29,46 +27,35 @@ TEXTOS = {
 def mostrar_ajuda(textos):
     st.sidebar.info(textos["ajuda"])
 
-def mostrar_cartoes_de_area(textos):
+def mostrar_logo_topo():
     st.markdown(
         """
-        <div style="text-align:center;">
-            <img src="qxplore.png" alt="qxplore" style="width:200px;"/>
+        <div style='text-align: center; margin-bottom: 20px;'>
+            <img src='qxplore.png' width='200'/>
         </div>
         """,
-        unsafe_allow_html=True,
+        unsafe_allow_html=True
     )
 
+def mostrar_cartoes_de_area(textos):
     st.subheader(textos["escolha_area"])
 
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        if st.markdown(
-            f"""
-            <a href="?pagina=otimizacao">
-                <img src="opt.png" alt="Otimização" style="width:100%; border-radius:10px;"/>
-            </a>
-            """, unsafe_allow_html=True):
-            pass
+        if st.button("", key="otimizacao_btn"):
+            st.session_state['pagina'] = 'otimizacao'
+        st.image("opt.png", use_container_width=True)
 
     with col2:
-        if st.markdown(
-            f"""
-            <a href="?pagina=monitoramento">
-                <img src="ml.png" alt="Monitoramento" style="width:100%; border-radius:10px;"/>
-            </a>
-            """, unsafe_allow_html=True):
-            pass
+        if st.button("", key="monitoramento_btn"):
+            st.session_state['pagina'] = 'monitoramento'
+        st.image("ml.png", use_container_width=True)
 
     with col3:
-        if st.markdown(
-            f"""
-            <a href="?pagina=manutencao">
-                <img src="infer.png" alt="Manutenção" style="width:100%; border-radius:10px;"/>
-            </a>
-            """, unsafe_allow_html=True):
-            pass
+        if st.button("", key="manutencao_btn"):
+            st.session_state['pagina'] = 'manutencao'
+        st.image("infer.png", use_container_width=True)
 
 def ler_manualmente(textos):
     valor = st.text_input(textos["instancia_input"])
@@ -81,48 +68,32 @@ def mostrar_instancia(instancia, textos):
     st.json(instancia)
 
 def main():
+    st.set_page_config(page_title="qxplore", layout="wide")
+
     idioma = st.sidebar.selectbox("🌐 " + TEXTOS["pt"]["idioma"], ("Português", "English"))
     lang = "pt" if idioma == "Português" else "en"
     textos = TEXTOS[lang]
 
     mostrar_ajuda(textos)
+    mostrar_logo_topo()
 
-    # Define página padrão
     if 'pagina' not in st.session_state:
         st.session_state['pagina'] = 'inicio'
 
-    # Detecta troca de página via URL (?pagina=otimizacao, etc)
-    pagina_hash = st.query_params.get("pagina", [None])[0]
-    if pagina_hash:
-        st.session_state['pagina'] = pagina_hash
-
-    # Roteamento
     if st.session_state['pagina'] == 'inicio':
         mostrar_cartoes_de_area(textos)
 
     elif st.session_state['pagina'] == 'otimizacao':
-        st.markdown(
-            '<div style="text-align:center;"><img src="qxplore.png" style="width:150px;"/></div>',
-            unsafe_allow_html=True
-        )
         st.subheader(textos["pagina_otimizacao"])
         instancia = ler_manualmente(textos)
         if instancia:
             mostrar_instancia(instancia, textos)
 
     elif st.session_state['pagina'] == 'monitoramento':
-        st.markdown(
-            '<div style="text-align:center;"><img src="qxplore.png" style="width:150px;"/></div>',
-            unsafe_allow_html=True
-        )
         st.subheader(textos["pagina_monitoramento"])
         st.write("Conteúdo da página de monitoramento.")
 
     elif st.session_state['pagina'] == 'manutencao':
-        st.markdown(
-            '<div style="text-align:center;"><img src="qxplore.png" style="width:150px;"/></div>',
-            unsafe_allow_html=True
-        )
         st.subheader(textos["pagina_manutencao"])
         st.write("Conteúdo da página de manutenção.")
 
