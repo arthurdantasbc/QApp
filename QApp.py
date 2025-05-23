@@ -9,7 +9,7 @@ TEXTOS = {
         "pagina_manutencao": "Página de Manutenção",
         "instancia_input": "Digite alguma coisa para testar a instância:",
         "instancia_recebida": "Instância recebida:",
-        "ajuda": "Clique em uma imagem para navegar.",
+        "ajuda": "Explore as possibilidades da computação quântica no idioma escolhido.",
         "idioma": "Escolha o idioma:", 
         "referencias_titulo": "Referências",
         "referencias_intro": "Para conhecer mais sobre nossos trabalhos na área, consulte as referências abaixo:"
@@ -23,7 +23,7 @@ TEXTOS = {
         "pagina_manutencao": "Maintenance Page",
         "instancia_input": "Type something to test the instance:",
         "instancia_recebida": "Received instance:",
-        "ajuda": "Click an image to navigate.",
+        "ajuda": "Explore the possibilities of quantum computing in the selected language.",
         "idioma": "Choose the language:", 
         "referencias_titulo": "References",
         "referencias_intro": "To learn more about our work in this area, check the references below:"
@@ -130,7 +130,7 @@ def main():
     st.sidebar.info(textos["ajuda"])
 
     # 4 - referências em expander
-    mostrar_referencias()
+    mostrar_referencias(textos)
 
     mostrar_logo_topo()
 
