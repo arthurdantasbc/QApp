@@ -35,17 +35,17 @@ def mostrar_cartoes_de_area(textos):
     with col1:
         if st.button("", key="otimizacao_btn"):
             st.session_state['pagina'] = 'otimizacao'
-        st.image("opt.png", width=100)
+        st.image("opt.png", width=200)
     
     with col2:
         if st.button("", key="monitoramento_btn"):
             st.session_state['pagina'] = 'monitoramento'
-        st.image("ml.png", width=120)
+        st.image("ml.png", width=200)
     
     with col3:
         if st.button("", key="manutencao_btn"):
             st.session_state['pagina'] = 'manutencao'
-        st.image("infer.png", width=120)
+        st.image("infer.png", width=200)
 
 def ler_manualmente(textos):
     valor = st.text_input(textos["instancia_input"])
