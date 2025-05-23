@@ -35,6 +35,7 @@ def mostrar_introducao_e_titulo(textos):
         <div style="text-align: center; font-size:16px; color: gray; line-height:1.5;white-space: pre-line;">
             {texto}
         </div>
+        <br>
         """,
         unsafe_allow_html=True
     )
@@ -82,17 +83,17 @@ def mostrar_cartoes_de_area(textos):
     with col1:
         st.write("")
     with col2:
-        st.image("opt.png", width=180)
+        st.image("opt.png", width=200)
         if st.button(textos["pagina_otimizacao"], key="otimizacao_btn"):
             st.session_state['pagina'] = 'otimizacao'
     with col3:
-        st.image("ml.png", width=180)
-        if st.button(textos["pagina_monitoramento"], key="monitoramento_btn"):
-            st.session_state['pagina'] = 'monitoramento'
+        st.image("ml.png", width=200)
+        if st.button(textos["pagina_ml"], key="ml_btn"):
+            st.session_state['pagina'] = 'ml'
     with col4:
-        st.image("infer.png", width=180)
-        if st.button(textos["pagina_manutencao"], key="manutencao_btn"):
-            st.session_state['pagina'] = 'manutencao'
+        st.image("infer.png", width=200)
+        if st.button(textos["pagina_inferencia"], key="inferencia_btn"):
+            st.session_state['pagina'] = 'inferencia'
     with col5:
         st.write("")
 
