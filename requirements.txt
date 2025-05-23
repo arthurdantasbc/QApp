@@ -1,4 +1,5 @@
 streamlit
+phython==3.11
 qiskit
 qiskit_optimization
 qiskit_algorithms
