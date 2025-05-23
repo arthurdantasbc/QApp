@@ -242,7 +242,7 @@ def main():
 
     elif st.session_state['pagina'] == 'otimizacao':
         st.subheader("Página de Otimização")
-            st.markdown("""
+        st.markdown("""
         <style>
         /* Muda a cor da seleção do st.radio */
         div[role="radiogroup"] > label > div:first-child {
