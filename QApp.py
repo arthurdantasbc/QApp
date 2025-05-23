@@ -30,23 +30,26 @@ def mostrar_ajuda(textos):
 def mostrar_cartoes_de_area(textos):
     st.subheader(textos["escolha_area"])
 
-    col1, col2, col3 = st.columns(3)
-
+    col1, col2, col3, col4, col5 = st.columns(5)
     with col1:
+        
+    with col2:
         if st.button("", key="otimizacao_btn"):
             st.session_state['pagina'] = 'otimizacao'
         st.image("opt.png", width=200)
     
-    with col2:
+    with col3:
         if st.button("", key="monitoramento_btn"):
             st.session_state['pagina'] = 'monitoramento'
         st.image("ml.png", width=200)
     
-    with col3:
+    with col4:
         if st.button("", key="manutencao_btn"):
             st.session_state['pagina'] = 'manutencao'
         st.image("infer.png", width=200)
 
+    with col5:
+        
 def ler_manualmente(textos):
     valor = st.text_input(textos["instancia_input"])
     if valor:
