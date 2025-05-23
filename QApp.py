@@ -31,7 +31,7 @@ def mostrar_introducao_e_titulo(textos):
         unsafe_allow_html=True
     )
     st.markdown(
-        f"<h3 style='font-weight: 600; margin-top: 20px;'>{textos['escolha_area']}</h3>", 
+        f"<h3 style='font-weight: 600; margin-top: 14px;'>{textos['escolha_area']}</h3>", 
         unsafe_allow_html=True
     )
 def mostrar_ajuda(textos):
