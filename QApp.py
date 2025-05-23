@@ -38,7 +38,6 @@ def mostrar_ajuda(textos):
     st.sidebar.info(textos["ajuda"])
 
 def mostrar_cartoes_de_area(textos):
-    st.subheader(textos["escolha_area"])
 
     col1, col2, col3, col4, col5 = st.columns(5)
     with col1:
