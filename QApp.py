@@ -62,8 +62,14 @@ def mostrar_instancia(instancia, textos):
     st.json(instancia)
     
 def mostrar_logo_topo():
-    st.image("qxplore.png", use_container_width=True)
-
+    st.markdown(
+        """
+        <div style="text-align: center;">
+            <img src="qxplore.png" style="max-width: 600px; width: 80%; height: auto;" />
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 def main():
     st.set_page_config(page_title="qxplore", layout="wide")
 
