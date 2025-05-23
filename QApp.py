@@ -505,10 +505,10 @@ def main():
                 camadas = st.number_input(textos_otim["inserir_camadas"], min_value=1, max_value=3, value=1)
                 rodadas = st.number_input(textos_otim["inserir_rodadas"], min_value=1, value=1)
                 
-        if st.button(textos_otimizacao[idioma]['executar']):
+        if st.button(textos_otimizacao[lang]['executar']):
 
             # Verifica o modo leitura escolhido (upload/manual)
-            if modo_leitura == textos_otimizacao[idioma]['modo_leitura_upload']:
+            if modo_leitura == textos_otimizacao[lang]['modo_leitura_upload']:
                 instancia = dados[0]  # Dados do upload
             else:
                 instancia = dados     # Dados da entrada manual
