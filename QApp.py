@@ -82,17 +82,17 @@ def mostrar_cartoes_de_area(textos):
     with col1:
         st.write("")
     with col2:
+        st.image("opt.png", width=180)
         if st.button(textos["pagina_otimizacao"], key="otimizacao_btn"):
             st.session_state['pagina'] = 'otimizacao'
-        st.image("opt.png", width=200)
     with col3:
-        if st.button(textos["pagina_ml"], key="ml_btn"):
-            st.session_state['pagina'] = 'ml'
-        st.image("ml.png", width=200)
+        st.image("ml.png", width=180)
+        if st.button(textos["pagina_monitoramento"], key="monitoramento_btn"):
+            st.session_state['pagina'] = 'monitoramento'
     with col4:
-        if st.button(textos["pagina_inferencia"], key="inferencia_btn"):
-            st.session_state['pagina'] = 'inferencia'
-        st.image("infer.png", width=200)
+        st.image("infer.png", width=180)
+        if st.button(textos["pagina_manutencao"], key="manutencao_btn"):
+            st.session_state['pagina'] = 'manutencao'
     with col5:
         st.write("")
 
