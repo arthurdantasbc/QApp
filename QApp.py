@@ -132,7 +132,8 @@ TEXTOS_OPT = {
 
         "vqe_nome": "VQE",
         "vqe_desc": "Variational Quantum Eigensolver é um algoritmo híbrido quântico-clássico que usa um circuito quântico variacional para encontrar o estado de menor energia de um Hamiltoniano, mas requer mais parâmetros e pode demandar mais tempo computacional em comparação com o QAOA.", 
-            "modo_leitura_label": "Modo de leitura dos dados:",
+
+        "modo_leitura_label": "Modo de leitura dos dados:",
         "modo_leitura_manual": "Manual",
         "modo_leitura_upload": "Upload",
         "ajuda_upload_botao": "Mostrar ajuda para upload",
@@ -142,7 +143,7 @@ TEXTOS_OPT = {
         "tipo_inicializacao": "Tipo de inicialização:",
         "inserir_ponto_fixo": "Insira o ponto fixo:",
         "inserir_camadas": "Número de camadas:",
-        "inserir_rodadas": "Número de rodadas:"
+        "inserir_rodadas": "Número de rodadas:", 
     },
     "en": {
         "insira_dados": "Enter the requested data:",
@@ -163,19 +164,21 @@ TEXTOS_OPT = {
 
         "vqe_nome": "VQE",
         "vqe_desc": "Variational Quantum Eigensolver is a hybrid quantum-classical algorithm that uses a variational quantum circuit to find the lowest energy state of a Hamiltonian, but it requires more parameters and may take longer computational time compared to QAOA.", 
-        "modo_leitura_label": "Modo de leitura dos dados:",
+
+        "modo_leitura_label": "Data input mode:",
         "modo_leitura_manual": "Manual",
         "modo_leitura_upload": "Upload",
-        "ajuda_upload_botao": "Mostrar ajuda para upload",
-        "ajuda_upload_texto": "Aqui vai o texto de ajuda para o upload de arquivos.",
-        "botao_mostrar_instancia": "Mostrar instância",
-        "selecionar_algoritmo": "Selecione o algoritmo:",
-        "tipo_inicializacao": "Tipo de inicialização:",
-        "inserir_ponto_fixo": "Insira o ponto fixo:",
-        "inserir_camadas": "Número de camadas:",
-        "inserir_rodadas": "Número de rodadas:",
+        "ajuda_upload_botao": "Show upload help",
+        "ajuda_upload_texto": "Here is the help text for uploading files.",
+        "botao_mostrar_instancia": "Show instance",
+        "selecionar_algoritmo": "Select the algorithm:",
+        "tipo_inicializacao": "Initialization type:",
+        "inserir_ponto_fixo": "Enter the fixed point:",
+        "inserir_camadas": "Number of layers:",
+        "inserir_rodadas": "Number of rounds:",
     }
 }
+
 
 
 def aplicar_css_botoes():
@@ -332,8 +335,6 @@ def formatar_tempo(segundos, textos_otim):
     )
 
 def mostrar_ajuda(textos_otim):
-    st.sidebar.image(r'CM.png', use_container_width=True)
-    st.sidebar.image(r'MA.png', use_container_width=True)
 
     st.sidebar.markdown(f"**{textos_otim['problema_rap']}**\n{textos_otim['descricao_rap']}")
     st.sidebar.markdown(f"**{textos_otim['algoritmos']}**\n{textos_otim['descricao_algoritmos']}")
