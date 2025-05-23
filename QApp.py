@@ -4,9 +4,9 @@ import streamlit as st
 TEXTOS = {
     "pt": {
         "intro": "Seja bem-vindo ao QXplore!\nEste aplicativo foi criado para incentivar o uso da computação quântica em três áreas distintas, apresentadas a seguir.\nEscolha a área que deseja explorar e descubra as possibilidades oferecidas por essa tecnologia inovadora.",
-        "pagina_otimizacao": "Página de Otimização",
-        "pagina_monitoramento": "Quantum Inference",
-        "pagina_manutencao": "Página de Manutenção",
+        "pagina_otimizacao": "Otimização Quântica",
+        "pagina_inferencia": "Inferência Quântica",
+        "pagina_ml": "Machine Learning Quântico",
         "instancia_input": "Digite alguma coisa para testar a instância:",
         "instancia_recebida": "Instância recebida:",
         "ajuda": "Explore as possibilidades da computação quântica no idioma escolhido.",
@@ -15,19 +15,16 @@ TEXTOS = {
         "referencias_intro": "Para conhecer mais sobre nossos trabalhos na área, consulte as referências abaixo:"
     },
     "en": {
-    },
-    "en": {
         "intro": "Welcome to QXplore!\nThis application was developed to promote the use of quantum computing in three distinct areas, described below.\nSelect the area you want to explore and discover the possibilities offered by this innovative technology.",
-        "pagina_otimizacao": "Optimization Page",
-        "pagina_monitoramento": "Monitoring Page",
-        "pagina_manutencao": "Maintenance Page",
+        "pagina_otimizacao": "Quantum Optimization",
+        "pagina_inferencia": "Quantum Inference",
+        "pagina_ml": "Quantum Machine Learning",
         "instancia_input": "Type something to test the instance:",
         "instancia_recebida": "Received instance:",
         "ajuda": "Explore the possibilities of quantum computing in the selected language.",
         "idioma": "Choose the language:", 
         "referencias_titulo": "References",
         "referencias_intro": "To learn more about our work in this area, check the references below:"
-
     }
 }
 
@@ -80,22 +77,21 @@ def mostrar_referencias(textos):
   33th European Safety and Reliability (ESREL) Conference.
         """)
 
-
 def mostrar_cartoes_de_area(textos):
     col1, col2, col3, col4, col5 = st.columns(5)
     with col1:
         st.write("")
     with col2:
-        if st.button("", key="otimizacao_btn"):
+        if st.button(textos["pagina_otimizacao"], key="otimizacao_btn"):
             st.session_state['pagina'] = 'otimizacao'
         st.image("opt.png", width=200)
     with col3:
-        if st.button("", key="monitoramento_btn"):
-            st.session_state['pagina'] = 'monitoramento'
+        if st.button(textos["pagina_ml"], key="ml_btn"):
+            st.session_state['pagina'] = 'ml'
         st.image("ml.png", width=200)
     with col4:
-        if st.button("", key="manutencao_btn"):
-            st.session_state['pagina'] = 'manutencao'
+        if st.button(textos["pagina_inferencia"], key="inferencia_btn"):
+            st.session_state['pagina'] = 'inferencia'
         st.image("infer.png", width=200)
     with col5:
         st.write("")
@@ -147,12 +143,13 @@ def main():
         if instancia:
             mostrar_instancia(instancia, textos)
 
-    elif st.session_state['pagina'] == 'monitoramento':
-        st.subheader(textos["pagina_monitoramento"])
-        st.write("Conteúdo da página de monitoramento.")
+    elif st.session_state['pagina'] == 'ml':
+        st.subheader(textos["pagina_ml"])
+        st.write("Conteúdo da página de Machine Learning Quântico.")
 
-    elif st.session_state['pagina'] == 'manutencao':
-        st.subheader(textos["pagina_manutencao"])
+    elif st.session_state['pagina'] == 'inferencia':
+        st.subheader(textos["pagina_inferencia"])
+        st.write("Conteúdo da página de Inferência Quântica.")
 
 if __name__ == "__main__":
     main()
