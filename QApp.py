@@ -36,26 +36,47 @@ def mostrar_ajuda(textos):
     st.sidebar.info(textos["ajuda"])
 
 def mostrar_cartoes_de_area(textos):
-    st.title(textos["titulo"])
+    # Título é uma imagem clicável que não muda de página, só mostra o título visual
+    st.markdown(
+        """
+        <div style="text-align:center;">
+            <img src="qxplore.png" alt="qxplore" style="width:250px;"/>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
     
     st.subheader(textos["escolha_area"])
 
     col1, col2, col3 = st.columns(3)
 
+    # Função para criar imagens clicáveis que mudam a página
+    def imagem_clicavel(img_src, alt_text, pagina):
+        codigo_html = f'''
+        <div style="text-align:center; cursor:pointer;">
+            <img src="{img_src}" alt="{alt_text}" style="width:150px;" 
+                onclick="window.parent.location.href='#{pagina}'"/>
+        </div>
+        '''
+        st.markdown(codigo_html, unsafe_allow_html=True)
+    
+    # No Streamlit o clique na imagem não funciona de verdade, então vamos usar botões transparentes com imagens
+    # Melhor solução: colocar a imagem e um botão abaixo transparente para clicar, ou o botão com imagem dentro
+
     with col1:
-        st.image("opt.png", use_container_width=True)
-        if st.button(textos["otimizacao"], key="otimizacao_btn"):
+        if st.button(textos["otimizacao"], key="btn_otimizacao", help=textos["otimizacao"]):
             st.session_state['pagina'] = 'otimizacao'
+        st.image("opt.png", use_container_width=True)
 
     with col2:
-        st.image("ml.png", use_container_width=True)
-        if st.button(textos["monitoramento"], key="monitoramento_btn"):
+        if st.button(textos["monitoramento"], key="btn_monitoramento", help=textos["monitoramento"]):
             st.session_state['pagina'] = 'monitoramento'
+        st.image("ml.png", use_container_width=True)
 
     with col3:
-        st.image("infer.png", use_container_width=True)
-        if st.button(textos["manutencao"], key="manutencao_btn"):
+        if st.button(textos["manutencao"], key="btn_manutencao", help=textos["manutencao"]):
             st.session_state['pagina'] = 'manutencao'
+        st.image("infer.png", use_container_width=True)
 
 def ler_manualmente(textos):
     valor = st.text_input(textos["instancia_input"])
@@ -68,19 +89,20 @@ def mostrar_instancia(instancia, textos):
     st.json(instancia)
 
 def main():
-    # Seleção do idioma no sidebar (antes de qualquer coisa)
     idioma = st.sidebar.selectbox("🌐 " + TEXTOS["pt"]["idioma"], ("Português", "English"))
-    if idioma == "Português":
-        lang = "pt"
-    else:
-        lang = "en"
-
+    lang = "pt" if idioma == "Português" else "en"
     textos = TEXTOS[lang]
 
     mostrar_ajuda(textos)
 
     if 'pagina' not in st.session_state:
         st.session_state['pagina'] = 'inicio'
+
+    # Se tiver hash na URL, usa para mudar a página (simula clique na imagem)
+    # Isso ajuda clicar na imagem com o código html acima
+    pagina_hash = st.experimental_get_query_params().get("pagina", [None])[0]
+    if pagina_hash:
+        st.session_state['pagina'] = pagina_hash
 
     if st.session_state['pagina'] == 'inicio':
         mostrar_cartoes_de_area(textos)
