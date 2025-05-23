@@ -100,7 +100,8 @@ def main():
 
     # Se tiver hash na URL, usa para mudar a página (simula clique na imagem)
     # Isso ajuda clicar na imagem com o código html acima
-    pagina_hash = st.experimental_get_query_params().get("pagina", [None])[0]
+    pagina_hash = st.query_params.get("pagina", [None])[0]
+
     if pagina_hash:
         st.session_state['pagina'] = pagina_hash
 
