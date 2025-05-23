@@ -144,6 +144,22 @@ TEXTOS_OPT = {
         "inserir_ponto_fixo": "Insira o ponto fixo:",
         "inserir_camadas": "Número de camadas:",
         "inserir_rodadas": "Número de rodadas:", 
+        "executar": "Executar",
+        "modo_leitura_upload": "Upload",
+        "parametros_iniciais": "Parâmetros iniciais",
+        "rodada": "Rodada",
+        "camada": "Camada",
+        "executando_qaoa": "Executando QAOA, por favor, aguarde...",
+        "resultados": "Resultados",
+        "energia_otima": "Energia Ótima",
+        "confiabilidade_otima": "Confiabilidade Ótima",
+        "componentes_solucao": "Componentes da Solução",
+        "custo_total": "Custo Total da Solução",
+        "medidas_energia": "Medidas Descritivas das Energias",
+        "media_energia": "Média das Energias",
+        "desvio_padrao_energia": "Desvio Padrão das Energias",
+        "conteudo_pagina_ml": "Conteúdo da página de Machine Learning Quântico.",
+        "conteudo_pagina_inferencia": "Conteúdo da página de Inferência Quântica.",
     },
     "en": {
         "insira_dados": "Enter the requested data:",
@@ -175,6 +191,22 @@ TEXTOS_OPT = {
         "inserir_ponto_fixo": "Enter the fixed point:",
         "inserir_camadas": "Number of layers:",
         "inserir_rodadas": "Number of rounds:",
+        "executar": "Execute",
+        "modo_leitura_upload": "Upload",
+        "parametros_iniciais": "Initial parameters",
+        "rodada": "Round",
+        "camada": "Layer",
+        "executando_qaoa": "Running QAOA, please wait...",
+        "resultados": "Results",
+        "energia_otima": "Optimal Energy",
+        "confiabilidade_otima": "Optimal Reliability",
+        "componentes_solucao": "Solution Components",
+        "custo_total": "Total Cost of the Solution",
+        "medidas_energia": "Descriptive Measures of Energy",
+        "media_energia": "Average Energy",
+        "desvio_padrao_energia": "Standard Deviation of Energy",
+        "conteudo_pagina_ml": "Content of the Quantum Machine Learning page.",
+        "conteudo_pagina_inferencia": "Content of the Quantum Inference page.",
     }
 }
 
@@ -472,6 +504,187 @@ def main():
     
                 camadas = st.number_input(textos_otim["inserir_camadas"], min_value=1, max_value=3, value=1)
                 rodadas = st.number_input(textos_otim["inserir_rodadas"], min_value=1, value=1)
+                
+        if st.button(textos_otimizacao[idioma]['executar']):
+
+            # Verifica o modo leitura escolhido (upload/manual)
+            if modo_leitura == textos_otimizacao[idioma]['modo_leitura_upload']:
+                instancia = dados[0]  # Dados do upload
+            else:
+                instancia = dados     # Dados da entrada manual
+        
+            # Extrai variáveis da instância
+            s = instancia[0]
+            nj_max = instancia[1]
+            nj_min = instancia[2]
+            ctj_of = instancia[3]
+            Rjk_of = instancia[4]
+            cjk_of = instancia[5]
+            C_of = instancia[6]
+
+            x = nj_max
+            nmax = x
+
+            i = 0
+            b = []
+
+            while x != 0:
+                b.append(x % 2)
+                x = np.floor(x / 2)
+                i = i + 1
+            nb = i
+
+            ct = ctj_of
+            Rjk = Rjk_of
+            cjk = cjk_of
+            C = C_of
+
+            v = len(Rjk)
+
+            qp = QuadraticProgram()
+
+            for j in range(1, v + 1):
+                for k in range(i):
+                    var_name = f"b{k}{j}"
+                    qp.binary_var(name=var_name)
+            
+            num_vars = len(qp.variables)
+
+            linear_terms = {}
+
+            for j in range(1, v + 1):
+                for k in range(i):
+                    linear_terms[f'b{k}{j}'] = np.log(1 - Rjk[j - 1]) * (2 ** (i - k - 1))
+
+            qp.minimize(linear=linear_terms)
+
+            constraint_terms = {}
+            for j in range(1, v + 1):
+                for k in range(i):
+                    constraint_terms[f'b{k}{j}'] = cjk[j - 1] * (2 ** (i - k - 1))
+
+            qp.linear_constraint(linear=constraint_terms, sense='<=', rhs=C, name='constraint_1')
+
+            constraint_terms2 = {}
+            for j in range(1, v + 1):
+                for k in range(i):
+                    constraint_terms2[f'b{k}{j}'] = (2 ** (i - k - 1))
+
+            qp.linear_constraint(linear=constraint_terms2, sense='>=', rhs=1, name='constraint_2')
+
+            constraint_terms3 = {}
+            for j in range(1, v + 1):
+                for k in range(i):
+                    constraint_terms3[f'b{k}{j}'] = (2 ** (i - k - 1))
+
+            qp.linear_constraint(linear=constraint_terms3, sense='<=', rhs=nmax, name='constraint_3')
+
+            ineq2eq = InequalityToEquality()
+            qp_eq = ineq2eq.convert(qp)
+
+            int2bin = IntegerToBinary()
+            qp_eq_bin = int2bin.convert(qp_eq)
+
+            lineq2penalty = LinearEqualityToPenalty()
+            qubo = lineq2penalty.convert(qp_eq_bin)
+
+            qubits = np.array(qubo.variables)
+            qubits = qubits.shape[0]
+
+            op, offset = qubo.to_ising()
+            
+            if modo_algoritmo == 'QAOA':
+
+                time_qaoa = 0
+                energias = []
+                parametros = []
+                tempos_execucao = []
+                componentes_otimos = [] 
+
+                for i in range(rodadas):
+                    for j in range(camadas):
+                        if tipo_inicializacao == 'LHS':
+                            param_intervals = [(0, 2*np.pi)] * 2 
+                            lhs_samples = generate_lhs_samples(param_intervals, rodadas+1)
+                            params = lhs_samples[i]
+                        elif tipo_inicializacao == 'Randômica':
+                            params = np.random.uniform(0, 2 * np.pi, 2)
+                        elif tipo_inicializacao == 'Ponto Fixo':
+                            params = np.full(2, numero_ponto_fixo)
+                        elif tipo_inicializacao == 'Clusterização':
+                            K = 2
+                            Q = 56  
+
+                            kmeans = KMeans(n_clusters=K)
+                            cluster_labels = kmeans.fit_predict(parametros_treino)
+
+                            random_cluster = np.random.randint(0, K)
+                            cluster_indices = np.where(cluster_labels == random_cluster)[0]
+                            closest_point_index = np.random.choice(cluster_indices)
+                            params = parametros_treino[closest_point_index]
+                                        
+                        st.write("---")
+                        st.write(f"{textos_otimizacao[idioma]['parametros_iniciais']} - {textos_otimizacao[idioma]['rodada']} {i+1} : {textos_otimizacao[idioma]['camada']} {j+1} = {', '.join(map(str, params))}")
+
+                        loading_placeholder = st.empty()  
+                        loading_placeholder.markdown("""
+                        <div class='loading-gif'><img src='https://th.bing.com/th/id/R.4e7379292ef4b8d1945b1c3bc628d00d?rik=1iNOSJvqT0k%2bww&riu=http%3a%2f%2fbookrosabv.com.br%2fimagens%2floader.gif&ehk=OOTFpItH%2fvfYkf4YThgEExBU9BILk0f4c629HC36vTI%3d&risl=&pid=ImgRaw&r=0' alt='Carregando...'></div>
+                        <div class='loading-text'>{textos_otimizacao[idioma]['executando_qaoa']}</div>
+                        """, unsafe_allow_html=True)
+
+                        algorithm_globals.random_seed = 10598
+
+                        shots = 1000
+                        mes = QAOA(sampler=Sampler(), optimizer=COBYLA(), initial_point=params)
+                        meo = MinimumEigenOptimizer(min_eigen_solver=mes)
+
+                        start = time.time()
+                        qaoa_result = meo.solve(qubo)
+                        end = time.time()
+
+                        energias.append(qaoa_result.fval)
+                        tempos_execucao.append(end - start)
+                        componentes_otimos.append(qaoa_result.x)
+                        st.write(qaoa_result)
+
+                energia_otimizada = min(energias)
+                confiabilidade = 1 - math.exp(energia_otimizada)
+                media_energia = np.mean(energias)
+                desvio_padrao_energia = np.std(energias)
+
+                indice_min_energia = energias.index(energia_otimizada)
+                componente_otimo = componentes_otimos[indice_min_energia]
+
+                #st.write("Configuração ótima dos componentes:")
+                #st.write(componente_otimo)
+                componentes_variaveis = []
+
+                f= ct
+                d= nb
+                
+                var_index = 0
+                for m in range(1, f + 1):
+                    componente = 0
+                    for k in range(d):
+                        var_value = componente_otimo[var_index]
+                        componente += var_value * (2 ** (m - k - 1))
+                        var_index += 1 
+                    componentes_variaveis.append(componente)
+                
+                pesos = cjk
+                custo_total = sum(c * p for c, p in zip(componentes_variaveis, pesos))
+                                                
+                loading_placeholder.empty()  # Remove the loading GIF
+                st.subheader(textos_otimizacao[idioma]['resultados'])
+                st.write(f"{textos_otimizacao[idioma]['energia_otima']}:", energia_otimizada)
+                st.write(f"{textos_otimizacao[idioma]['confiabilidade_otima']}:", confiabilidade)
+                st.write(f"{textos_otimizacao[idioma]['componentes_solucao']}:", componentes_variaveis)
+                st.write(f"{textos_otimizacao[idioma]['custo_total']}:", custo_total)
+                st.write("")
+                st.subheader(textos_otimizacao[idioma]['medidas_energia'])
+                st.write(f"{textos_otimizacao[idioma]['media_energia']}:", media_energia)
+                st.write(f"{textos_otimizacao[idioma]['desvio_padrao_energia']}:", desvio_padrao_energia)
+
 
     elif st.session_state['pagina'] == 'ml':
         st.subheader(textos["pagina_ml"])
