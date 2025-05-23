@@ -28,7 +28,7 @@ def mostrar_introducao_e_titulo(textos):
     texto = textos['intro']
     st.markdown(
         f"""
-        <div style="text-align: center; font-size:16px; color: gray; white-space: pre-line; line-height:1.5;">
+        <div style="text-align: center; font-size:16px; color: gray; line-height:1.5;">
             {texto}
         </div>
         """,
