@@ -17,6 +17,26 @@ from pyDOE2 import lhs
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 
+def mostrar_cartoes_de_area():
+    st.subheader("Escolha uma área de aplicação:")
+
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        st.image("img/otimizacao.png", use_container_width=True)
+        if st.button("Otimização", key="otimizacao_btn"):
+            st.session_state['pagina'] = 'otimizacao'
+
+    with col2:
+        st.image("img/monitoramento.png", use_container_width=True)
+        if st.button("Monitoramento", key="monitoramento_btn"):
+            st.session_state['pagina'] = 'monitoramento'
+
+    with col3:
+        st.image("img/manutencao.png", use_container_width=True)
+        if st.button("Manutenção", key="manutencao_btn"):
+            st.session_state['pagina'] = 'manutencao'
+
 parametros_treino=[
     [5.64955258, 5.13768523],
     [3.61058585, 1.50012797],
@@ -211,10 +231,18 @@ def mostrar_ajuda():
           33th European Safety and Reliability (ESREL) Conference.
     """)
 
-
-
 def main():
-    st.markdown("""
+    mostrar_ajuda()
+
+    if 'pagina' not in st.session_state:
+        st.session_state['pagina'] = 'inicio'
+
+    if st.session_state['pagina'] == 'inicio':
+        mostrar_cartoes_de_area()
+
+    elif st.session_state['pagina'] == 'otimizacao':
+        st.subheader("Página de Otimização")
+            st.markdown("""
     <style>
     /* Muda a cor da seleção do st.radio */
     div[role="radiogroup"] > label > div:first-child {
@@ -680,6 +708,15 @@ def main():
         if st.button('Reset'):
             # Limpar variáveis ou realizar qualquer ação de reset necessária
             st.experimental_rerun()
+
+    elif st.session_state['pagina'] == 'monitoramento':
+        st.subheader("Página de Monitoramento")
+        # Conteúdo correspondente
+
+    elif st.session_state['pagina'] == 'manutencao':
+        st.subheader("Página de Manutenção")
+        # Conteúdo correspondente
+
     
 if __name__ == '__main__':
     main()
