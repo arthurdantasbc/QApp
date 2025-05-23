@@ -163,8 +163,7 @@ TEXTOS_OPT = {
         "qaoa_desc": "Quantum Approximate Optimization Algorithm is a quantum algorithm designed to solve combinatorial optimization problems, such as RAP, by approximating optimal solutions using a parameterized sequence of quantum operations.",
 
         "vqe_nome": "VQE",
-        "vqe_desc": "Variational Quantum Eigensolver is a hybrid quantum-classical algorithm that uses a variational quantum circuit to find the lowest energy state of a Hamiltonian, but it requires more parameters and may take longer computational time compared to QAOA.", 
-
+        "vqe_desc": "Variational Quantum Eigensolver is a hybrid quantum-classical algorithm that uses a variational quantum circuit to find the lowest energy state of a Hamiltonian, but it requires more parameters and may take longer computational time compared to QAOA.",
         "modo_leitura_label": "Data input mode:",
         "modo_leitura_manual": "Manual",
         "modo_leitura_upload": "Upload",
@@ -434,7 +433,7 @@ def main():
         modo_leitura = st.radio(
             textos_otim["modo_leitura_label"],
             (textos_otim["modo_leitura_manual"], textos_otim["modo_leitura_upload"]),
-            key='modo_leitura'
+            key=f"modo_leitura_{lang}"
         )
     
         dados = []
