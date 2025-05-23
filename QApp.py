@@ -62,7 +62,7 @@ def mostrar_instancia(instancia, textos):
     st.json(instancia)
 
 def mostrar_logo_topo():
-    col1, col2, col3, col3, col5 = st.columns([1, 2,2, 2, 1])
+    col1, col2, col3, col3, col5 = st.columns([1, 1,4, 1, 1])
     with col3:
         st.image("qxplore.png", use_container_width=True)
 
