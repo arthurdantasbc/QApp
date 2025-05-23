@@ -60,11 +60,9 @@ def ler_manualmente(textos):
 def mostrar_instancia(instancia, textos):
     st.write(textos["instancia_recebida"])
     st.json(instancia)
-
+    
 def mostrar_logo_topo():
-    col1, col2, col3, col3, col5 = st.columns([1, 1,4, 1, 1])
-    with col3:
-        st.image("qxplore.png", use_container_width=True)
+    st.image("qxplore.png", use_column_width=True)
 
 def main():
     st.set_page_config(page_title="qxplore", layout="wide")
