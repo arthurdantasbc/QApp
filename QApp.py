@@ -113,7 +113,6 @@ def main():
     lang = "pt" if idioma == "Português" else "en"
     textos = TEXTOS[lang]
 
-    mostrar_ajuda(textos)
     mostrar_referencias()
     mostrar_ajuda_sidebar(textos)
     mostrar_logo_topo()
