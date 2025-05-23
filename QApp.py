@@ -60,7 +60,7 @@ def mostrar_instancia(instancia, textos):
 def mostrar_logo_topo():
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
-        st.image("qxplore.png",  use_column_width=True)
+        st.image("qxplore.png", use_container_width=True)
 
 def main():
     st.set_page_config(page_title="qxplore", layout="wide")
