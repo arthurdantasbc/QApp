@@ -83,15 +83,15 @@ def mostrar_cartoes_de_area(textos):
     with col1:
         st.write("")
     with col2:
-        st.image("opt.png", width=200)
+        st.image("opt2.png", width=150)
         if st.button(textos["pagina_otimizacao"], key="otimizacao_btn"):
             st.session_state['pagina'] = 'otimizacao'
     with col3:
-        st.image("ml.png", width=200)
+        st.image("ml2.png", width=150)
         if st.button(textos["pagina_ml"], key="ml_btn"):
             st.session_state['pagina'] = 'ml'
     with col4:
-        st.image("infer.png", width=200)
+        st.image("infer2.png", width=150)
         if st.button(textos["pagina_inferencia"], key="inferencia_btn"):
             st.session_state['pagina'] = 'inferencia'
     with col5:
