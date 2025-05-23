@@ -4,7 +4,6 @@ import streamlit as st
 TEXTOS = {
     "pt": {
         "intro": "Seja bem vindo ao QXplore, este aplicativo foi desenvolvido com o intuito de promover a utilização da computação quântica em 3 áreas diferentes, conforme descrito abaixo. Selecione a área que deseja explorar.",
-        "escolha_area": "Escolha uma área de aplicação:",
         "pagina_otimizacao": "Página de Otimização",
         "pagina_monitoramento": "Página de Monitoramento",
         "pagina_manutencao": "Página de Manutenção",
@@ -15,7 +14,6 @@ TEXTOS = {
     },
     "en": {
         "intro": "Welcome to QXplore! This application was developed to promote the use of quantum computing in 3 different areas, described below. Select the area you want to explore.",
-        "escolha_area": "Choose an application area:",
         "pagina_otimizacao": "Optimization Page",
         "pagina_monitoramento": "Monitoring Page",
         "pagina_manutencao": "Maintenance Page",
@@ -30,11 +28,44 @@ def mostrar_introducao_e_titulo(textos):
         f"<p style='font-size:16px; color: gray;'>{textos['intro']}</p>", 
         unsafe_allow_html=True
     )
-    st.markdown(
-        f"<h3 style='font-weight: 600; margin-top: 14px;'>{textos['escolha_area']}</h3>", 
-        unsafe_allow_html=True
-    )
-def mostrar_ajuda(textos):
+def mostrar_referencias():
+    st.sidebar.image(r'CM.png', use_container_width=True)
+    with st.sidebar.expander("Referências"):
+        st.markdown("""
+        - **Araújo, L. M. M., Lins, I., Aichele, D., Maior, C., Moura, M., & Droguett, E. (2022).**  
+          *Review of Quantum(-Inspired) Optimization Methods for System Reliability Problems.*  
+          16th International Probabilistic Safety Assessment and Management Conference - PSAM 16.
+        
+        - **Araújo, L. M. M., Lins, I., Maior, C., Aichele, D., & Droguett, E. (2022).**  
+          *A Quantum Optimization Modeling for Redundancy Allocation Problems.*  
+          32nd European Safety and Reliability (ESREL) Conference.
+    
+        - **Araújo, L. M. M., Lins, I., Maior, C. S., Moura, M., & Droguett, E. (2023b).**  
+          *A Linearization Proposal for the Redundancy Allocation Problem.*  
+          INFORMS Annual Meeting.
+    
+        - **Araújo, L. M. M., Raupp, L., Lins, I., & Moura, M. (2024).**  
+          *Quantum Approaches for Reliability Estimation: A Systematic Literature Review.*  
+          34th European Safety and Reliability (ESREL) Conference.
+    
+        - **Bezerra, V., Araújo, L., Lins, I., Maior, C., & Moura, M. (2024a).**  
+          *Exploring initialization strategies for quantum optimization algorithms to solve the redundancy allocation problem.*  
+          34th European Safety and Reliability (ESREL) Conference.
+    
+        - **Bezerra, V., Araújo, L., Lins, I., Maior, C., & Moura, M. (2024b).**  
+          *Quantum optimization applied to the allocation of redundancies in systems in the Oil & Gas industry.*  
+          Anais Do LVI Simpósio Brasileiro de Pesquisa Operacional.
+    
+        - **Bezerra, V. M. A., Araújo, L. M. M., Lins, I. D., Maior, C. B. S., & Moura, M. J. D. C. (2024).**  
+          *Optimization of system reliability based on quantum algorithms considering the redundancy allocation problem.*  
+          [DOI: 10.48072/2525-7579.roge.2024.3481](https://doi.org/10.48072/2525-7579.roge.2024.3481)
+        
+        - **Lins, I., Araújo, L., Maior, C., Teixeira, E., Bezerra, P., Moura, M., & Droguett, E. (2023).**  
+          *Quantum Optimization for Redundancy Allocation Problem Considering Various Subsystems.*  
+          33th European Safety and Reliability (ESREL) Conference.
+    """)
+
+def mostrar_ajuda_sidebar(textos):
     st.sidebar.info(textos["ajuda"])
 
 def mostrar_cartoes_de_area(textos):
@@ -83,6 +114,8 @@ def main():
     textos = TEXTOS[lang]
 
     mostrar_ajuda(textos)
+    mostrar_referencias()
+    mostrar_ajuda_sidebar(textos)
     mostrar_logo_topo()
 
     if 'pagina' not in st.session_state:
