@@ -32,7 +32,7 @@ def mostrar_cartoes_de_area(textos):
 
     col1, col2, col3, col4, col5 = st.columns(5)
     with col1:
-        
+        st.write("")
     with col2:
         if st.button("", key="otimizacao_btn"):
             st.session_state['pagina'] = 'otimizacao'
@@ -49,6 +49,7 @@ def mostrar_cartoes_de_area(textos):
         st.image("infer.png", width=200)
 
     with col5:
+        st.write("")
         
 def ler_manualmente(textos):
     valor = st.text_input(textos["instancia_input"])
@@ -61,7 +62,7 @@ def mostrar_instancia(instancia, textos):
     st.json(instancia)
 
 def mostrar_logo_topo():
-    col1, col2, col3 = st.columns([1, 2, 1])
+    col1, col2, col3 = st.columns([1, 2,2, 2, 1])
     with col2:
         st.image("qxplore.png", use_container_width=True)
 
