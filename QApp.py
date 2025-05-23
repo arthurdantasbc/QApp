@@ -442,7 +442,7 @@ def main():
         elif modo_leitura == textos_otim["modo_leitura_upload"]:
             if st.button(textos_otim["ajuda_upload_botao"]):
                 st.markdown(textos_otim["ajuda_upload_texto"], unsafe_allow_html=True)
-            dados = ler_do_drive()
+            dados = ler_do_drive(textos_otim)
     
         # Verifica se os dados estão válidos
         if (modo_leitura == textos_otim["modo_leitura_manual"] and len(dados[0]) == 7) or \
