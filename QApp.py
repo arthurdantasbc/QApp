@@ -27,6 +27,27 @@ TEXTOS = {
         "referencias_intro": "To learn more about our work in this area, check the references below:"
     }
 }
+def aplicar_css_botoes():
+    st.markdown(
+        """
+        <style>
+        div.stButton > button {
+            background-color: #0d4376;
+            color: white;
+            width: 180px;
+            height: 50px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+        div.stButton > button:hover {
+            background-color: #07294a;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
 
 def mostrar_introducao_e_titulo(textos):
     texto = textos['intro']
@@ -114,6 +135,8 @@ def mostrar_logo_topo():
 
 def main():
     st.set_page_config(page_title="qxplore", layout="wide")
+
+    aplicar_css_botoes()
 
     # 1 - imagem no topo da sidebar
     st.sidebar.image("CM.png", use_container_width=True)
