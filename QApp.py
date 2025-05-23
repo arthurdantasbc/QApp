@@ -131,7 +131,18 @@ TEXTOS_OPT = {
         "qaoa_desc": "Quantum Approximate Optimization Algorithm é um algoritmo quântico projetado para resolver problemas de otimização combinatória, como o RAP, aproximando-se das soluções ótimas utilizando uma sequência parametrizada de operações quânticas.",
 
         "vqe_nome": "VQE",
-        "vqe_desc": "Variational Quantum Eigensolver é um algoritmo híbrido quântico-clássico que usa um circuito quântico variacional para encontrar o estado de menor energia de um Hamiltoniano, mas requer mais parâmetros e pode demandar mais tempo computacional em comparação com o QAOA."
+        "vqe_desc": "Variational Quantum Eigensolver é um algoritmo híbrido quântico-clássico que usa um circuito quântico variacional para encontrar o estado de menor energia de um Hamiltoniano, mas requer mais parâmetros e pode demandar mais tempo computacional em comparação com o QAOA.", 
+            "modo_leitura_label": "Modo de leitura dos dados:",
+        "modo_leitura_manual": "Manual",
+        "modo_leitura_upload": "Upload",
+        "ajuda_upload_botao": "Mostrar ajuda para upload",
+        "ajuda_upload_texto": "Aqui vai o texto de ajuda para o upload de arquivos.",
+        "botao_mostrar_instancia": "Mostrar instância",
+        "selecionar_algoritmo": "Selecione o algoritmo:",
+        "tipo_inicializacao": "Tipo de inicialização:",
+        "inserir_ponto_fixo": "Insira o ponto fixo:",
+        "inserir_camadas": "Número de camadas:",
+        "inserir_rodadas": "Número de rodadas:"
     },
     "en": {
         "insira_dados": "Enter the requested data:",
@@ -151,7 +162,18 @@ TEXTOS_OPT = {
         "qaoa_desc": "Quantum Approximate Optimization Algorithm is a quantum algorithm designed to solve combinatorial optimization problems, such as RAP, by approximating optimal solutions using a parameterized sequence of quantum operations.",
 
         "vqe_nome": "VQE",
-        "vqe_desc": "Variational Quantum Eigensolver is a hybrid quantum-classical algorithm that uses a variational quantum circuit to find the lowest energy state of a Hamiltonian, but it requires more parameters and may take longer computational time compared to QAOA."
+        "vqe_desc": "Variational Quantum Eigensolver is a hybrid quantum-classical algorithm that uses a variational quantum circuit to find the lowest energy state of a Hamiltonian, but it requires more parameters and may take longer computational time compared to QAOA.", 
+        "modo_leitura_label": "Modo de leitura dos dados:",
+        "modo_leitura_manual": "Manual",
+        "modo_leitura_upload": "Upload",
+        "ajuda_upload_botao": "Mostrar ajuda para upload",
+        "ajuda_upload_texto": "Aqui vai o texto de ajuda para o upload de arquivos.",
+        "botao_mostrar_instancia": "Mostrar instância",
+        "selecionar_algoritmo": "Selecione o algoritmo:",
+        "tipo_inicializacao": "Tipo de inicialização:",
+        "inserir_ponto_fixo": "Insira o ponto fixo:",
+        "inserir_camadas": "Número de camadas:",
+        "inserir_rodadas": "Número de rodadas:",
     }
 }
 
