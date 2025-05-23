@@ -3,6 +3,7 @@ import streamlit as st
 # Textos multilíngues
 TEXTOS = {
     "pt": {
+        "intro": "Seja bem vindo ao QXplore, este aplicativo foi desenvolvido com o intuito de promover a utilização da computação quântica em 3 áreas diferentes, conforme descrito abaixo. Selecione a área que deseja explorar.",
         "escolha_area": "Escolha uma área de aplicação:",
         "pagina_otimizacao": "Página de Otimização",
         "pagina_monitoramento": "Página de Monitoramento",
@@ -13,6 +14,7 @@ TEXTOS = {
         "idioma": "Escolha o idioma:"
     },
     "en": {
+        "intro": "Welcome to QXplore! This application was developed to promote the use of quantum computing in 3 different areas, described below. Select the area you want to explore.",
         "escolha_area": "Choose an application area:",
         "pagina_otimizacao": "Optimization Page",
         "pagina_monitoramento": "Monitoring Page",
@@ -23,7 +25,15 @@ TEXTOS = {
         "idioma": "Choose the language:"
     }
 }
-
+def mostrar_introducao_e_titulo(textos):
+    st.markdown(
+        f"<p style='font-size:16px; color: gray;'>{textos['intro']}</p>", 
+        unsafe_allow_html=True
+    )
+    st.markdown(
+        f"<h3 style='font-weight: 600; margin-top: 20px;'>{textos['escolha_area']}</h3>", 
+        unsafe_allow_html=True
+    )
 def mostrar_ajuda(textos):
     st.sidebar.info(textos["ajuda"])
 
@@ -80,6 +90,7 @@ def main():
         st.session_state['pagina'] = 'inicio'
 
     if st.session_state['pagina'] == 'inicio':
+        mostrar_introducao_e_titulo(textos)
         mostrar_cartoes_de_area(textos)
 
     elif st.session_state['pagina'] == 'otimizacao':
