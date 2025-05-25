@@ -382,18 +382,38 @@ def mostrar_logo_topo():
 #Otimização
 def ler_manualmente(textos_otim):
     st.write(textos_otim["insira_dados"])
-    s = st.number_input("s:", key='s', step=1)
-    nj_max = st.number_input("nj_max:", key='nj_max', step=1)
-    nj_min = st.number_input("nj_min:", key='nj_min', step=1)
-    ctj_of = st.number_input("ctj_of:", key='ctj_of', step=1)
-    
-    Rjk_of, cjk_of = [], []
-    for i in range(int(ctj_of)):
-        Rjk_of.append(st.number_input(f"Rjk_of[{i+1}]:", key=f'Rjk_of_{i}', step=0.01, format="%.8f"))
-        cjk_of.append(st.number_input(f"cjk_of[{i+1}]:", key=f'cjk_of_{i}', step=1))
 
-    C_of = st.number_input("C_of:", key='C_of', step=1)
-    return [[s, nj_max, nj_min, ctj_of, Rjk_of, cjk_of, C_of]]
+    s = st.number_input(f"{textos_otim['s']}:", key='s', step=1, min_value=1)
+    nj_max = st.number_input(f"{textos_otim['nj_max']}:", key='nj_max', step=1, min_value=1)
+    nj_min = st.number_input(f"{textos_otim['nj_min']}:", key='nj_min', step=1, min_value=0)
+    ctj_of = st.number_input(f"{textos_otim['ctj_of']}:", key='ctj_of', step=1, min_value=1)
+
+    st.markdown(f"**{textos_otim['lista_componentes']}**")
+
+    Rjk_of = []
+    cjk_of = []
+
+    for i in range(int(ctj_of)):
+        Rjk_of.append(
+            st.number_input(f"{textos_otim['confiabilidade']} [{i+1}]:", 
+                            key=f'Rjk_of_{i}', 
+                            step=0.001, 
+                            min_value=0.000, 
+                            max_value=1.0, 
+                            format="%.8f")
+        )
+        cjk_of.append(
+            st.number_input(f"{textos_otim['custo']} [{i+1}]:", 
+                            key=f'cjk_of_{i}', 
+                            step=1, 
+                            min_value=0)
+        )
+
+    C_of = st.number_input(f"{textos_otim['custo_total_limite']}:", key='C_of', step=1, min_value=1)
+
+    dados = [[s, nj_max, nj_min, ctj_of, Rjk_of, cjk_of, C_of]]
+
+    return dados
 
 def mostrar_instancia(instancia, textos_otim):
     st.subheader(textos_otim["instancia"])
