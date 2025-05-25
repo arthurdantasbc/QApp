@@ -114,6 +114,7 @@ TEXTOS = {
 
 TEXTOS_OPT = {
     "pt": {
+        "idioma": "Idioma"
         "insira_dados": "Insira os dados solicitados:",
         "instancia": "Instância fornecida:",
         "carregar_arquivo": "Carregar arquivo:",
@@ -168,6 +169,7 @@ TEXTOS_OPT = {
         "de": "de",
     },
     "en": {
+        "idioma": "Language"
         "insira_dados": "Enter the requested data:",
         "instancia": "Provided instance:",
         "carregar_arquivo": "Upload file:",
@@ -385,10 +387,10 @@ def mostrar_ajuda(textos_otim):
         st.markdown(f"### {textos_otim['algoritmos']}")
         st.markdown(f"{textos_otim['descricao_algoritmos']}")
 
-        with st.expander(f"🧠 {textos_otim['qaoa_nome']}"):
+        with st.expander(f"{textos_otim['qaoa_nome']}"):
             st.markdown(f"**_{textos_otim['qaoa_nome']}_**: {textos_otim['qaoa_desc']}")
 
-        with st.expander(f"🧠 {textos_otim['vqe_nome']}"):
+        with st.expander(f"{textos_otim['vqe_nome']}"):
             st.markdown(f"**_{textos_otim['vqe_nome']}_**: {textos_otim['vqe_desc']}")
         
 
@@ -468,7 +470,7 @@ def main():
     # 3 - Após escolha do idioma, sincroniza a seleção do sidebar com o idioma atual
     idioma_atual = "Português" if st.session_state.lang == "pt" else "English"
     idioma_selecionado = st.sidebar.selectbox(
-        "🌐 Idioma / Language",
+        textos_otim["idioma"],
         ("Português", "English"),
         index=0 if idioma_atual == "Português" else 1
     )
