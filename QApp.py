@@ -695,7 +695,7 @@ def main():
                             params = parametros_treino[closest_point_index]
                                         
                         st.write("---")
-                        st.write(f"{textos_otimizacao[idioma]['parametros_iniciais']} - {textos_otimizacao[idioma]['rodada']} {i+1} : {textos_otimizacao[idioma]['camada']} {j+1} = {', '.join(map(str, params))}")
+                        st.write(f"{textos_otim[idioma]['parametros_iniciais']} - {textos_otimizacao[idioma]['rodada']} {i+1} : {textos_otimizacao[idioma]['camada']} {j+1} = {', '.join(map(str, params))}")
 
                         loading_placeholder = st.empty()  
                         loading_placeholder.markdown("""
@@ -746,15 +746,15 @@ def main():
                 custo_total = sum(c * p for c, p in zip(componentes_variaveis, pesos))
                                                 
                 loading_placeholder.empty()  # Remove the loading GIF
-                st.subheader(textos_otimizacao[idioma]['resultados'])
-                st.write(f"{textos_otimizacao[idioma]['energia_otima']}:", energia_otimizada)
-                st.write(f"{textos_otimizacao[idioma]['confiabilidade_otima']}:", confiabilidade)
-                st.write(f"{textos_otimizacao[idioma]['componentes_solucao']}:", componentes_variaveis)
-                st.write(f"{textos_otimizacao[idioma]['custo_total']}:", custo_total)
+                st.subheader(textos_otim[idioma]['resultados'])
+                st.write(f"{textos_otim[idioma]['energia_otima']}:", energia_otimizada)
+                st.write(f"{textos_otim[idioma]['confiabilidade_otima']}:", confiabilidade)
+                st.write(f"{textos_otim[idioma]['componentes_solucao']}:", componentes_variaveis)
+                st.write(f"{textos_otim[idioma]['custo_total']}:", custo_total)
                 st.write("")
-                st.subheader(textos_otimizacao[idioma]['medidas_energia'])
-                st.write(f"{textos_otimizacao[idioma]['media_energia']}:", media_energia)
-                st.write(f"{textos_otimizacao[idioma]['desvio_padrao_energia']}:", desvio_padrao_energia)
+                st.subheader(textos_otim[idioma]['medidas_energia'])
+                st.write(f"{textos_otim[idioma]['media_energia']}:", media_energia)
+                st.write(f"{textos_otim[idioma]['desvio_padrao_energia']}:", desvio_padrao_energia)
 
 
     elif st.session_state['pagina'] == 'ml':
