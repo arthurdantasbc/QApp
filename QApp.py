@@ -84,6 +84,11 @@ def generate_lhs_samples(param_intervals, num_samples):
 
     return lhs_scaled
 
+textos_idioma = {
+    "Português": "Idioma",
+    "English": "Language"
+}
+
 # Textos multilíngues
 TEXTOS = {
     "pt": {
@@ -468,7 +473,7 @@ def main():
     # 3 - Após escolha do idioma, sincroniza a seleção do sidebar com o idioma atual
     idioma_atual = "Português" if st.session_state.lang == "pt" else "English"
     idioma_selecionado = st.sidebar.selectbox(
-        textos_otim["idioma"],
+        textos_idioma["idioma_atual"],
         ("Português", "English"),
         index=0 if idioma_atual == "Português" else 1
     )
