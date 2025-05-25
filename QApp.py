@@ -388,27 +388,76 @@ def main():
 
    # 2 - escolha de idioma logo abaixo da imagem
     if 'lang' not in st.session_state:
-        st.session_state.lang = None
-    
+    st.session_state.lang = None
+
     if st.session_state.lang is None:
-        with st.container():
-            st.image("https://upload.wikimedia.org/wikipedia/commons/5/5f/Globe_icon.svg", width=100)
-            st.markdown("<h3 style='text-align: center;'>Escolha seu idioma / Choose your language</h3>", unsafe_allow_html=True)
+        # Centraliza tudo usando markdown com CSS
+        st.markdown(
+            """
+            <style>
+                .centered {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    height: 90vh;
+                }
+                .button-container {
+                    display: flex;
+                    gap: 50px;
+                    margin-top: 30px;
+                }
+                button[kind="primary"] {
+                    width: 200px;
+                    height: 50px;
+                    font-size: 18px;
+                }
+            </style>
+            """,
+            unsafe_allow_html=True
+        )
     
-            col1, col2 = st.columns(2)
-            with col1:
-                if st.button("🌎 Português"):
-                    st.session_state.lang = "pt"
-            with col2:
-                if st.button("🌍 English"):
-                    st.session_state.lang = "en"
+        st.markdown('<div class="centered">', unsafe_allow_html=True)
     
-        st.stop()  # Interrompe o restante do app até escolher
-    else:
-        # Carregar textos após seleção
-        lang = st.session_state.lang
-        textos = TEXTOS[lang]
-        textos_otim = TEXTOS_OPT[lang]
+        st.image("https://upload.wikimedia.org/wikipedia/commons/5/5f/Globe_icon.svg", width=120)
+    
+        st.markdown(
+            """
+            <h1 style="text-align: center;">Bem-vindo ao <span style="color:#FF4B4B;">Qxplore</span></h1>
+            <p style="text-align: center; font-size:20px;">
+                Selecione o idioma desejado para acessar o Qxplore.
+            </p>
+            """,
+            unsafe_allow_html=True
+        )
+    
+        # Botões centralizados
+        col1, col2, col3 = st.columns([1, 1, 1])
+        with col1:
+            pass
+        with col2:
+            if st.button("🌎 Português"):
+                st.session_state.lang = "pt"
+            if st.button("🌍 English"):
+                st.session_state.lang = "en"
+        with col3:
+            pass
+    
+        st.markdown("</div>", unsafe_allow_html=True)
+    
+        st.stop()
+    
+    # ---------------------------
+    # Após escolha do idioma
+    # ---------------------------
+    lang = st.session_state.lang
+    textos = TEXTOS[lang]
+    textos_otim = TEXTOS_OPT[lang]
+
+    idioma = st.sidebar.selectbox("🌐 " + TEXTOS["pt"]["idioma"], ("Português", "English"))
+    lang = "pt" if idioma == "Português" else "en"
+    textos = TEXTOS[lang]
+    textos_otim = TEXTOS_OPT[lang]
     
     # 3 - aviso para clicar na imagem
     st.sidebar.info(textos["ajuda"])
