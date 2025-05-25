@@ -486,17 +486,14 @@ def main():
         )
     
         # Botões centralizados horizontalmente
-        col1, col2, col3, col4, col5, col6 = st.columns(6)
+        col1, col2, col3, col4, col5 = st.columns([1.5, 1, 1, 1.5])
         with col1:
             st.write("")
         with col2:
-            st.write("")
-        
-        with col3:
             if st.button("English"):
                 st.session_state.lang = "en"
         
-        with col4:
+        with col3:
             if st.button("Português"):
                 st.session_state.lang = "pt"
 
