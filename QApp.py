@@ -145,7 +145,7 @@ TEXTOS_OPT = {
         "ajuda_upload_texto": """
         <div style="background-color: #f9f9f9; margin: 0; padding: 8px; border-radius: 3px; border: 1px solid #ddd; max-width: 850px; font-size: 14px;">
             <h4 style="color: #333; font-size: 16px; margin: 10px;">Instruções para Upload</h4>
-            <p style="margin: 1px 0; font-size: 12px;">O arquivo de entrada deve ser um arquivo de texto (<code>.txt</code>), onde cada linha representa uma instância, com o seguinte formato:</p>
+            <p style="margin: 1px 0; font-size: 14px;">O arquivo de entrada deve ser um arquivo de texto (<code>.txt</code>), onde cada linha representa uma instância, com o seguinte formato:</p>
             <pre style="background-color: #eee; padding: 5px; border-radius: 5px; font-size: 14px; margin: 1px 0;">
     [s, nj_max, nj_min, ctj_of, Rjk_of, cjk_of, C_of]
             </pre>
