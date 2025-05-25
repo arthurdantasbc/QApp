@@ -475,8 +475,8 @@ def main():
     # 3 - Após escolha do idioma, sincroniza a seleção do sidebar com o idioma atual
     idioma_atual = "Português" if st.session_state.lang == "pt" else "English"
     idioma_selecionado = st.sidebar.selectbox(
-        textos_idioma[idioma_atual],
-        ("Português", "English"),
+        "Language / Idioma:",
+        ("English", "Português"),
         index=0 if idioma_atual == "Português" else 1
     )
 
