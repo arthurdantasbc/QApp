@@ -443,7 +443,7 @@ def mostrar_modal_idioma():
                     <img src="data:image/png;base64,{logo_base64}">
                 </div>
                 <div class="modal-bemvindo">🌐 Bem-vindo!<br>Selecione o idioma / Select your language</div>
-        """.format(logo_base64=imagem_para_base64("/mnt/data/aea6cced-501e-45ad-a19e-05689a27a6ab.png")), unsafe_allow_html=True)
+        """.format(logo_base64=imagem_para_base64("qxplore.png")), unsafe_allow_html=True)
 
     col1, col2 = st.columns(2)
     with col1:
