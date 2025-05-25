@@ -387,17 +387,17 @@ def formatar_tempo(segundos, textos_otim):
 
 def mostrar_ajuda(textos_otim):
     with st.sidebar.expander(textos_otim["pagina_otimizacao"]):
-        st.markdown(f"### {textos_otim['problema_rap']}")
+        st.markdown(f"#### {textos_otim['problema_rap']}")
         st.markdown(f"{textos_otim['descricao_rap']}")
 
-        st.markdown(f"### {textos_otim['algoritmos']}")
+        st.markdown(f"#### {textos_otim['algoritmos']}")
         st.markdown(f"{textos_otim['descricao_algoritmos']}")
 
-        with st.expander(f"{textos_otim['qaoa_nome']}"):
-            st.markdown(f"**_{textos_otim['qaoa_nome']}_**: {textos_otim['qaoa_desc']}")
+        st.markdown(f"#####{textos_otim['qaoa_nome']}"):
+        st.markdown(f"**_{textos_otim['qaoa_nome']}_**: {textos_otim['qaoa_desc']}")
 
-        with st.expander(f"{textos_otim['vqe_nome']}"):
-            st.markdown(f"**_{textos_otim['vqe_nome']}_**: {textos_otim['vqe_desc']}")
+        st.markdown(f"#####{textos_otim['vqe_nome']}"):
+        st.markdown(f"**_{textos_otim['vqe_nome']}_**: {textos_otim['vqe_desc']}")
         
 
 
