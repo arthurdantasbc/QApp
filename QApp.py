@@ -398,7 +398,6 @@ def main():
     
     # Se não selecionou ainda, obriga a escolher
     if st.session_state.idioma is None:
-        st.image("qxplore.png", width=150)  # Ou outro banner
         idioma_escolhido = st.selectbox("🌐 Selecione o idioma / Select your language", list(idiomas.values()))
         if idioma_escolhido:
             # Define idioma e recarrega
