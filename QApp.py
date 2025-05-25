@@ -87,25 +87,23 @@ def generate_lhs_samples(param_intervals, num_samples):
 # Textos multilíngues
 TEXTOS = {
     "pt": {
-        "intro": "Seja bem-vindo ao QXplore!\nEste aplicativo foi criado para incentivar o uso da computação quântica em três áreas distintas, apresentadas a seguir.\nEscolha a área que deseja explorar e descubra as possibilidades oferecidas por essa tecnologia inovadora.",
+        "intro": "Este aplicativo foi criado para incentivar o uso da computação quântica em três áreas distintas, apresentadas a seguir.\nEscolha a área que deseja explorar e descubra as possibilidades oferecidas por essa tecnologia inovadora.",
         "pagina_otimizacao": "Otimização Quântica",
         "pagina_inferencia": "Inferência Quântica",
         "pagina_ml": "Machine Learning Quântico",
         "instancia_input": "Digite alguma coisa para testar a instância:",
         "instancia_recebida": "Instância recebida:",
-        "ajuda": "Explore as possibilidades da computação quântica no idioma escolhido.",
         "idioma": "Escolha o idioma:", 
         "referencias_titulo": "Referências",
         "referencias_intro": "Para conhecer mais sobre nossos trabalhos na área, consulte as referências abaixo:"
     },
     "en": {
-        "intro": "Welcome to QXplore!\nThis application was developed to promote the use of quantum computing in three distinct areas, described below.\nSelect the area you want to explore and discover the possibilities offered by this innovative technology.",
+        "intro": "This application was developed to promote the use of quantum computing in three distinct areas, described below.\nSelect the area you want to explore and discover the possibilities offered by this innovative technology.",
         "pagina_otimizacao": "Quantum Optimization",
         "pagina_inferencia": "Quantum Inference",
         "pagina_ml": "Quantum Machine Learning",
         "instancia_input": "Type something to test the instance:",
         "instancia_recebida": "Received instance:",
-        "ajuda": "Explore the possibilities of quantum computing in the selected language.",
         "idioma": "Choose the language:", 
         "referencias_titulo": "References",
         "referencias_intro": "To learn more about our work in this area, check the references below:"
@@ -436,11 +434,11 @@ def main():
         st.markdown(
             """
             <h1 style="text-align: center;">
-                Welcome to <span style="color:#0d4376;">QXplore</span><br>
+                Welcome to <span style="color:#0d4376;">QXplore/</span><br>
                 Bem-vindo ao <span style="color:#0d4376;">QXplore</span>
             </h1>
             <p style="text-align: center; font-size:20px;">
-                Selecione o idioma desejado / Select your preferred language
+                Select your preferred language / Selecione o idioma desejado :
             </p>
             """,
             unsafe_allow_html=True
@@ -484,9 +482,6 @@ def main():
     lang = st.session_state.lang
     textos = TEXTOS[lang]
     textos_otim = TEXTOS_OPT[lang]
-
-    # 4 - aviso para clicar na imagem, traduzido
-    st.sidebar.info(textos["ajuda"])
 
     # 4 - referências em expander
     mostrar_referencias(textos)
