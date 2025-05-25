@@ -208,6 +208,19 @@ TEXTOS_OPT = {
         "confiabilidade": "Confiabilidade do componente (Rjk_of)",
         "custo": "Custo do componente (cjk_of)",
         "custo_total_limite": "Limite máximo de custo (C_of)",
+        "selecionar_tipo_circuito": "Selecione o tipo de circuito VQE:",
+        "real_amplitudes": "Real Amplitudes",
+        "two_local": "Two Local",
+
+        "opcoes_rotacao": ["rx", "ry", "rz"],
+        "selecionar_rotacao": "Selecione as portas de rotação:",
+
+        "opcoes_emaranhamento": ["cx", "cz", "iswap"],
+        "selecionar_emaranhamento": "Selecione as portas de emaranhamento:",
+
+        "tipo_inicializacao": "Selecione o método de inicialização:",
+        "tipos_inicializacao_vqe": ["Ponto Fixo", "Clusterização", "LHS", "Randômica"],
+        
     },
     "en": {
         "idioma": "Language",
@@ -294,7 +307,19 @@ TEXTOS_OPT = {
             "**Clustering:** parameters based on centers of optimal clusters.\n\n"
             "**LHS:** uniform sampling via Latin Hypercube.\n\n"
             "**Random:** parameters initialized randomly.\n\n"
-            "**Fixed Point:** fixed, predefined initial values."
+            "**Fixed Point:** fixed, predefined initial values.",
+        "selecionar_tipo_circuito": "Select the type of VQE circuit:",
+        "real_amplitudes": "Real Amplitudes",
+        "two_local": "Two Local",
+
+        "opcoes_rotacao": ["rx", "ry", "rz"],
+        "selecionar_rotacao": "Select rotation gates:",
+
+        "opcoes_emaranhamento": ["cx", "cz", "iswap"],
+        "selecionar_emaranhamento": "Select entanglement gates:",
+
+        "tipo_inicializacao": "Select the initialization method:",
+        "tipos_inicializacao_vqe": ["Fixed Point", "Clustering", "LHS", "Random"],
         )
     }
 }
@@ -685,12 +710,27 @@ def main():
                 modo_algoritmo = st.radio(textos_otim["selecionar_algoritmo"], ('QAOA', 'VQE'))
     
                 if modo_algoritmo == 'VQE':
+                    tipo_circuito = st.radio(
+                        textos_otim["selecionar_tipo_circuito"], 
+                        (textos_otim["real_amplitudes"], textos_otim["two_local"])
+                    )
+                    
+                    if tipo_circuito == textos_otim["two_local"]:
+                        # Escolha das portas de rotação
+                        opcoes_rotacao = textos_otim["opcoes_rotacao"]
+                        rotacao_escolhida = st.multiselect(textos_otim["selecionar_rotacao"], opcoes_rotacao)
+                    
+                        # Escolha das portas de emaranhamento
+                        opcoes_entanglement = textos_otim["opcoes_emaranhamento"]
+                        entanglement_escolhido = st.multiselect(textos_otim["selecionar_emaranhamento"], opcoes_entanglement)
+                    
                     tipo_inicializacao = st.radio(
                         textos_otim["tipo_inicializacao"],
                         textos_otim["tipos_inicializacao_vqe"]
                     )
-                
-                    if tipo_inicializacao in ['Ponto Fixo', 'Fixed Point']:
+                    
+                    # Verificação do ponto fixo
+                    if tipo_inicializacao in [textos_otim["ponto_fixo"], textos_otim["fixed_point"]]:
                         numero_ponto_fixo = st.number_input(textos_otim["inserir_ponto_fixo"], step=0.1)
                 
                 elif modo_algoritmo == 'QAOA':
