@@ -158,8 +158,12 @@ TEXTOS_OPT = {
         "medidas_energia": "Medidas Descritivas das Energias",
         "media_energia": "Média das Energias",
         "desvio_padrao_energia": "Desvio Padrão das Energias",
-        "conteudo_pagina_ml": "Conteúdo da página de Machine Learning Quântico.",
-        "conteudo_pagina_inferencia": "Conteúdo da página de Inferência Quântica.",
+        "conteudo_pagina_ml": "Dantas",
+        "conteudo_pagina_inferencia": "Lavínia",
+        "tipo_inicializacao": "Tipo de inicialização",
+        "inserir_ponto_fixo": "Insira o valor do ponto fixo",
+        "tipos_inicializacao_vqe": ['LHS', 'Randômica', 'Ponto Fixo'],
+        "tipos_inicializacao_qaoa": ['Clusterização', 'LHS', 'Randômica', 'Ponto Fixo'],
     },
     "en": {
         "insira_dados": "Enter the requested data:",
@@ -205,8 +209,12 @@ TEXTOS_OPT = {
         "medidas_energia": "Descriptive Measures of Energy",
         "media_energia": "Average Energy",
         "desvio_padrao_energia": "Standard Deviation of Energy",
-        "conteudo_pagina_ml": "Content of the Quantum Machine Learning page.",
-        "conteudo_pagina_inferencia": "Content of the Quantum Inference page.",
+        "conteudo_pagina_ml": "Dantas",
+        "conteudo_pagina_inferencia": "Lavínia",
+        "tipo_inicializacao": "Initialization type",
+        "inserir_ponto_fixo": "Enter the fixed point value",
+        "tipos_inicializacao_vqe": ['LHS', 'Random', 'Fixed Point'],
+        "tipos_inicializacao_qaoa": ['Clustering', 'LHS', 'Random', 'Fixed Point'],
     }
 }
 
@@ -225,7 +233,7 @@ def aplicar_css_botoes():
             border-radius: 8px !important;
             font-size: 16px !important;
             font-weight: 600 !important;
-            transition: background-color 0.3s ease !important;
+            transition: background-color 0.1s ease !important;
             margin-top: 10px !important;
         }
         div.stButton > button:hover {
@@ -566,19 +574,22 @@ def main():
                 if modo_algoritmo == 'VQE':
                     tipo_inicializacao = st.radio(
                         textos_otim["tipo_inicializacao"],
-                        ('LHS', 'Randômica', 'Ponto Fixo')
+                        textos_otim["tipos_inicializacao_vqe"]
                     )
-                    if tipo_inicializacao == 'Ponto Fixo':
+                
+                    if tipo_inicializacao in ['Ponto Fixo', 'Fixed Point']:
                         numero_ponto_fixo = st.number_input(textos_otim["inserir_ponto_fixo"], step=0.1)
-    
+                
                 elif modo_algoritmo == 'QAOA':
                     tipo_inicializacao = st.radio(
                         textos_otim["tipo_inicializacao"],
-                        ('Clusterização', 'LHS', 'Randômica', 'Ponto Fixo')
+                        textos_otim["tipos_inicializacao_qaoa"]
                     )
-                    if tipo_inicializacao == 'Ponto Fixo':
+                
+                    if tipo_inicializacao in ['Ponto Fixo', 'Fixed Point']:
                         numero_ponto_fixo = st.number_input(textos_otim["inserir_ponto_fixo"], step=0.1)
-    
+
+
                 camadas = st.number_input(textos_otim["inserir_camadas"], min_value=1, max_value=3, value=1)
                 rodadas = st.number_input(textos_otim["inserir_rodadas"], min_value=1, value=1)
                 
