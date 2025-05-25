@@ -376,6 +376,93 @@ def mostrar_ajuda(textos_otim):
     with st.sidebar.expander(textos_otim["vqe_nome"]):
         st.markdown(f"**_{textos_otim['vqe_nome']}_:** {textos_otim['vqe_desc']}")
 
+from PIL import Image
+
+def mostrar_modal_idioma():
+    st.markdown("""
+        <style>
+            .modal-fundo {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                background-color: rgba(0, 0, 0, 0.4);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 9999;
+            }
+
+            .modal-conteudo {
+                background-color: white;
+                padding: 40px;
+                border-radius: 16px;
+                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+                text-align: center;
+                width: 400px;
+                font-family: Arial, sans-serif;
+                z-index: 10000;
+            }
+
+            .modal-logo img {
+                max-width: 120px;
+                margin-bottom: 20px;
+            }
+
+            .modal-bemvindo {
+                font-size: 20px;
+                margin-bottom: 20px;
+                font-weight: bold;
+            }
+
+            .modal-btn {
+                display: flex;
+                justify-content: space-around;
+                margin-top: 20px;
+            }
+
+            .stButton > button {
+                width: 130px;
+                padding: 10px;
+                border-radius: 8px;
+                background-color: #007BFF;
+                color: white;
+                font-weight: bold;
+                border: none;
+            }
+
+            .stButton > button:hover {
+                background-color: #0056b3;
+                cursor: pointer;
+            }
+        </style>
+        <div class="modal-fundo">
+            <div class="modal-conteudo">
+                <div class="modal-logo">
+                    <img src="data:image/png;base64,{logo_base64}">
+                </div>
+                <div class="modal-bemvindo">🌐 Bem-vindo!<br>Selecione o idioma / Select your language</div>
+        """.format(logo_base64=imagem_para_base64("/mnt/data/aea6cced-501e-45ad-a19e-05689a27a6ab.png")), unsafe_allow_html=True)
+
+    col1, col2 = st.columns(2)
+    with col1:
+        if st.button("🇧🇷 Português"):
+            st.session_state.idioma = "pt"
+            st.experimental_rerun()
+    with col2:
+        if st.button("🇺🇸 English"):
+            st.session_state.idioma = "en"
+            st.experimental_rerun()
+
+    st.markdown("</div></div>", unsafe_allow_html=True)
+    st.stop()
+
+
+def imagem_para_base64(path):
+    import base64
+    with open(path, "rb") as img_file:
+        return base64.b64encode(img_file.read()).decode()
 
 def main():
     st.set_page_config(page_title="qxplore", layout="wide")
@@ -385,74 +472,11 @@ def main():
     # 1 - imagem no topo da sidebar
     st.sidebar.image("CM.png", use_container_width=True)
 
-
-    # Idiomas disponíveis
-    idiomas = {
-        "pt": "Português",
-        "en": "English"
-    }
-
-    # Inicializa estado do idioma
     if "idioma" not in st.session_state:
         st.session_state.idioma = None
 
-    # Mostra janela modal de idioma se ainda não definido
     if st.session_state.idioma is None:
-        # Fundo escurecido e modal central
-        st.markdown("""
-            <style>
-                .modal-fundo {
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    background-color: rgba(0, 0, 0, 0.5);
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    z-index: 9999;
-                }
-
-                .modal-conteudo {
-                    background-color: white;
-                    padding: 30px;
-                    border-radius: 12px;
-                    box-shadow: 0px 0px 12px rgba(0,0,0,0.3);
-                    text-align: center;
-                    width: 350px;
-                    max-width: 90%;
-                    font-family: 'Arial';
-                }
-
-                .modal-conteudo h2 {
-                    margin-top: 0;
-                    font-size: 20px;
-                }
-            </style>
-            <div class="modal-fundo">
-                <div class="modal-conteudo">
-                    <h2>🌐 Selecione o idioma / Select your language</h2>
-                    <div id="idioma-placeholder"></div>
-                </div>
-            </div>
-        """, unsafe_allow_html=True)
-
-        # Substitui dinamicamente dentro da div do modal
-        container = st.empty()
-        with container.container():
-            idioma_escolhido = st.selectbox(
-                "",  # Remove o label aqui pois o título está no modal
-                list(idiomas.values()),
-                key="idioma_modal"
-            )
-            if idioma_escolhido:
-                for k, v in idiomas.items():
-                    if v == idioma_escolhido:
-                        st.session_state.idioma = k
-                st.experimental_rerun()
-
-        st.stop()  # Impede continuar até escolher
+        mostrar_modal_idioma()
 
     # 3 - Conteúdo após escolha de idioma
     lang = st.session_state.idioma
