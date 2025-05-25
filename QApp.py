@@ -465,8 +465,8 @@ def main():
     
         # Caixa de informação sobre idioma
         st.info(
-            "ℹ️ For a better experience, you can change the language anytime during navigation."\n\n" 
-            "ℹ️ Para uma melhor experiência, você pode alterar o idioma a qualquer momento durante a navegação.
+            "ℹ️ For a better experience, you can change the language anytime during navigation."\n
+            "ℹ️ Para uma melhor experiência, você pode alterar o idioma a qualquer momento durante a navegação.\n" 
         )
     
         st.stop()
