@@ -444,7 +444,7 @@ def mostrar_ml(textos):
 def mostrar_inf(textos):
     with st.sidebar.expander(textos["pagina_inferencia"]):
         st.markdown(f"#### {'Lavínia'}")
-        st.markdown(f"{textos['info_infe']}")
+        st.markdown(f"{textos['info_inf']}")
 
 def main():
     st.set_page_config(page_title="qxplore", layout="wide")
