@@ -376,11 +376,6 @@ def mostrar_ajuda(textos_otim):
     with st.sidebar.expander(textos_otim["vqe_nome"]):
         st.markdown(f"**_{textos_otim['vqe_nome']}_:** {textos_otim['vqe_desc']}")
         
-# Dicionários de texto para teste
-TEXTOS_IDIO = {
-    "pt": {"idioma": "Idioma", "bem_vindo": "Bem-vindo ao QXplore!"},
-    "en": {"idioma": "Language", "bem_vindo": "Welcome to QXplore!"},
-}
 
 
 def main():
@@ -392,10 +387,28 @@ def main():
     st.sidebar.image("CM.png", use_container_width=True)
 
    # 2 - escolha de idioma logo abaixo da imagem
-    idioma = st.sidebar.selectbox("🌐 " + TEXTOS["pt"]["idioma"], ("Português", "English"))
-    lang = "pt" if idioma == "Português" else "en"
-    textos = TEXTOS[lang]
-    textos_otim = TEXTOS_OPT[lang]
+    if 'lang' not in st.session_state:
+        st.session_state.lang = None
+    
+    if st.session_state.lang is None:
+        with st.container():
+            st.image("https://upload.wikimedia.org/wikipedia/commons/5/5f/Globe_icon.svg", width=100)
+            st.markdown("<h3 style='text-align: center;'>Escolha seu idioma / Choose your language</h3>", unsafe_allow_html=True)
+    
+            col1, col2 = st.columns(2)
+            with col1:
+                if st.button("🌎 Português"):
+                    st.session_state.lang = "pt"
+            with col2:
+                if st.button("🌍 English"):
+                    st.session_state.lang = "en"
+    
+        st.stop()  # Interrompe o restante do app até escolher
+    else:
+        # Carregar textos após seleção
+        lang = st.session_state.lang
+        textos = TEXTOS[lang]
+        textos_otim = TEXTOS_OPT[lang]
     
     # 3 - aviso para clicar na imagem
     st.sidebar.info(textos["ajuda"])
