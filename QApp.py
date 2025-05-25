@@ -85,8 +85,8 @@ def generate_lhs_samples(param_intervals, num_samples):
     return lhs_scaled
 
 textos_idioma = {
-    "Português": "Idioma",
-    "English": "Language"
+    "Português": {"idioma_label": "Idioma"},
+    "English": {"idioma_label": "Language"},
 }
 
 # Textos multilíngues
