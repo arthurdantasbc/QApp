@@ -112,7 +112,7 @@ TEXTOS = {
 
 TEXTOS_OPT = {
     "pt": {
-        "idioma": "Idioma"
+        "idioma": "Idioma",
         "insira_dados": "Insira os dados solicitados:",
         "instancia": "Instância fornecida:",
         "carregar_arquivo": "Carregar arquivo:",
@@ -167,7 +167,7 @@ TEXTOS_OPT = {
         "de": "de",
     },
     "en": {
-        "idioma": "Language"
+        "idioma": "Language",
         "insira_dados": "Enter the requested data:",
         "instancia": "Provided instance:",
         "carregar_arquivo": "Upload file:",
