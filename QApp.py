@@ -101,7 +101,9 @@ TEXTOS = {
         "instancia_recebida": "Instância recebida:",
         "idioma": "Escolha o idioma:", 
         "referencias_titulo": "Referências",
-        "referencias_intro": "Para conhecer mais sobre nossos trabalhos na área, consulte as referências abaixo:"
+        "referencias_intro": "Para conhecer mais sobre nossos trabalhos na área, consulte as referências abaixo:",
+        "info_ml": "Seção para descrever as técnicas de Machine Learning Quântico usadas.",
+        "info_inf": "Seção para descrever as técnicas de Inferância Quântica usadas.",
     },
     "en": {
         "intro": "This application was developed to promote the use of quantum computing in three distinct areas, described below.\nSelect the area you want to explore and discover the possibilities offered by this innovative technology.",
@@ -112,7 +114,9 @@ TEXTOS = {
         "instancia_recebida": "Received instance:",
         "idioma": "Choose the language:", 
         "referencias_titulo": "References",
-        "referencias_intro": "To learn more about our work in this area, check the references below:"
+        "referencias_intro": "To learn more about our work in this area, check the references below:", 
+        "info_ml": "Section describing the Quantum Machine Learning techniques used.",
+        "info_inf": "Section describing the Quantum Inference techniques used.",
     }
 }
 
@@ -421,7 +425,7 @@ def formatar_tempo(segundos, textos_otim):
         f"{minutos} {textos_otim['minutos_e_segundos'].format(segundos=segundos_restantes)}"
     )
 
-def mostrar_ajuda(textos_otim):
+def mostrar_otim(textos_otim):
     with st.sidebar.expander(textos_otim["pagina_otimizacao"]):
         st.markdown(f"#### {textos_otim['problema_rap']}")
         st.markdown(f"{textos_otim['descricao_rap']}")
@@ -432,7 +436,15 @@ def mostrar_ajuda(textos_otim):
         st.markdown(f"**_{textos_otim['qaoa_nome']}_**: {textos_otim['qaoa_desc']}")
         st.markdown(f"**_{textos_otim['vqe_nome']}_**: {textos_otim['vqe_desc']}")
         
+def mostrar_ml(textos):
+    with st.sidebar.expander(textos["pagina_ml"]):
+        st.markdown(f"#### {Arthur}")
+        st.markdown(f"{textos['info_ml']}")
 
+def mostrar_ml(textos):
+    with st.sidebar.expander(textos["pagina_inferencia"]):
+        st.markdown(f"#### {Lavínia}")
+        st.markdown(f"{textos['info_infe']}")
 
 def main():
     st.set_page_config(page_title="qxplore", layout="wide")
@@ -531,6 +543,9 @@ def main():
     mostrar_referencias(textos)
 
     mostrar_logo_topo()
+        
+    # Ajuda
+    mostrar_ajuda(textos_otim)
 
     if 'pagina' not in st.session_state:
         st.session_state['pagina'] = 'inicio'
@@ -589,10 +604,6 @@ def main():
             }
             </style>
         """, unsafe_allow_html=True)
-    
-    
-        # Ajuda
-        mostrar_ajuda(textos_otim)
     
         # Leitura de dados
         modo_leitura = st.radio(
