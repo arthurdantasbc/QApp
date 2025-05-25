@@ -171,7 +171,6 @@ TEXTOS_OPT = {
         "tipos_inicializacao_qaoa": ['Clusterização', 'LHS', 'Randômica', 'Ponto Fixo'],
         "executando_vqe": "Executando VQE, por favor, aguarde...",
         "de": "de",
-        "pagina_otimizacao": "Quantum Optimization",
         "pagina_otimizacao": "Otimização Quântica",
     },
     "en": {
@@ -227,6 +226,7 @@ TEXTOS_OPT = {
         "tipos_inicializacao_qaoa": ['Clustering', 'LHS', 'Random', 'Fixed Point'],
         "executando_vqe": "Running VQE, please wait...",
         "de": "of",
+        "pagina_otimizacao": "Quantum Optimization",
     }
 }
 
