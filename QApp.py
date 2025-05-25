@@ -143,22 +143,22 @@ TEXTOS_OPT = {
         "modo_leitura_upload": "Upload",
         "ajuda_upload_botao": "Mostrar ajuda para upload",
         "ajuda_upload_texto": """
-        <div style="background-color: #f9f9f9; margin: 0; padding: 8px; border-radius: 3px; border: 1px solid #ddd; max-width: 700px; font-size: 12px;">
-            <h4 style="color: #333; font-size: 14px; margin: 10px;">Instruções para Upload</h4>
+        <div style="background-color: #f9f9f9; margin: 0; padding: 8px; border-radius: 3px; border: 1px solid #ddd; max-width: 850px; font-size: 14px;">
+            <h4 style="color: #333; font-size: 16px; margin: 10px;">Instruções para Upload</h4>
             <p style="margin: 1px 0; font-size: 12px;">O arquivo de entrada deve ser um arquivo de texto (<code>.txt</code>), onde cada linha representa uma instância, com o seguinte formato:</p>
-            <pre style="background-color: #eee; padding: 5px; border-radius: 5px; font-size: 12px; margin: 1px 0;">
+            <pre style="background-color: #eee; padding: 5px; border-radius: 5px; font-size: 14px; margin: 1px 0;">
     [s, nj_max, nj_min, ctj_of, Rjk_of, cjk_of, C_of]
             </pre>
-            <ul style="padding-left: 20px; margin: 1px 0; font-size: 12px;">
-                <li style="font-size: 12px;"><code>s</code>: Número de subsistemas;</li>
-                <li style="font-size: 12px;"><code>nj_max</code>: Valor máximo dos componentes;</li>
-                <li style="font-size: 12px;"><code>nj_min</code>: Valor mínimo dos componentes;</li>
-                <li style="font-size: 12px;"><code>ctj_of</code>: Número de elementos em <code>Rjk_of</code> e <code>cjk_of</code>;</li>
-                <li style="font-size: 12px;"><code>Rjk_of</code>: Lista de valores de confiabilidade dos componentes;</li>
-                <li style="font-size: 12px;"><code>cjk_of</code>: Lista de valores de custos dos componentes;</li>
-                <li style="font-size: 12px;"><code>C_of</code>: Limite de custo total;</li>
+            <ul style="padding-left: 24px; margin: 1px 0; font-size: 12px;">
+                <li style="font-size: 14px;"><code>s</code>: Número de subsistemas;</li>
+                <li style="font-size: 14px;"><code>nj_max</code>: Valor máximo dos componentes;</li>
+                <li style="font-size: 14px;"><code>nj_min</code>: Valor mínimo dos componentes;</li>
+                <li style="font-size: 14px;"><code>ctj_of</code>: Número de elementos em <code>Rjk_of</code> e <code>cjk_of</code>;</li>
+                <li style="font-size: 14px;"><code>Rjk_of</code>: Lista de valores de confiabilidade dos componentes;</li>
+                <li style="font-size: 14px;"><code>cjk_of</code>: Lista de valores de custos dos componentes;</li>
+                <li style="font-size: 14px;"><code>C_of</code>: Limite de custo total;</li>
             </ul>
-            <p style="margin: 1px; font-size: 12px;">Certifique-se de que o arquivo siga exatamente este formato para que os dados sejam lidos corretamente.</p>
+            <p style="margin: 1px; font-size: 14px;">Certifique-se de que o arquivo siga exatamente este formato para que os dados sejam lidos corretamente.</p>
         </div>
         """,
         "botao_mostrar_instancia": "Mostrar instância",
@@ -216,22 +216,22 @@ TEXTOS_OPT = {
         "modo_leitura_upload": "Upload",
         "ajuda_upload_botao": "Show upload help",
         "ajuda_upload_texto": """
-        <div style="background-color: #f9f9f9; margin: 0; padding: 8px; border-radius: 3px; border: 1px solid #ddd; max-width: 500px; font-size: 10px;">
-            <h4 style="color: #333; font-size: 14px; margin: 10px;">Upload Instructions</h4>
-            <p style="margin: 1px 0; font-size: 12px;">The input file should be a text file (<code>.txt</code>), where each line represents an instance in the following format:</p>
-            <pre style="background-color: #eee; padding: 5px; border-radius: 5px; font-size: 12px; margin: 1px 0;">
+        <div style="background-color: #f9f9f9; margin: 0; padding: 8px; border-radius: 3px; border: 1px solid #ddd; max-width: 850px; font-size: 14px;">
+            <h4 style="color: #333; font-size: 16px; margin: 10px;">Upload Instructions</h4>
+            <p style="margin: 1px 0; font-size: 14px;">The input file should be a text file (<code>.txt</code>), where each line represents an instance in the following format:</p>
+            <pre style="background-color: #eee; padding: 5px; border-radius: 5px; font-size: 14px; margin: 1px 0;">
     [s, nj_max, nj_min, ctj_of, Rjk_of, cjk_of, C_of]
             </pre>
-            <ul style="padding-left: 20px; margin: 1px 0; font-size: 10px;">
-                <li style="font-size: 12px;"><code>s</code>: Number of subsystems;</li>
-                <li style="font-size: 12px;"><code>nj_max</code>: Maximum value of components;</li>
-                <li style="font-size: 12px;"><code>nj_min</code>: Minimum value of components;</li>
-                <li style="font-size: 12px;"><code>ctj_of</code>: Number of elements in <code>Rjk_of</code> and <code>cjk_of</code>;</li>
-                <li style="font-size: 12px;"><code>Rjk_of</code>: List of component reliability values;</li>
-                <li style="font-size: 12px;"><code>cjk_of</code>: List of component cost values;</li>
-                <li style="font-size: 12px;"><code>C_of</code>: Total cost limit;</li>
+            <ul style="padding-left: 24px; margin: 1px 0; font-size: 10px;">
+                <li style="font-size: 14px;"><code>s</code>: Number of subsystems;</li>
+                <li style="font-size: 14px;"><code>nj_max</code>: Maximum value of components;</li>
+                <li style="font-size: 14px;"><code>nj_min</code>: Minimum value of components;</li>
+                <li style="font-size: 14px;"><code>ctj_of</code>: Number of elements in <code>Rjk_of</code> and <code>cjk_of</code>;</li>
+                <li style="font-size: 14px;"><code>Rjk_of</code>: List of component reliability values;</li>
+                <li style="font-size: 14px;"><code>cjk_of</code>: List of component cost values;</li>
+                <li style="font-size: 14px;"><code>C_of</code>: Total cost limit;</li>
             </ul>
-            <p style="margin: 1px; font-size: 12px;">Make sure the file follows exactly this format so the data is read correctly.</p>
+            <p style="margin: 1px; font-size: 14px;">Make sure the file follows exactly this format so the data is read correctly.</p>
         </div>
         """,
         "botao_mostrar_instancia": "Show instance",
