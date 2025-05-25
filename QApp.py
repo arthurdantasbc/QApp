@@ -456,10 +456,10 @@ def main():
         col1, col2, col3 = st.columns([1, 2, 1])
         with col2:
             c1, c2 = st.columns(2)
-            with c1:
+            with c2:
                 if st.button("Português"):
                     st.session_state.lang = "pt"
-            with c2:
+            with c1:
                 if st.button("English"):
                     st.session_state.lang = "en"
     
