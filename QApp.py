@@ -385,35 +385,74 @@ def main():
     # 1 - imagem no topo da sidebar
     st.sidebar.image("CM.png", use_container_width=True)
 
-    # Dicionário de idiomas
+
+    # Idiomas disponíveis
     idiomas = {
         "pt": "Português",
         "en": "English"
     }
 
-    # Inicializa o estado do idioma
+    # Inicializa estado do idioma
     if "idioma" not in st.session_state:
         st.session_state.idioma = None
 
-    # 2 - Seleção de idioma obrigatória
+    # Mostra janela modal de idioma se ainda não definido
     if st.session_state.idioma is None:
-        try:
-            st.image("qxplore.png", width=150)
-        except Exception:
-            st.warning("⚠️ Imagem 'qxplore.png' não encontrada.")
+        # Fundo escurecido e modal central
+        st.markdown("""
+            <style>
+                .modal-fundo {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba(0, 0, 0, 0.5);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 9999;
+                }
 
-        idioma_escolhido = st.selectbox(
-            "🌐 Selecione o idioma / Select your language",
-            list(idiomas.values())
-        )
+                .modal-conteudo {
+                    background-color: white;
+                    padding: 30px;
+                    border-radius: 12px;
+                    box-shadow: 0px 0px 12px rgba(0,0,0,0.3);
+                    text-align: center;
+                    width: 350px;
+                    max-width: 90%;
+                    font-family: 'Arial';
+                }
 
-        if idioma_escolhido:
-            for k, v in idiomas.items():
-                if v == idioma_escolhido:
-                    st.session_state.idioma = k
-            st.experimental_rerun()
+                .modal-conteudo h2 {
+                    margin-top: 0;
+                    font-size: 20px;
+                }
+            </style>
+            <div class="modal-fundo">
+                <div class="modal-conteudo">
+                    <h2>🌐 Selecione o idioma / Select your language</h2>
+                    <div id="idioma-placeholder"></div>
+                </div>
+            </div>
+        """, unsafe_allow_html=True)
 
-        st.stop()  # Impede execução do restante até o idioma ser definido
+        # Substitui dinamicamente dentro da div do modal
+        container = st.empty()
+        with container.container():
+            idioma_escolhido = st.selectbox(
+                "",  # Remove o label aqui pois o título está no modal
+                list(idiomas.values()),
+                key="idioma_modal"
+            )
+            if idioma_escolhido:
+                for k, v in idiomas.items():
+                    if v == idioma_escolhido:
+                        st.session_state.idioma = k
+                st.experimental_rerun()
+
+        st.stop()  # Impede continuar até escolher
 
     # 3 - Conteúdo após escolha de idioma
     lang = st.session_state.idioma
