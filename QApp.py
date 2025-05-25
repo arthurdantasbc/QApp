@@ -117,6 +117,12 @@ TEXTOS = {
         "referencias_intro": "To learn more about our work in this area, check the references below:", 
         "info_ml": "Section describing the Quantum Machine Learning techniques used.",
         "info_inf": "Section describing the Quantum Inference techniques used.",
+        "inicializacoes_titulo": "Métodos de Inicialização",
+        "inicializacoes_descricao": (
+            "**Clusterização:** parâmetros baseados nos centros dos clusters ótimos.\n\n"
+            "**LHS:** amostragem uniforme pelo hipercubo latino.\n\n"
+            "**Randômica:** parâmetros iniciados aleatoriamente.\n\n"
+            "**Ponto Fixo:** valores iniciais fixos e pré-definidos."), 
     }
 }
 
@@ -194,6 +200,14 @@ TEXTOS_OPT = {
         "executando_vqe": "Executando VQE, por favor, aguarde...",
         "de": "de",
         "pagina_otimizacao": "Otimização Quântica",
+        "s": "Número de subsistemas (s)",
+        "nj_max": "Valor máximo dos componentes por subsistema (nj_max)",
+        "nj_min": "Valor mínimo dos componentes por subsistema (nj_min)",
+        "ctj_of": "Quantidade de tipos de componentes disponíveis (ctj_of)",
+        "lista_componentes": "Informe a confiabilidade (Rjk_of) e o custo (cjk_of) de cada componente:",
+        "confiabilidade": "Confiabilidade do componente (Rjk_of)",
+        "custo": "Custo do componente (cjk_of)",
+        "custo_total_limite": "Limite máximo de custo (C_of)",
     },
     "en": {
         "idioma": "Language",
@@ -267,6 +281,21 @@ TEXTOS_OPT = {
         "executando_vqe": "Running VQE, please wait...",
         "de": "of",
         "pagina_otimizacao": "Quantum Optimization",
+        "s": "Number of subsystems (s)",
+        "nj_max": "Maximum number of components per subsystem (nj_max)",
+        "nj_min": "Minimum number of components per subsystem (nj_min)",
+        "ctj_of": "Number of available component types (ctj_of)",
+        "lista_componentes": "Enter the reliability (Rjk_of) and cost (cjk_of) for each component type:",
+        "confiabilidade": "Reliability of component (Rjk_of)",
+        "custo": "Cost of component (cjk_of)",
+        "custo_total_limite": "Maximum total cost limit (C_of)",
+        "inicializacoes_titulo": "Initialization Methods",
+        "inicializacoes_descricao": (
+            "**Clustering:** parameters based on centers of optimal clusters.\n\n"
+            "**LHS:** uniform sampling via Latin Hypercube.\n\n"
+            "**Random:** parameters initialized randomly.\n\n"
+            "**Fixed Point:** fixed, predefined initial values."
+        )
     }
 }
 
@@ -455,6 +484,9 @@ def mostrar_otim(textos_otim):
 
         st.markdown(f"**_{textos_otim['qaoa_nome']}_**: {textos_otim['qaoa_desc']}")
         st.markdown(f"**_{textos_otim['vqe_nome']}_**: {textos_otim['vqe_desc']}")
+
+        st.markdown(f"#### {textos_otim['inicializacoes_titulo']}")
+        st.markdown(textos_otim['inicializacoes_descricao'])
         
 def mostrar_ml(textos):
     with st.sidebar.expander(textos["pagina_ml"]):
