@@ -441,7 +441,7 @@ def mostrar_ml(textos):
         st.markdown(f"#### {Arthur}")
         st.markdown(f"{textos['info_ml']}")
 
-def mostrar_ml(textos):
+def mostrar_inf(textos):
     with st.sidebar.expander(textos["pagina_inferencia"]):
         st.markdown(f"#### {Lavínia}")
         st.markdown(f"{textos['info_infe']}")
@@ -540,12 +540,14 @@ def main():
     textos_otim = TEXTOS_OPT[lang]
 
     # 4 - referências em expander
-    mostrar_referencias(textos)
 
     mostrar_logo_topo()
         
     # Ajuda
-    mostrar_ajuda(textos_otim)
+    mostrar_otim(textos_otim)
+    mostrar_ml(textos)
+    mostrar_inf(textos)
+    mostrar_referencias(textos)
 
     if 'pagina' not in st.session_state:
         st.session_state['pagina'] = 'inicio'
