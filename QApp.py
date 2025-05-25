@@ -379,7 +379,6 @@ def mostrar_ajuda(textos_otim):
 
 
 def main():
-def main():
     st.set_page_config(page_title="qxplore", layout="wide")
 
     aplicar_css_botoes()
@@ -402,7 +401,6 @@ def main():
                     flex-direction: column;
                     align-items: center;
                     justify-content: start;
-                    height: 80vh;  /* para centralizar verticalmente */
                 }
                 .stButton > button {
                     width: 200px;
