@@ -486,7 +486,7 @@ def main():
         )
     
         # Botões centralizados horizontalmente
-        col1, col2, col3, col4, col5 = st.columns([1.5, 1, 1, 1.5])
+        col1, col2, col3, col4= st.columns([1.5, 1, 1, 1.5])
         with col1:
             st.write("")
         with col2:
