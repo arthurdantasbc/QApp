@@ -696,13 +696,22 @@ def main():
                                         
                         st.write("---")
                         st.write(f"{textos_otim['parametros_iniciais']} - {textos_otim['rodada']} {i+1} : {textos_otim['camada']} {j+1} = {', '.join(map(str, params))}")
-
-                        loading_placeholder = st.empty()  
-                        loading_placeholder.markdown("""
-                        <div class='loading-gif'><img src='https://th.bing.com/th/id/R.4e7379292ef4b8d1945b1c3bc628d00d?rik=1iNOSJvqT0k%2bww&riu=http%3a%2f%2fbookrosabv.com.br%2fimagens%2floader.gif&ehk=OOTFpItH%2fvfYkf4YThgEExBU9BILk0f4c629HC36vTI%3d&risl=&pid=ImgRaw&r=0' alt='Carregando...'></div>
-                        <div class='loading-text'>{textos_otim['executando_qaoa']}</div>
-                        """, unsafe_allow_html=True)
-
+                        loading_placeholder = st.empty()
+                        
+                        loading_placeholder.markdown(
+                            f"""
+                            <div style='display: flex; flex-direction: column; align-items: center; justify-content: center;'>
+                                <div class='loading-gif'>
+                                    <img src='https://th.bing.com/th/id/R.4e7379292ef4b8d1945b1c3bc628d00d?rik=1iNOSJvqT0k%2bww&riu=http%3a%2f%2fbookrosabv.com.br%2fimagens%2floader.gif&ehk=OOTFpItH%2fvfYkf4YThgEExBU9BILk0f4c629HC36vTI%3d&risl=&pid=ImgRaw&r=0' 
+                                    alt='Carregando...' width='100'>
+                                </div>
+                                <div class='loading-text' style='margin-top: 10px; font-size:18px;'>
+                                    {textos_otim['executando_qaoa']}
+                                </div>
+                            </div>
+                            """,
+                            unsafe_allow_html=True
+                        )
                         algorithm_globals.random_seed = 10598
 
                         shots = 1000
