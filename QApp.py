@@ -379,6 +379,7 @@ def mostrar_ajuda(textos_otim):
 
 
 def main():
+def main():
     st.set_page_config(page_title="qxplore", layout="wide")
 
     aplicar_css_botoes()
@@ -386,10 +387,11 @@ def main():
     # 1 - imagem no topo da sidebar
     st.sidebar.image("CM.png", use_container_width=True)
 
-   # 2 - escolha de idioma logo abaixo da imagem
+    # 2 - escolha de idioma logo abaixo da imagem
     if 'lang' not in st.session_state:
         st.session_state.lang = None
     
+    # Modal para escolha do idioma na primeira visita
     if st.session_state.lang is None:
         # Centraliza tudo usando markdown com CSS
         st.markdown(
@@ -400,7 +402,7 @@ def main():
                     flex-direction: column;
                     align-items: center;
                     justify-content: start;
-                    padding-top: 40px;
+                    height: 80vh;  /* para centralizar verticalmente */
                 }
                 .stButton > button {
                     width: 200px;
@@ -419,8 +421,8 @@ def main():
         st.markdown(
             """
             <h1 style="text-align: center;">
-                Welcome to <span style="color:#0d4376;">Qxplore</span><br>
-                Bem-vindo ao <span style="color:#0d4376;">Qxplore</span>
+                Welcome to <span style="color:#0d4376;">QXplore</span><br>
+                Bem-vindo ao <span style="color:#0d4376;">QXplore</span>
             </h1>
             <p style="text-align: center; font-size:20px;">
                 Selecione o idioma desejado / Select your preferred language
@@ -434,10 +436,10 @@ def main():
         with col2:
             c1, c2 = st.columns(2)
             with c1:
-                if st.button("🌎 Português"):
+                if st.button("Português"):
                     st.session_state.lang = "pt"
             with c2:
-                if st.button("🌍 English"):
+                if st.button("English"):
                     st.session_state.lang = "en"
     
         st.markdown("</div>", unsafe_allow_html=True)
@@ -450,19 +452,25 @@ def main():
     
         st.stop()
     
-    # ---------------------------
-    # Após escolha do idioma
-    # ---------------------------
+    # 3 - Após escolha do idioma, sincroniza a seleção do sidebar com o idioma atual
+    idioma_atual = "Português" if st.session_state.lang == "pt" else "English"
+    idioma_selecionado = st.sidebar.selectbox(
+        "🌐 Idioma / Language",
+        ("Português", "English"),
+        index=0 if idioma_atual == "Português" else 1
+    )
+
+    # Atualiza o idioma no estado se o usuário mudar pelo selectbox
+    if idioma_selecionado == "Português" and st.session_state.lang != "pt":
+        st.session_state.lang = "pt"
+    elif idioma_selecionado == "English" and st.session_state.lang != "en":
+        st.session_state.lang = "en"
+
     lang = st.session_state.lang
     textos = TEXTOS[lang]
     textos_otim = TEXTOS_OPT[lang]
 
-    idioma = st.sidebar.selectbox("🌐 " + TEXTOS["pt"]["idioma"], ("Português", "English"))
-    lang = "pt" if idioma == "Português" else "en"
-    textos = TEXTOS[lang]
-    textos_otim = TEXTOS_OPT[lang]
-    
-    # 3 - aviso para clicar na imagem
+    # 4 - aviso para clicar na imagem, traduzido
     st.sidebar.info(textos["ajuda"])
 
     # 4 - referências em expander
