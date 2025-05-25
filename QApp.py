@@ -171,6 +171,8 @@ TEXTOS_OPT = {
         "tipos_inicializacao_qaoa": ['Clusterização', 'LHS', 'Randômica', 'Ponto Fixo'],
         "executando_vqe": "Executando VQE, por favor, aguarde...",
         "de": "de",
+        "pagina_otimizacao": "Quantum Optimization",
+        "pagina_otimizacao": "Otimização Quântica",
     },
     "en": {
         "idioma": "Language",
@@ -384,7 +386,7 @@ def formatar_tempo(segundos, textos_otim):
     )
 
 def mostrar_ajuda(textos_otim):
-    with st.sidebar.expander(textos["pagina_otimizacao"]):
+    with st.sidebar.expander(textos_otim["pagina_otimizacao"]):
         st.markdown(f"### {textos_otim['problema_rap']}")
         st.markdown(f"{textos_otim['descricao_rap']}")
 
@@ -440,10 +442,10 @@ def main():
         st.markdown(
             """
             <h1 style="text-align: center;">
-                Welcome to <span style="color:#0d4376;">QXplore/</span><br>
-                Bem-vindo ao <span style="color:#0d4376;">QXplore</span>
+                Welcome to <span style="color:#0d4376;">QXplore!</span><br>
+                Bem-vindo ao <span style="color:#0d4376;">QXplore!</span>
             </h1>
-            <p style="text-align: center; font-size:20px;">
+            <p style="text-align: center; font-size:18px;">
                 Select your preferred language / Selecione o idioma desejado :
             </p>
             """,
@@ -465,7 +467,7 @@ def main():
     
         # Caixa de informação sobre idioma
         st.info(
-            "ℹ️ For a better experience, you can change the language anytime during navigation.\n"
+            "ℹ️ For a better experience, you can change the language anytime during navigation.\n\n"
             "ℹ️ Para uma melhor experiência, você pode alterar o idioma a qualquer momento durante a navegação."
         )
 
