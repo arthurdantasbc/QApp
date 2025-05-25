@@ -149,7 +149,7 @@ TEXTOS_OPT = {
             <pre style="background-color: #eee; padding: 5px; border-radius: 5px; font-size: 14px; margin: 1px 0;">
     [s, nj_max, nj_min, ctj_of, Rjk_of, cjk_of, C_of]
             </pre>
-            <ul style="padding-left: 24px; margin: 1px 0; font-size: 12px;">
+            <ul style="padding-left: 24px; margin: 1px 0; font-size: 14px;">
                 <li style="font-size: 14px;"><code>s</code>: Número de subsistemas;</li>
                 <li style="font-size: 14px;"><code>nj_max</code>: Valor máximo dos componentes;</li>
                 <li style="font-size: 14px;"><code>nj_min</code>: Valor mínimo dos componentes;</li>
