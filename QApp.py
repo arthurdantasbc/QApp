@@ -456,13 +456,12 @@ def main():
         col1, col2, col3 = st.columns([1, 2, 1])
         with col2:
             c1, c2 = st.columns(2)
-            with c2:
-                if st.button("Português"):
-                    st.session_state.lang = "pt"
             with c1:
                 if st.button("English"):
                     st.session_state.lang = "en"
-    
+            with c2:
+                if st.button("Português"):
+                    st.session_state.lang = "pt"
         st.markdown("</div>", unsafe_allow_html=True)
     
         # Caixa de informação sobre idioma
