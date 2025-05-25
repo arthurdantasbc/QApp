@@ -375,6 +375,16 @@ def mostrar_ajuda(textos_otim):
 
     with st.sidebar.expander(textos_otim["vqe_nome"]):
         st.markdown(f"**_{textos_otim['vqe_nome']}_:** {textos_otim['vqe_desc']}")
+        
+# Dicionários de texto para teste
+TEXTOS_IDIO = {
+    "pt": {"idioma": "Idioma", "bem_vindo": "Bem-vindo ao QXplore!"},
+    "en": {"idioma": "Language", "bem_vindo": "Welcome to QXplore!"},
+}
+
+
+def escolher_idioma(lang):
+    st.session_state.lang = lang
 
 def main():
     st.set_page_config(page_title="qxplore", layout="wide")
@@ -383,27 +393,14 @@ def main():
 
     # 1 - imagem no topo da sidebar
     st.sidebar.image("CM.png", use_container_width=True)
+    
+    if "lang" not in st.session_state:
+        st.session_state.lang = None
 
-    import streamlit as st
-
-# Dicionários de texto para teste
-TEXTOS = {
-    "pt": {"idioma": "Idioma", "bem_vindo": "Bem-vindo ao QXplore!"},
-    "en": {"idioma": "Language", "bem_vindo": "Welcome to QXplore!"},
-}
-
-# Inicializa variável de sessão para idioma
-if "lang" not in st.session_state:
-    st.session_state.lang = None
-
-def escolher_idioma(lang):
-    st.session_state.lang = lang
-
-# Se idioma ainda não foi escolhido, mostra o modal central
+    # Se idioma ainda não foi escolhido, mostra o modal central
     if st.session_state.lang is None:
-        # Container vazio para o modal
         modal = st.empty()
-        
+
         with modal.container():
             # Centralizar o conteúdo com CSS
             st.markdown(
@@ -436,35 +433,34 @@ def escolher_idioma(lang):
             )
             # Fundo escurecido
             st.markdown('<div class="overlay"></div>', unsafe_allow_html=True)
-            
+
             st.markdown('<div class="centralizado">', unsafe_allow_html=True)
-    
-            # Logo centralizada (coloque a imagem na mesma pasta do app)
+
+            # Logo centralizada (certifique-se que qxplore.png está na pasta correta)
             st.image("qxplore.png", width=120)
-    
+
             # Texto de boas-vindas bilíngue
             st.markdown("<h3>Bem-vindo ao QXplore!</h3>", unsafe_allow_html=True)
             st.markdown("<h3>Welcome to QXplore!</h3>", unsafe_allow_html=True)
-    
+
             # Botões lado a lado para escolha do idioma
             col1, col2 = st.columns(2)
             with col1:
                 if st.button("Português"):
                     escolher_idioma("pt")
-                    modal.empty()  # Remove o modal
+                    modal.empty()  # Remove o modal (recarrega a página)
             with col2:
                 if st.button("English"):
                     escolher_idioma("en")
-                    modal.empty()  # Remove o modal
-    
+                    modal.empty()
+
             st.markdown('</div>', unsafe_allow_html=True)
-    
+
     else:
         # Conteúdo do app quando o idioma foi escolhido
-        textos = TEXTOS[st.session_state.lang]
+        textos = TEXTOS_IDIO[st.session_state.lang]
         st.title(textos["bem_vindo"])
         st.write(f"Você escolheu: {textos['idioma']}")
-        # Aqui o resto do app
 
 
     # 2 - escolha de idioma logo abaixo da imagem
