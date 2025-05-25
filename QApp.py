@@ -160,7 +160,7 @@ TEXTOS_OPT = {
             </ul>
             <p style="margin: 1px; font-size: 12px;">Certifique-se de que o arquivo siga exatamente este formato para que os dados sejam lidos corretamente.</p>
         </div>
-        """
+        """,
         "botao_mostrar_instancia": "Mostrar instância",
         "selecionar_algoritmo": "Selecione o algoritmo:",
         "tipo_inicializacao": "Tipo de inicialização:",
@@ -233,7 +233,7 @@ TEXTOS_OPT = {
             </ul>
             <p style="margin: 1px; font-size: 12px;">Make sure the file follows exactly this format so the data is read correctly.</p>
         </div>
-        """
+        """,
         "botao_mostrar_instancia": "Show instance",
         "selecionar_algoritmo": "Select the algorithm:",
         "tipo_inicializacao": "Initialization type:",
