@@ -379,9 +379,11 @@ def mostrar_ajuda(textos_otim):
 from PIL import Image
 
 def mostrar_modal_idioma():
-    st.markdown("""
+    logo_base64 = imagem_para_base64("qxplore.png")
+    
+    st.markdown(f"""
         <style>
-            .modal-fundo {
+            .modal-fundo {{
                 position: fixed;
                 top: 0;
                 left: 0;
@@ -392,58 +394,27 @@ def mostrar_modal_idioma():
                 align-items: center;
                 justify-content: center;
                 z-index: 9999;
-            }
-
-            .modal-conteudo {
+            }}
+            .modal-conteudo {{
                 background-color: white;
                 padding: 40px;
                 border-radius: 16px;
-                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
                 text-align: center;
                 width: 400px;
-                font-family: Arial, sans-serif;
-                z-index: 10000;
-            }
-
-            .modal-logo img {
-                max-width: 120px;
+            }}
+            .modal-logo img {{
+                max-width: 100px;
                 margin-bottom: 20px;
-            }
-
-            .modal-bemvindo {
-                font-size: 20px;
-                margin-bottom: 20px;
-                font-weight: bold;
-            }
-
-            .modal-btn {
-                display: flex;
-                justify-content: space-around;
-                margin-top: 20px;
-            }
-
-            .stButton > button {
-                width: 130px;
-                padding: 10px;
-                border-radius: 8px;
-                background-color: #007BFF;
-                color: white;
-                font-weight: bold;
-                border: none;
-            }
-
-            .stButton > button:hover {
-                background-color: #0056b3;
-                cursor: pointer;
-            }
+            }}
         </style>
+    
         <div class="modal-fundo">
             <div class="modal-conteudo">
                 <div class="modal-logo">
-                    <img src="data:image/png;base64,{logo_base64}">
+                    <img src="data:image/png;base64,{logo_base64}" alt="logo">
                 </div>
-                <div class="modal-bemvindo">🌐 Bem-vindo!<br>Selecione o idioma / Select your language</div>
-        """.format(logo_base64=imagem_para_base64("qxplore.png")), unsafe_allow_html=True)
+                <h4>🌐 Bem-vindo!<br>Selecione o idioma / Select your language</h4>
+    """, unsafe_allow_html=True)
 
     col1, col2 = st.columns(2)
     with col1:
