@@ -164,6 +164,8 @@ TEXTOS_OPT = {
         "inserir_ponto_fixo": "Insira o valor do ponto fixo",
         "tipos_inicializacao_vqe": ['LHS', 'Randômica', 'Ponto Fixo'],
         "tipos_inicializacao_qaoa": ['Clusterização', 'LHS', 'Randômica', 'Ponto Fixo'],
+        "executando_vqe": "Executando VQE, por favor, aguarde...",
+        "de": "de",
     },
     "en": {
         "insira_dados": "Enter the requested data:",
@@ -215,6 +217,8 @@ TEXTOS_OPT = {
         "inserir_ponto_fixo": "Enter the fixed point value",
         "tipos_inicializacao_vqe": ['LHS', 'Random', 'Fixed Point'],
         "tipos_inicializacao_qaoa": ['Clustering', 'LHS', 'Random', 'Fixed Point'],
+        "executando_vqe": "Running VQE, please wait...",
+        "de": "of",
     }
 }
 
@@ -782,6 +786,98 @@ def main():
                 st.write(f"{textos_otim['media_energia']}:", media_energia)
                 st.write(f"{textos_otim['desvio_padrao_energia']}:", desvio_padrao_energia)
 
+            elif modo_algoritmo == 'VQE':
+            time_vqe = 0
+            energias = []
+            parametros = []
+            tempos_execucao = []
+        
+            for i in range(rodadas):
+                for j in range(camadas):
+        
+                    if tipo_inicializacao == textos_otim["tipos_inicializacao_vqe"][1]:  # LHS
+                        param_intervals = [(0, 2*np.pi)] * (4 * qubits) 
+                        lhs_samples = generate_lhs_samples(param_intervals, rodadas+1)
+                        params = lhs_samples[i]
+        
+                    elif tipo_inicializacao == textos_otim["tipos_inicializacao_vqe"][2]:  # Randômica / Random
+                        params = np.random.uniform(0, 2 * np.pi, 4 * qubits)
+        
+                    elif tipo_inicializacao == textos_otim["tipos_inicializacao_vqe"][3]:  # Ponto Fixo / Fixed Point
+                        params = np.full(4 * qubits, numero_ponto_fixo)
+        
+                    st.write("---")
+                    st.write(f"{textos_otim['parametros_iniciais']} - {textos_otim['rodada']} {i+1} : {textos_otim['camada']} {j+1} = {', '.join(map(str, params))}")
+        
+                    loading_placeholder = st.empty()
+                    loading_placeholder.markdown(f"""
+                    <div style='display: flex; flex-direction: column; align-items: center; justify-content: center;'>
+                        <div class='loading-gif'>
+                            <img src='https://th.bing.com/th/id/R.4e7379292ef4b8d1945b1c3bc628d00d?rik=1iNOSJvqT0k%2bww&riu=http%3a%2f%2fbookrosabv.com.br%2fimagens%2floader.gif&ehk=OOTFpItH%2fvfYkf4YThgEExBU9BILk0f4c629HC36vTI%3d&risl=&pid=ImgRaw&r=0' 
+                            alt='Carregando...' width='100'>
+                        </div>
+                        <div class='loading-text' style='margin-top: 10px; font-size:18px;'>
+                            {textos_otim['executando_vqe']}
+                        </div>
+                    </div>
+                    """, unsafe_allow_html=True)
+        
+                    st.markdown(f"<div class='counter'>{textos_otim['rodada']} {i + 1} / {rodadas}</div>", unsafe_allow_html=True)
+        
+                    algorithm_globals.random_seed = 10598
+        
+                    mes = SamplingVQE(sampler=Sampler(), ansatz=RealAmplitudes(), optimizer=SPSA(), initial_point=params)
+                    meo = MinimumEigenOptimizer(min_eigen_solver=mes)
+        
+                    start = time.time()
+                    vqe_result = meo.solve(qubo)
+                    end = time.time()
+        
+                    energias.append(vqe_result.fval)
+                    tempos_execucao.append(end - start)
+                    componentes_otimos.append(vqe_result.x)
+        
+            energia_otimizada = min(energias)
+            confiabilidade = 1 - math.exp(energia_otimizada)
+            media_energia = np.mean(energias)
+            desvio_padrao_energia = np.std(energias)
+        
+            indice_min_energia = energias.index(energia_otimizada)
+            componente_otimo = componentes_otimos[indice_min_energia]
+        
+            componentes_variaveis = []
+            f = ct
+            d = nb
+        
+            var_index = 0
+            for m in range(1, f + 1):
+                componente = 0
+                for k in range(d):
+                    var_value = componente_otimo[var_index]
+                    componente += var_value * (2 ** (m - k - 1))
+                    var_index += 1 
+                componentes_variaveis.append(componente)
+        
+            pesos = cjk
+            custo_total = sum(c * p for c, p in zip(componentes_variaveis, pesos))
+        
+            loading_placeholder.empty()
+        
+            st.write("---")
+            st.subheader(textos_otim['resultados'])
+            st.write(f"{textos_otim['energia_otima']}:", energia_otimizada)
+            st.write(f"{textos_otim['confiabilidade_otima']}:", confiabilidade)
+            st.write(f"{textos_otim['componentes_solucao']}:", componentes_variaveis)
+            st.write(f"{textos_otim['custo_total']}:", custo_total)
+            st.write("")
+            st.subheader(textos_otim['medidas_energia'])
+            st.write(f"{textos_otim['media_energia']}:", media_energia)
+            st.write(f"{textos_otim['desvio_padrao_energia']}:", desvio_padrao_energia)
+        
+        # Botão de Reset
+        if st.button('Reset'):
+            st.experimental_rerun()
+    
 
     elif st.session_state['pagina'] == 'ml':
         st.subheader(textos["pagina_ml"])
