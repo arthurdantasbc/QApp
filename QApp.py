@@ -143,13 +143,13 @@ TEXTOS_OPT = {
         "modo_leitura_upload": "Upload",
         "ajuda_upload_botao": "Mostrar ajuda para upload",
         "ajuda_upload_texto": """
-        <div style="background-color: #f9f9f9; margin: 0; padding: 8px; border-radius: 3px; border: 1px solid #ddd; max-width: 500px; font-size: 10px;">
+        <div style="background-color: #f9f9f9; margin: 0; padding: 8px; border-radius: 3px; border: 1px solid #ddd; max-width: 700px; font-size: 12px;">
             <h4 style="color: #333; font-size: 14px; margin: 10px;">Instruções para Upload</h4>
             <p style="margin: 1px 0; font-size: 12px;">O arquivo de entrada deve ser um arquivo de texto (<code>.txt</code>), onde cada linha representa uma instância, com o seguinte formato:</p>
             <pre style="background-color: #eee; padding: 5px; border-radius: 5px; font-size: 12px; margin: 1px 0;">
     [s, nj_max, nj_min, ctj_of, Rjk_of, cjk_of, C_of]
             </pre>
-            <ul style="padding-left: 20px; margin: 1px 0; font-size: 10px;">
+            <ul style="padding-left: 20px; margin: 1px 0; font-size: 12px;">
                 <li style="font-size: 12px;"><code>s</code>: Número de subsistemas;</li>
                 <li style="font-size: 12px;"><code>nj_max</code>: Valor máximo dos componentes;</li>
                 <li style="font-size: 12px;"><code>nj_min</code>: Valor mínimo dos componentes;</li>
