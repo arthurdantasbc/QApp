@@ -389,7 +389,7 @@ def main():
    # 2 - escolha de idioma logo abaixo da imagem
     if 'lang' not in st.session_state:
         st.session_state.lang = None
-
+    
     if st.session_state.lang is None:
         # Centraliza tudo usando markdown com CSS
         st.markdown(
@@ -399,14 +399,10 @@ def main():
                     display: flex;
                     flex-direction: column;
                     align-items: center;
-                    justify-content: center;
+                    justify-content: start;
+                    padding-top: 40px;
                 }
-                .button-container {
-                    display: flex;
-                    gap: 50px;
-                    margin-top: 30px;
-                }
-                button[kind="primary"] {
+                .stButton > button {
                     width: 200px;
                     height: 50px;
                     font-size: 18px;
@@ -418,31 +414,39 @@ def main():
     
         st.markdown('<div class="centered">', unsafe_allow_html=True)
     
-        mostrar_logo_topo()
+        mostrar_logo_topo()  # Sua função para exibir a logo
     
         st.markdown(
             """
-            <h1 style="text-align: center;">Bem-vindo ao <span style="color:#0d4376;">Qxplore</span></h1>
+            <h1 style="text-align: center;">
+                Welcome to <span style="color:#0d4376;">Qxplore</span><br>
+                Bem-vindo ao <span style="color:#0d4376;">Qxplore</span>
+            </h1>
             <p style="text-align: center; font-size:20px;">
-                Selecione o idioma desejado para acessar o Qxplore.
+                Selecione o idioma desejado / Select your preferred language
             </p>
             """,
             unsafe_allow_html=True
         )
     
-        # Botões centralizados
-        col1, col2, col3 = st.columns([1, 1, 1])
-        with col1:
-            pass
+        # Botões centralizados horizontalmente
+        col1, col2, col3 = st.columns([1, 2, 1])
         with col2:
-            if st.button("🌎 Português"):
-                st.session_state.lang = "pt"
-            if st.button("🌍 English"):
-                st.session_state.lang = "en"
-        with col3:
-            pass
+            c1, c2 = st.columns(2)
+            with c1:
+                if st.button("🌎 Português"):
+                    st.session_state.lang = "pt"
+            with c2:
+                if st.button("🌍 English"):
+                    st.session_state.lang = "en"
     
         st.markdown("</div>", unsafe_allow_html=True)
+    
+        # Caixa de informação sobre idioma
+        st.info(
+            "ℹ️ Para uma melhor experiência, você pode alterar o idioma a qualquer momento durante a navegação.\n\n"
+            "ℹ️ For a better experience, you can change the language anytime during navigation."
+        )
     
         st.stop()
     
