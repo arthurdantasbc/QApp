@@ -385,9 +385,31 @@ def main():
     # 1 - imagem no topo da sidebar
     st.sidebar.image("CM.png", use_container_width=True)
 
-    # 2 - escolha de idioma logo abaixo da imagem
-    idioma = st.sidebar.selectbox("🌐 " + TEXTOS["pt"]["idioma"], ("Português", "English"))
-    lang = "pt" if idioma == "Português" else "en"
+        
+    # Dicionário temporário apenas para exibir nomes antes da seleção
+    idiomas = {
+        "pt": "Português",
+        "en": "English"
+    }
+    
+    # Verifica se o idioma já foi selecionado
+    if "idioma" not in st.session_state:
+        st.session_state.idioma = None
+    
+    # Se não selecionou ainda, obriga a escolher
+    if st.session_state.idioma is None:
+        st.image("logo.png", width=150)  # Ou outro banner
+        idioma_escolhido = st.selectbox("🌐 Selecione o idioma / Select your language", list(idiomas.values()))
+        if idioma_escolhido:
+            # Define idioma e recarrega
+            for k, v in idiomas.items():
+                if v == idioma_escolhido:
+                    st.session_state.idioma = k
+            st.experimental_rerun()
+        st.stop()  # Impede o resto do app até o idioma ser escolhido
+    
+    # Agora que o idioma foi escolhido
+    lang = st.session_state.idioma
     textos = TEXTOS[lang]
     textos_otim = TEXTOS_OPT[lang]
 
