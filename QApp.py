@@ -456,9 +456,11 @@ def main():
             with c1:
                 if st.button("English"):
                     st.session_state.lang = "en"
+                    st.experimental_rerun()
             with c2:
                 if st.button("Português"):
                     st.session_state.lang = "pt"
+                    st.experimental_rerun()
         st.markdown("</div>", unsafe_allow_html=True)
     
         # Caixa de informação sobre idioma
@@ -475,7 +477,7 @@ def main():
     idioma_selecionado = st.sidebar.selectbox(
         "Language / Idioma:",
         ("English", "Português"),
-        index=0 if idioma_atual == "Português" else 1
+        index=0 if idioma_atual == "English"  else 1
     )
 
     # Atualiza o idioma no estado se o usuário mudar pelo selectbox
@@ -501,6 +503,7 @@ def main():
         mostrar_cartoes_de_area(textos)
 
     elif st.session_state['pagina'] == 'otimizacao':
+        st.experimental_rerun()
         st.subheader(textos["pagina_otimizacao"])
         
         # Aplica estilos personalizados
