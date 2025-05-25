@@ -400,7 +400,6 @@ def main():
                     flex-direction: column;
                     align-items: center;
                     justify-content: center;
-                    height: 90vh;
                 }
                 .button-container {
                     display: flex;
@@ -423,7 +422,7 @@ def main():
     
         st.markdown(
             """
-            <h1 style="text-align: center;">Bem-vindo ao <span style="color:#FF4B4B;">Qxplore</span></h1>
+            <h1 style="text-align: center;">Bem-vindo ao <span style="color:#0d4376;">Qxplore</span></h1>
             <p style="text-align: center; font-size:20px;">
                 Selecione o idioma desejado para acessar o Qxplore.
             </p>
