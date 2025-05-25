@@ -388,7 +388,7 @@ def main():
 
    # 2 - escolha de idioma logo abaixo da imagem
     if 'lang' not in st.session_state:
-    st.session_state.lang = None
+        st.session_state.lang = None
 
     if st.session_state.lang is None:
         # Centraliza tudo usando markdown com CSS
