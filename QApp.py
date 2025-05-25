@@ -385,29 +385,37 @@ def main():
     # 1 - imagem no topo da sidebar
     st.sidebar.image("CM.png", use_container_width=True)
 
-        
-    # Dicionário temporário apenas para exibir nomes antes da seleção
+    # Dicionário de idiomas
     idiomas = {
         "pt": "Português",
         "en": "English"
     }
-    
-    # Verifica se o idioma já foi selecionado
+
+    # Inicializa o estado do idioma
     if "idioma" not in st.session_state:
         st.session_state.idioma = None
-    
-    # Se não selecionou ainda, obriga a escolher
+
+    # 2 - Seleção de idioma obrigatória
     if st.session_state.idioma is None:
-        idioma_escolhido = st.selectbox("🌐 Selecione o idioma / Select your language", list(idiomas.values()))
+        try:
+            st.image("qxplore.png", width=150)
+        except Exception:
+            st.warning("⚠️ Imagem 'qxplore.png' não encontrada.")
+
+        idioma_escolhido = st.selectbox(
+            "🌐 Selecione o idioma / Select your language",
+            list(idiomas.values())
+        )
+
         if idioma_escolhido:
-            # Define idioma e recarrega
             for k, v in idiomas.items():
                 if v == idioma_escolhido:
                     st.session_state.idioma = k
             st.experimental_rerun()
-        st.stop()  # Impede o resto do app até o idioma ser escolhido
-    
-    # Agora que o idioma foi escolhido
+
+        st.stop()  # Impede execução do restante até o idioma ser definido
+
+    # 3 - Conteúdo após escolha de idioma
     lang = st.session_state.idioma
     textos = TEXTOS[lang]
     textos_otim = TEXTOS_OPT[lang]
