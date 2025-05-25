@@ -393,23 +393,17 @@ def main():
 
     # 1 - imagem no topo da sidebar
     st.sidebar.image("CM.png", use_container_width=True)
-    
+  
     if "lang" not in st.session_state:
         st.session_state.lang = None
 
-    # Se idioma ainda não foi escolhido, mostra o modal central
     if st.session_state.lang is None:
         modal = st.empty()
-
         with modal.container():
-            # Centralizar o conteúdo com CSS
-            st.markdown(
-                """
+            st.markdown("""
                 <style>
                 .centralizado {
-                    position: fixed;
-                    top: 50%;
-                    left: 50%;
+                    position: fixed; top: 50%; left: 50%;
                     transform: translate(-50%, -50%);
                     padding: 2rem;
                     box-shadow: 0 0 15px rgba(0,0,0,0.3);
@@ -420,54 +414,35 @@ def main():
                     z-index: 9999;
                 }
                 .overlay {
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    width: 100vw;
-                    height: 100vh;
+                    position: fixed; top: 0; left: 0;
+                    width: 100vw; height: 100vh;
                     background-color: rgba(0,0,0,0.3);
                     z-index: 9998;
                 }
                 </style>
-                """, unsafe_allow_html=True
-            )
-            # Fundo escurecido
+            """, unsafe_allow_html=True)
             st.markdown('<div class="overlay"></div>', unsafe_allow_html=True)
-
             st.markdown('<div class="centralizado">', unsafe_allow_html=True)
-
-            # Logo centralizada (certifique-se que qxplore.png está na pasta correta)
             st.image("qxplore.png", width=120)
-
-            # Texto de boas-vindas bilíngue
             st.markdown("<h3>Bem-vindo ao QXplore!</h3>", unsafe_allow_html=True)
             st.markdown("<h3>Welcome to QXplore!</h3>", unsafe_allow_html=True)
 
-            # Botões lado a lado para escolha do idioma
             col1, col2 = st.columns(2)
             with col1:
                 if st.button("Português"):
                     escolher_idioma("pt")
-                    modal.empty()  # Remove o modal (recarrega a página)
+                    modal.empty()
             with col2:
                 if st.button("English"):
                     escolher_idioma("en")
                     modal.empty()
-
             st.markdown('</div>', unsafe_allow_html=True)
+        return  # Sai para evitar renderizar o resto antes da escolha
 
-    else:
-        # Conteúdo do app quando o idioma foi escolhido
-        textos = TEXTOS_IDIO[st.session_state.lang]
-        st.title(textos["bem_vindo"])
-        st.write(f"Você escolheu: {textos['idioma']}")
+    # Após idioma escolhido
+    textos = TEXTOS[st.session_state.lang]
+    textos_otim = TEXTOS_OPT[st.session_state.lang]
 
-
-    # 2 - escolha de idioma logo abaixo da imagem
-    idioma = st.sidebar.selectbox("🌐 " + TEXTOS["pt"]["idioma"], ("Português", "English"))
-    lang = "pt" if idioma == "Português" else "en"
-    textos = TEXTOS[lang]
-    textos_otim = TEXTOS_OPT[lang]
     
     # 3 - aviso para clicar na imagem
     st.sidebar.info(textos["ajuda"])
