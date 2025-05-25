@@ -419,7 +419,7 @@ def main():
     
         st.markdown('<div class="centered">', unsafe_allow_html=True)
     
-        st.image("https://upload.wikimedia.org/wikipedia/commons/5/5f/Globe_icon.svg", width=120)
+        mostrar_logo_topo()
     
         st.markdown(
             """
