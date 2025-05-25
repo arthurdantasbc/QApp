@@ -456,11 +456,9 @@ def main():
             with c1:
                 if st.button("English"):
                     st.session_state.lang = "en"
-                    st.experimental_rerun()
             with c2:
                 if st.button("Português"):
                     st.session_state.lang = "pt"
-                    st.experimental_rerun()
         st.markdown("</div>", unsafe_allow_html=True)
     
         # Caixa de informação sobre idioma
@@ -503,7 +501,6 @@ def main():
         mostrar_cartoes_de_area(textos)
 
     elif st.session_state['pagina'] == 'otimizacao':
-        st.experimental_rerun()
         st.subheader(textos["pagina_otimizacao"])
         
         # Aplica estilos personalizados
