@@ -499,12 +499,8 @@ def main():
         with col4:
             if st.button("Português"):
                 st.session_state.lang = "pt"
-        with col5:
-            st.write("")
 
-        with col1:
-            st.write("")
-        
+
         st.markdown("</div>", unsafe_allow_html=True)
     
         # Caixa de informação sobre idioma
