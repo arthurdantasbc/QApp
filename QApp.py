@@ -438,12 +438,12 @@ def mostrar_otim(textos_otim):
         
 def mostrar_ml(textos):
     with st.sidebar.expander(textos["pagina_ml"]):
-        st.markdown(f"#### {Arthur}")
+        st.markdown(f"#### {'Arthur'}")
         st.markdown(f"{textos['info_ml']}")
 
 def mostrar_inf(textos):
     with st.sidebar.expander(textos["pagina_inferencia"]):
-        st.markdown(f"#### {Lavínia}")
+        st.markdown(f"#### {'Lavínia'}")
         st.markdown(f"{textos['info_infe']}")
 
 def main():
