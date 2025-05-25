@@ -376,65 +376,6 @@ def mostrar_ajuda(textos_otim):
     with st.sidebar.expander(textos_otim["vqe_nome"]):
         st.markdown(f"**_{textos_otim['vqe_nome']}_:** {textos_otim['vqe_desc']}")
 
-from PIL import Image
-
-def mostrar_modal_idioma():
-    logo_base64 = imagem_para_base64("qxplore.png")
-    
-    st.markdown(f"""
-        <style>
-            .modal-fundo {{
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100vw;
-                height: 100vh;
-                background-color: rgba(0, 0, 0, 0.4);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                z-index: 9999;
-            }}
-            .modal-conteudo {{
-                background-color: white;
-                padding: 40px;
-                border-radius: 16px;
-                text-align: center;
-                width: 400px;
-            }}
-            .modal-logo img {{
-                max-width: 100px;
-                margin-bottom: 20px;
-            }}
-        </style>
-    
-        <div class="modal-fundo">
-            <div class="modal-conteudo">
-                <div class="modal-logo">
-                    <img src="data:image/png;base64,{logo_base64}" alt="logo">
-                </div>
-                <h4>🌐 Bem-vindo!<br>Selecione o idioma / Select your language</h4>
-    """, unsafe_allow_html=True)
-
-    col1, col2 = st.columns(2)
-    with col1:
-        if st.button("🇧🇷 Português"):
-            st.session_state.idioma = "pt"
-            st.experimental_rerun()
-    with col2:
-        if st.button("🇺🇸 English"):
-            st.session_state.idioma = "en"
-            st.experimental_rerun()
-
-    st.markdown("</div></div>", unsafe_allow_html=True)
-    st.stop()
-
-
-def imagem_para_base64(path):
-    import base64
-    with open(path, "rb") as img_file:
-        return base64.b64encode(img_file.read()).decode()
-
 def main():
     st.set_page_config(page_title="qxplore", layout="wide")
 
@@ -443,17 +384,12 @@ def main():
     # 1 - imagem no topo da sidebar
     st.sidebar.image("CM.png", use_container_width=True)
 
-    if "idioma" not in st.session_state:
-        st.session_state.idioma = None
-
-    if st.session_state.idioma is None:
-        mostrar_modal_idioma()
-
-    # 3 - Conteúdo após escolha de idioma
-    lang = st.session_state.idioma
+    # 2 - escolha de idioma logo abaixo da imagem
+    idioma = st.sidebar.selectbox("🌐 " + TEXTOS["pt"]["idioma"], ("Português", "English"))
+    lang = "pt" if idioma == "Português" else "en"
     textos = TEXTOS[lang]
     textos_otim = TEXTOS_OPT[lang]
-
+    
     # 3 - aviso para clicar na imagem
     st.sidebar.info(textos["ajuda"])
 
