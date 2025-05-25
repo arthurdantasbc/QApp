@@ -393,17 +393,28 @@ def main():
 
     # 1 - imagem no topo da sidebar
     st.sidebar.image("CM.png", use_container_width=True)
-  
-    if "lang" not in st.session_state:
-        st.session_state.lang = None
 
+    def escolher_idioma(lang):
+        st.session_state.lang = lang
+    
+    if 'lang' not in st.session_state:
+        st.session_state.lang = None
+    
     if st.session_state.lang is None:
         modal = st.empty()
         with modal.container():
             st.markdown("""
                 <style>
+                .overlay {
+                    position: fixed; 
+                    top: 0; left: 0;
+                    width: 100vw; height: 100vh;
+                    background-color: rgba(0,0,0,0.3);
+                    z-index: 9998;
+                }
                 .centralizado {
-                    position: fixed; top: 50%; left: 50%;
+                    position: fixed;
+                    top: 50%; left: 50%;
                     transform: translate(-50%, -50%);
                     padding: 2rem;
                     box-shadow: 0 0 15px rgba(0,0,0,0.3);
@@ -413,31 +424,32 @@ def main():
                     width: 300px;
                     z-index: 9999;
                 }
-                .overlay {
-                    position: fixed; top: 0; left: 0;
-                    width: 100vw; height: 100vh;
-                    background-color: rgba(0,0,0,0.3);
-                    z-index: 9998;
-                }
                 </style>
+                <div class="overlay"></div>
+                <div class="centralizado">
             """, unsafe_allow_html=True)
-            st.markdown('<div class="overlay"></div>', unsafe_allow_html=True)
-            st.markdown('<div class="centralizado">', unsafe_allow_html=True)
+    
             st.image("qxplore.png", width=120)
             st.markdown("<h3>Bem-vindo ao QXplore!</h3>", unsafe_allow_html=True)
             st.markdown("<h3>Welcome to QXplore!</h3>", unsafe_allow_html=True)
-
+    
             col1, col2 = st.columns(2)
             with col1:
                 if st.button("Português"):
                     escolher_idioma("pt")
-                    modal.empty()
+                    modal.empty()  # Fecha modal para mostrar app
             with col2:
                 if st.button("English"):
                     escolher_idioma("en")
-                    modal.empty()
-            st.markdown('</div>', unsafe_allow_html=True)
-        return  # Sai para evitar renderizar o resto antes da escolha
+                    modal.empty()  # Fecha modal para mostrar app
+    
+            st.markdown("</div>", unsafe_allow_html=True)
+    
+        st.stop()  # Para não renderizar o resto do app antes da escolha
+    
+    # Aqui vem o resto do seu app, que só aparece depois que escolher idioma
+    st.write(f"Idioma escolhido: {st.session_state.lang}")
+    st.write("Aqui começa o app para o usuário.")
 
     # Após idioma escolhido
     textos = TEXTOS[st.session_state.lang]
