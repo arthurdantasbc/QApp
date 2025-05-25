@@ -486,19 +486,25 @@ def main():
         )
     
         # Botões centralizados horizontalmente
-        col1, col2, col3, col4 = st.columns(4)
+        col1, col2, col3, col4, col5, col6 = st.columns(6)
         with col1:
             st.write("")
-        
         with col2:
+            st.write("")
+        
+        with col3:
             if st.button("English"):
                 st.session_state.lang = "en"
         
-        with col3:
+        with col4:
             if st.button("Português"):
                 st.session_state.lang = "pt"
+        with col5:
+            st.write("")
+
         with col1:
             st.write("")
+        
         st.markdown("</div>", unsafe_allow_html=True)
     
         # Caixa de informação sobre idioma
