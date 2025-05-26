@@ -122,7 +122,7 @@ TEXTOS = {
             "**Clusterização:** parâmetros baseados nos centros dos clusters ótimos.\n\n"
             "**LHS:** amostragem uniforme pelo hipercubo latino.\n\n"
             "**Randômica:** parâmetros iniciados aleatoriamente.\n\n"
-            "**Ponto Fixo:** valores iniciais fixos e pré-definidos."), 
+            "**Ponto Fixo:** valores iniciais fixos e pré-definidos."),
     }
 }
 
@@ -220,8 +220,9 @@ TEXTOS_OPT = {
         "selecionar_emaranhamento": "Selecione as portas de emaranhamento:",
 
         "tipo_inicializacao": "Selecione o método de inicialização:",
-        "tipos_inicializacao_vqe": ["Ponto Fixo", "LHS", "Randômica"],
-        
+        "selecionar_otimizador": "Selecione o otimizador:",
+        "opcoes_otimizadores": ["SPSA", "COBYLA"],
+        "inserir_shots": "Insira o número de shots:"
     },
     "en": {
         "idioma": "Language",
@@ -320,7 +321,9 @@ TEXTOS_OPT = {
         "selecionar_emaranhamento": "Select entanglement gates:",
 
         "tipo_inicializacao": "Select the initialization method:",
-        "tipos_inicializacao_vqe": ["Fixed Point", "LHS", "Random"],
+        "selecionar_otimizador": "Select the optimizer:",
+        "opcoes_otimizadores": ["SPSA", "COBYLA"], 
+        "inserir_shots": "Enter the number of shots:"
     }
 }
 
@@ -742,9 +745,10 @@ def main():
                     if tipo_inicializacao in ['Ponto Fixo', 'Fixed Point']:
                         numero_ponto_fixo = st.number_input(textos_otim["inserir_ponto_fixo"], step=0.1)
 
-
+                otimizador = st.radio(textos_otim["selecionar_otimizador"],textos_otim["opcoes_otimizadores"])
                 camadas = st.number_input(textos_otim["inserir_camadas"], min_value=1, max_value=3, value=1)
                 rodadas = st.number_input(textos_otim["inserir_rodadas"], min_value=1, value=1)
+                shots = st.number_input(textos_otim["inserir_shots"], min_value=100, value=1000)
                 
         if st.button(textos_otim['executar']):
 
@@ -844,15 +848,15 @@ def main():
 
                 for i in range(rodadas):
                     for j in range(camadas):
-                        if tipo_inicializacao == 'LHS':
+                        if tipo_inicializacao == textos_otim["tipos_inicializacao_qaoa"][2]:  # LHS
                             param_intervals = [(0, 2*np.pi)] * 2 
                             lhs_samples = generate_lhs_samples(param_intervals, rodadas+1)
                             params = lhs_samples[i]
-                        elif tipo_inicializacao == 'Randômica':
+                        elif tipo_inicializacao == textos_otim["tipos_inicializacao_qaoa"][3]:
                             params = np.random.uniform(0, 2 * np.pi, 2)
-                        elif tipo_inicializacao == 'Ponto Fixo':
+                        elif tipo_inicializacao == textos_otim["tipos_inicializacao_qaoa"][4]:  # Ponto Fixo / Fixed Point
                             params = np.full(2, numero_ponto_fixo)
-                        elif tipo_inicializacao == 'Clusterização':
+                        elif tipo_inicializacao == textos_otim["tipos_inicializacao_qaoa"][1]:
                             K = 2
                             Q = 56  
 
@@ -884,8 +888,13 @@ def main():
                         )
                         algorithm_globals.random_seed = 10598
 
-                        shots = 1000
-                        mes = QAOA(sampler=Sampler(), optimizer=COBYLA(), initial_point=params)
+                        if otimizador == textos_otim["opcoes_otimizadores"][0]:  # SPSA
+                            otimizador_instanciado = SPSA()
+                        elif otimizador == textos_otim["opcoes_otimizadores"][1]:  # COBYLA
+                            otimizador_instanciado = COBYLA()
+
+                        sampler = Sampler(options={"shots": shots})
+                        mes = QAOA(sampler=Sampler(), optimizer= otimizador_instanciado, initial_point=params)
                         meo = MinimumEigenOptimizer(min_eigen_solver=mes)
 
                         start = time.time()
@@ -940,10 +949,14 @@ def main():
                 energias = []
                 parametros = []
                 tempos_execucao = []
-            
+
                 for i in range(rodadas):
                     for j in range(camadas):
-            
+                        if tipo_circuito == textos_otim["real_amplitudes"]:
+                            num_parametros = qubits * 2 * camadas  
+                        elif tipo_circuito == textos_otim["two_local"]:
+                            num_parametros = (len(rotacao_escolhida)*2) * camadas * qubits 
+
                         if tipo_inicializacao == textos_otim["tipos_inicializacao_vqe"][1]:  # LHS
                             param_intervals = [(0, 2*np.pi)] * (4 * qubits) 
                             lhs_samples = generate_lhs_samples(param_intervals, rodadas+1)
@@ -974,8 +987,14 @@ def main():
                         st.markdown(f"<div class='counter'>{textos_otim['rodada']} {i + 1} / {rodadas}</div>", unsafe_allow_html=True)
             
                         algorithm_globals.random_seed = 10598
-            
-                        mes = SamplingVQE(sampler=Sampler(), ansatz=RealAmplitudes(), optimizer=SPSA(), initial_point=params)
+
+                        if otimizador == textos_otim["opcoes_otimizadores"][0]:  # SPSA
+                            otimizador_instanciado = SPSA()
+                        elif otimizador == textos_otim["opcoes_otimizadores"][1]:  # COBYLA
+                            otimizador_instanciado = COBYLA()
+
+                        sampler = Sampler(options={"shots": shots})
+                        mes = SamplingVQE(sampler=Sampler(), ansatz=variational_circuit, optimizer=otimizador_instanciado, initial_point=params)
                         meo = MinimumEigenOptimizer(min_eigen_solver=mes)
             
                         start = time.time()
