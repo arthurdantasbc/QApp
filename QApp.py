@@ -117,12 +117,6 @@ TEXTOS = {
         "referencias_intro": "To learn more about our work in this area, check the references below:", 
         "info_ml": "Section describing the Quantum Machine Learning techniques used.",
         "info_inf": "Section describing the Quantum Inference techniques used.",
-        "inicializacoes_titulo": "Métodos de Inicialização",
-        "inicializacoes_descricao": (
-            "**Clusterização:** parâmetros baseados nos centros dos clusters ótimos.\n\n"
-            "**LHS:** amostragem uniforme pelo hipercubo latino.\n\n"
-            "**Randômica:** parâmetros iniciados aleatoriamente.\n\n"
-            "**Ponto Fixo:** valores iniciais fixos e pré-definidos."),
     }
 }
 
@@ -138,6 +132,12 @@ TEXTOS_OPT = {
         "problema_rap": "Problema de Alocação de Redundâncias (RAP):",
         "descricao_rap": "O RAP refere-se à otimização da alocação de componentes redundantes em um sistema para aumentar sua confiabilidade e disponibilidade.",
         "algoritmos": "Algoritmos quânticos disponíveis:",
+        "inicializacoes_titulo": "Métodos de Inicialização",
+        "inicializacoes_descricao": (
+            "**Clusterização:** parâmetros baseados nos centros dos clusters ótimos.\n\n"
+            "**LHS:** amostragem uniforme pelo hipercubo latino.\n\n"
+            "**Randômica:** parâmetros iniciados aleatoriamente.\n\n"
+            "**Ponto Fixo:** valores iniciais fixos e pré-definidos."),
         "descricao_algoritmos": "Os algoritmos quânticos de otimização são projetados para explorar as propriedades únicas da mecânica quântica, como superposição e entrelaçamento, para resolver problemas de otimização, como o RAP.",
         "qaoa_nome": "QAOA",
         "qaoa_desc": "Quantum Approximate Optimization Algorithm é um algoritmo quântico projetado para resolver problemas de otimização combinatória, como o RAP, aproximando-se das soluções ótimas utilizando uma sequência parametrizada de operações quânticas.",
