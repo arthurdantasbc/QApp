@@ -134,20 +134,15 @@ TEXTOS_OPT = {
         "carregar_arquivo": "Carregar arquivo:",
         "minutos": "minutos",
         "minutos_e_segundos": "minutos e {segundos} segundos",
-
         # Textos da ajuda
         "problema_rap": "Problema de Alocação de Redundâncias (RAP):",
         "descricao_rap": "O RAP refere-se à otimização da alocação de componentes redundantes em um sistema para aumentar sua confiabilidade e disponibilidade.",
-
         "algoritmos": "Algoritmos quânticos disponíveis:",
         "descricao_algoritmos": "Os algoritmos quânticos de otimização são projetados para explorar as propriedades únicas da mecânica quântica, como superposição e entrelaçamento, para resolver problemas de otimização, como o RAP.",
-
         "qaoa_nome": "QAOA",
         "qaoa_desc": "Quantum Approximate Optimization Algorithm é um algoritmo quântico projetado para resolver problemas de otimização combinatória, como o RAP, aproximando-se das soluções ótimas utilizando uma sequência parametrizada de operações quânticas.",
-
         "vqe_nome": "VQE",
         "vqe_desc": "Variational Quantum Eigensolver é um algoritmo híbrido quântico-clássico que usa um circuito quântico variacional para encontrar o estado de menor energia de um Hamiltoniano, mas requer mais parâmetros e pode demandar mais tempo computacional em comparação com o QAOA.", 
-
         "modo_leitura_label": "Modo de leitura dos dados:",
         "modo_leitura_manual": "Manual",
         "modo_leitura_upload": "Upload",
@@ -211,18 +206,14 @@ TEXTOS_OPT = {
         "selecionar_tipo_circuito": "Selecione o tipo de circuito VQE:",
         "real_amplitudes": "Real Amplitudes",
         "two_local": "Two Local",
-        
-
         "opcoes_rotacao": ["rx", "ry", "rz"],
         "selecionar_rotacao": "Selecione as portas de rotação:",
-
         "opcoes_emaranhamento": ["cx", "cz", "iswap"],
         "selecionar_emaranhamento": "Selecione as portas de emaranhamento:",
-
         "tipo_inicializacao": "Selecione o método de inicialização:",
         "selecionar_otimizador": "Selecione o otimizador:",
         "opcoes_otimizadores": ["SPSA", "COBYLA"],
-        "inserir_shots": "Insira o número de shots:"
+        "inserir_shots": "Insira o número de shots:",
     },
     "en": {
         "idioma": "Language",
