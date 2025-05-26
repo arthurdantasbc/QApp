@@ -838,15 +838,15 @@ def main():
 
                 for i in range(rodadas):
                     for j in range(camadas):
-                        if tipo_inicializacao == textos_otim["tipos_inicializacao_qaoa"][2]:  # LHS
+                        if tipo_inicializacao == textos_otim["tipos_inicializacao_qaoa"][1]:  # LHS
                             param_intervals = [(0, 2*np.pi)] * 2 
                             lhs_samples = generate_lhs_samples(param_intervals, rodadas+1)
                             params = lhs_samples[i]
-                        elif tipo_inicializacao == textos_otim["tipos_inicializacao_qaoa"][3]:
+                        elif tipo_inicializacao == textos_otim["tipos_inicializacao_qaoa"][2]:
                             params = np.random.uniform(0, 2 * np.pi, 2)
-                        elif tipo_inicializacao == textos_otim["tipos_inicializacao_qaoa"][4]:  # Ponto Fixo / Fixed Point
+                        elif tipo_inicializacao == textos_otim["tipos_inicializacao_qaoa"][3]:  # Ponto Fixo / Fixed Point
                             params = np.full(2, numero_ponto_fixo)
-                        elif tipo_inicializacao == textos_otim["tipos_inicializacao_qaoa"][1]:
+                        elif tipo_inicializacao == textos_otim["tipos_inicializacao_qaoa"][0]:
                             K = 2
                             Q = 56  
 
@@ -947,15 +947,15 @@ def main():
                         elif tipo_circuito == textos_otim["two_local"]:
                             num_parametros = (len(rotacao_escolhida)*2) * camadas * qubits 
 
-                        if tipo_inicializacao == textos_otim["tipos_inicializacao_vqe"][1]:  # LHS
+                        if tipo_inicializacao == textos_otim["tipos_inicializacao_vqe"][0]:  # LHS
                             param_intervals = [(0, 2*np.pi)] * (4 * qubits) 
                             lhs_samples = generate_lhs_samples(param_intervals, rodadas+1)
                             params = lhs_samples[i]
             
-                        elif tipo_inicializacao == textos_otim["tipos_inicializacao_vqe"][2]:  # Randômica / Random
+                        elif tipo_inicializacao == textos_otim["tipos_inicializacao_vqe"][1]:  # Randômica / Random
                             params = np.random.uniform(0, 2 * np.pi, 4 * qubits)
             
-                        elif tipo_inicializacao == textos_otim["tipos_inicializacao_vqe"][3]:  # Ponto Fixo / Fixed Point
+                        elif tipo_inicializacao == textos_otim["tipos_inicializacao_vqe"][2]:  # Ponto Fixo / Fixed Point
                             params = np.full(4 * qubits, numero_ponto_fixo)
             
                         st.write("---")
