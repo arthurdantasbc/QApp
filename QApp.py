@@ -307,7 +307,7 @@ TEXTOS_OPT = {
             "**Clustering:** parameters based on centers of optimal clusters.\n\n"
             "**LHS:** uniform sampling via Latin Hypercube.\n\n"
             "**Random:** parameters initialized randomly.\n\n"
-            "**Fixed Point:** fixed, predefined initial values.",
+            "**Fixed Point:** fixed, predefined initial values."),
         "selecionar_tipo_circuito": "Select the type of VQE circuit:",
         "real_amplitudes": "Real Amplitudes",
         "two_local": "Two Local",
@@ -320,7 +320,6 @@ TEXTOS_OPT = {
 
         "tipo_inicializacao": "Select the initialization method:",
         "tipos_inicializacao_vqe": ["Fixed Point", "Clustering", "LHS", "Random"],
-        )
     }
 }
 
