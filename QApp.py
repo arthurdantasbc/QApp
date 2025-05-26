@@ -988,7 +988,6 @@ def main():
                         elif otimizador == textos_otim["opcoes_otimizadores"][1]:  # COBYLA
                             otimizador_instanciado = COBYLA()
 
-
                         sampler = Sampler(options={"shots": shots})
                         mes = SamplingVQE(sampler=Sampler(), ansatz=variational_circuit, optimizer=otimizador_instanciado, initial_point=params)
                         meo = MinimumEigenOptimizer(min_eigen_solver=mes)
