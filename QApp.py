@@ -978,10 +978,16 @@ def main():
             
                         algorithm_globals.random_seed = 10598
 
+                        if tipo_circuito ==textos_otim["real_amplitudes"]:
+                            variational_circuit = RealAmplitudes(qubits, reps=camadas)
+                        elif tipo_circuito == textos_otim["two_local"]: 
+                            variational_circuit = TwoLocal(qubits, rotacao_escolhida, entanglement_escolhido, reps=camadas)
+
                         if otimizador == textos_otim["opcoes_otimizadores"][0]:  # SPSA
                             otimizador_instanciado = SPSA()
                         elif otimizador == textos_otim["opcoes_otimizadores"][1]:  # COBYLA
                             otimizador_instanciado = COBYLA()
+
 
                         sampler = Sampler(options={"shots": shots})
                         mes = SamplingVQE(sampler=Sampler(), ansatz=variational_circuit, optimizer=otimizador_instanciado, initial_point=params)
