@@ -948,15 +948,14 @@ def main():
                             num_parametros = (len(rotacao_escolhida)*2) * camadas * qubits 
 
                         if tipo_inicializacao == textos_otim["tipos_inicializacao_vqe"][0]:  # LHS
-                            param_intervals = [(0, 2*np.pi)] * (4 * qubits) 
-                            lhs_samples = generate_lhs_samples(param_intervals, rodadas+1)
-                            params = lhs_samples[i]
-            
+                            param_intervals = [(0, 2 * np.pi)] * num_parametros  # Intervalo para cada parâmetro
+                            lhs_samples = generate_lhs_samples(param_intervals, rodadas + 1)  # Gerando amostras LHS
+                            params = lhs_samples[i]  # Selecionando a amostra correspondente à rodada
                         elif tipo_inicializacao == textos_otim["tipos_inicializacao_vqe"][1]:  # Randômica / Random
-                            params = np.random.uniform(0, 2 * np.pi, 4 * qubits)
+                            params = np.random.uniform(0, 2 * np.pi, num_parametros)  # Inicialização randômica
             
                         elif tipo_inicializacao == textos_otim["tipos_inicializacao_vqe"][2]:  # Ponto Fixo / Fixed Point
-                            params = np.full(4 * qubits, numero_ponto_fixo)
+                            params = np.full(num_parametros, numero_ponto_fixo)  # Inicialização com valor fixo
             
                         st.write("---")
                         st.write(f"{textos_otim['parametros_iniciais']} - {textos_otim['rodada']} {i+1} : {textos_otim['camada']} {j+1} = {', '.join(map(str, params))}")
