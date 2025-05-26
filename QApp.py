@@ -211,6 +211,7 @@ TEXTOS_OPT = {
         "selecionar_tipo_circuito": "Selecione o tipo de circuito VQE:",
         "real_amplitudes": "Real Amplitudes",
         "two_local": "Two Local",
+        
 
         "opcoes_rotacao": ["rx", "ry", "rz"],
         "selecionar_rotacao": "Selecione as portas de rotação:",
@@ -219,7 +220,7 @@ TEXTOS_OPT = {
         "selecionar_emaranhamento": "Selecione as portas de emaranhamento:",
 
         "tipo_inicializacao": "Selecione o método de inicialização:",
-        "tipos_inicializacao_vqe": ["Ponto Fixo", "Clusterização", "LHS", "Randômica"],
+        "tipos_inicializacao_vqe": ["Ponto Fixo", "LHS", "Randômica"],
         
     },
     "en": {
@@ -319,7 +320,7 @@ TEXTOS_OPT = {
         "selecionar_emaranhamento": "Select entanglement gates:",
 
         "tipo_inicializacao": "Select the initialization method:",
-        "tipos_inicializacao_vqe": ["Fixed Point", "Clustering", "LHS", "Random"],
+        "tipos_inicializacao_vqe": ["Fixed Point", "LHS", "Random"],
     }
 }
 
@@ -729,7 +730,7 @@ def main():
                     )
                     
                     # Verificação do ponto fixo
-                    if tipo_inicializacao in [textos_otim["ponto_fixo"], textos_otim["fixed_point"]]:
+                    if tipo_inicializacao in ['Ponto Fixo', 'Fixed Point']:
                         numero_ponto_fixo = st.number_input(textos_otim["inserir_ponto_fixo"], step=0.1)
                 
                 elif modo_algoritmo == 'QAOA':
