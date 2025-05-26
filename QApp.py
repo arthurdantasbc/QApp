@@ -510,8 +510,8 @@ def mostrar_otim(textos_otim):
         st.markdown(f"#### {textos_otim['algoritmos']}")
         st.markdown(f"{textos_otim['descricao_algoritmos']}")
 
-        st.markdown(f"**_{textos_otim['qaoa_nome']}_**: {textos_otim['qaoa_desc']}")
-        st.markdown(f"**_{textos_otim['vqe_nome']}_**: {textos_otim['vqe_desc']}")
+        st.markdown(f"**_{QAOA}_**: {textos_otim['qaoa_desc']}")
+        st.markdown(f"**_{VQE}_**: {textos_otim['vqe_desc']}")
 
         st.markdown(f"#### {textos_otim['inicializacoes_titulo']}")
         st.markdown(textos_otim['inicializacoes_descricao'])
