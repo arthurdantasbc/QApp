@@ -1062,7 +1062,21 @@ def main():
         # Botão de Reset
         if st.button('Reset'):
             st.experimental_rerun()
-    
+
+        if st.button("Página Inicial"):
+            st.session_state.page = 'inicio'
+            st.experimental_rerun()
+            
+        with st.sidebar:
+            if st.button('Resetar App'):
+                st.session_state.clear()
+                st.experimental_rerun()
+        
+            if st.button("Voltar para Página Inicial"):
+                st.session_state.page = 'inicio'
+                st.experimental_rerun()
+
+        
 
     elif st.session_state['pagina'] == 'ml':
         st.subheader(textos["pagina_ml"])
