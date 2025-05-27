@@ -539,7 +539,7 @@ def mostrar_inf(textos):
 
 def main():
     st.set_page_config(
-    page_title="qxplore",
+    page_title="QXplore",
     page_icon="pesq.png",
     layout="wide"
 )
