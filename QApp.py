@@ -1059,11 +1059,11 @@ def main():
                 st.write(f"{textos_otim['media_energia']}:", media_energia)
                 st.write(f"{textos_otim['desvio_padrao_energia']}:", desvio_padrao_energia)
             
-        # Botão de Reset
         if st.button('Reset'):
             for key in list(st.session_state.keys()):
                 del st.session_state[key]
             st.experimental_rerun()
+            return
             
         with st.sidebar:
             if st.button("Voltar para Página Inicial"):
