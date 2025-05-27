@@ -109,6 +109,7 @@ TEXTOS = {
              "Este aplicativo foi feito para ajudar você a conhecer e usar computação quântica em três áreas importantes.\n\n"
              "Escolha uma dessas áreas para explorar e veja como essa tecnologia pode ajudar a resolver problemas do dia a dia."
             ),
+        "ini": "Página incial", 
     },
     "en": {
         "intro": "This application was developed to promote the use of quantum computing in three distinct areas, described below.\nSelect the area you want to explore and discover the possibilities offered by this innovative technology.",
@@ -126,7 +127,8 @@ TEXTOS = {
             "corpo": (
                 "This application was created to help you learn and use quantum computing in three key areas.\n\n"
                 "Choose one of these areas to explore and see how this technology can help solve everyday problems."
-            )
+            ),
+        "ini": "Homepage",
     }
 }
 
@@ -1060,7 +1062,7 @@ def main():
                 st.write(f"{textos_otim['desvio_padrao_energia']}:", desvio_padrao_energia)
                     
         with st.sidebar:
-            if st.button("Página Inicial"):
+            if st.button(textos["ini"]):
                 st.session_state['pagina'] = 'inicio'
 
 
