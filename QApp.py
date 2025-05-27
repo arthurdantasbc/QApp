@@ -143,9 +143,9 @@ TEXTOS_OPT = {
         "qaoa_desc": "Quantum Approximate Optimization Algorithm é um algoritmo quântico projetado para resolver problemas de otimização combinatória, como o RAP, aproximando-se das soluções ótimas utilizando uma sequência parametrizada de operações quânticas.",
         "vqe_nome": "VQE",
         "vqe_desc": "Variational Quantum Eigensolver é um algoritmo híbrido quântico-clássico que usa um circuito quântico variacional para encontrar o estado de menor energia de um Hamiltoniano, mas requer mais parâmetros e pode demandar mais tempo computacional em comparação com o QAOA.", 
-        "modo_leitura_label": "Modo de leitura dos dados:",
-        "modo_leitura_manual": "Manual",
-        "modo_leitura_upload": "Upload",
+        "modo_leitura_label": "Selecione o modo de entrada dos dados:",
+        "modo_leitura_manual": "Inserção manual (preencher os dados manualmente)",
+        "modo_leitura_upload": "Upload de arquivo (arquivo .txt)",
         "ajuda_upload_botao": "Mostrar ajuda para upload",
         "ajuda_upload_texto": """
         <div style="background-color: #f9f9f9; margin: 0; padding: 8px; border-radius: 3px; border: 1px solid #ddd; max-width: 850px; font-size: 14px;">
@@ -173,7 +173,6 @@ TEXTOS_OPT = {
         "inserir_camadas": "Número de camadas:",
         "inserir_rodadas": "Número de rodadas:", 
         "executar": "Executar",
-        "modo_leitura_upload": "Upload",
         "parametros_iniciais": "Parâmetros iniciais",
         "rodada": "Rodada",
         "camada": "Camada",
@@ -217,9 +216,9 @@ TEXTOS_OPT = {
     },
     "en": {
         "idioma": "Language",
-        "insira_dados": "Enter the requested data:",
-        "instancia": "Provided instance:",
-        "carregar_arquivo": "Upload file:",
+        "modo_leitura_label": "Select the data input mode:",
+        "modo_leitura_manual": "Manual input (manually fill the data)",
+        "modo_leitura_upload": "File upload (.txt file)",
         "minutos": "minutes",
         "minutos_e_segundos": "minutes and {segundos} seconds",
 
@@ -508,12 +507,12 @@ def mostrar_otim(textos_otim):
         
 def mostrar_ml(textos):
     with st.sidebar.expander(textos["pagina_ml"]):
-        st.markdown(f"#### {'Arthur'}")
+        st.markdown(f"#### {'Coisas de Arthur'}")
         st.markdown(f"{textos['info_ml']}")
 
 def mostrar_inf(textos):
     with st.sidebar.expander(textos["pagina_inferencia"]):
-        st.markdown(f"#### {'Lavínia'}")
+        st.markdown(f"#### {'Coisas de Lavínia'}")
         st.markdown(f"{textos['info_inf']}")
 
 def main():
