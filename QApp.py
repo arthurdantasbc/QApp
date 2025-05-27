@@ -359,7 +359,7 @@ def mostrar_introducao_e_titulo(textos):
     st.markdown(
         f"""
         <div style="text-align: center; max-width: 700px; margin: auto;">
-            <h1 style="font-size: 30px; margin-bottom: 4px;">{titulo}</h1>
+            <h1 style="font-size: 32px; margin-bottom: 4px;">{titulo}</h1>
             <p style="font-size: 16px; line-height: 1.5; white-space: pre-line; margin-top: 0;">
                 {corpo}
             </p>
@@ -508,7 +508,8 @@ def formatar_tempo(segundos, textos_otim):
     )
 
 def mostrar_otim(textos_otim):
-    with st.sidebar.expander(textos_otim["pagina_otimizacao"]):
+    with st.sidebar(f"### {textos_otim['area']}")
+    with st.sidebar.expander(textos_otim["pagina_otimizacao"]):        
         st.markdown(f"#### {textos_otim['problema_rap']}")
         st.markdown(f"{textos_otim['descricao_rap']}")
 
