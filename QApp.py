@@ -1061,7 +1061,7 @@ def main():
                     
         with st.sidebar:
             if st.button("Página Inicial"):
-                st.session_state.page = 'inicio'
+                st.session_state['pagina'] = 'inicio'
 
 
     elif st.session_state['pagina'] == 'ml':
