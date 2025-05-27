@@ -104,6 +104,11 @@ TEXTOS = {
         "referencias_intro": "Para conhecer mais sobre nossos trabalhos na área, consulte as referências abaixo:",
         "info_ml": "Seção para descrever as técnicas de Machine Learning Quântico usadas.",
         "info_inf": "Seção para descrever as técnicas de Inferância Quântica usadas.",
+        "titulo": "Seja bem-vindo ao QXplore!",
+         "corpo": (
+                "Este aplicativo foi feito para ajudar você a conhecer e usar computação quântica em três áreas importantes.\n"
+                "Escolha qual quer explorar e veja na prática como essa tecnologia pode resolver problemas do dia a dia."
+            ),
     },
     "en": {
         "intro": "This application was developed to promote the use of quantum computing in three distinct areas, described below.\nSelect the area you want to explore and discover the possibilities offered by this innovative technology.",
@@ -117,6 +122,11 @@ TEXTOS = {
         "referencias_intro": "To learn more about our work in this area, check the references below:", 
         "info_ml": "Section describing the Quantum Machine Learning techniques used.",
         "info_inf": "Section describing the Quantum Inference techniques used.",
+        "titulo": "Welcome to QXplore!",
+            "corpo": (
+                "This application was created to help you learn and use quantum computing in three key areas.\n"
+                "Choose what you want to explore and see in practice how this technology can solve everyday problems."
+            )
     }
 }
 
@@ -343,16 +353,21 @@ def aplicar_css_botoes():
         unsafe_allow_html=True
     )
 def mostrar_introducao_e_titulo(textos):
-    texto = textos['intro']
+    titulo = textos['titulo']
+    corpo = textos['corpo']
+
     st.markdown(
         f"""
-        <div style="text-align: center; font-size:16px; color: black; line-height:1.5;white-space: pre-line;">
-            {texto}
+        <div style="text-align: center; max-width: 700px; margin: auto; font-family: Arial, sans-serif; color: black;">
+            <h1 style="font-size: 30px; margin-bottom: 15px;">{titulo}</h1>
+            <p style="font-size: 18px; line-height: 1.5; white-space: pre-line; margin-top: 0;">
+                {corpo}
+            </p>
         </div>
-        <br>
         """,
         unsafe_allow_html=True
     )
+
     
 def mostrar_referencias(textos):
     st.sidebar.markdown(f"{textos['referencias_intro']}")
