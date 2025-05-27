@@ -358,9 +358,9 @@ def mostrar_introducao_e_titulo(textos):
 
     st.markdown(
         f"""
-        <div style="text-align: center; max-width: 700px; margin: auto; font-family: Arial, sans-serif; color: black;">
+        <div style="text-align: center; max-width: 700px; margin: auto;">
             <h1 style="font-size: 30px; margin-bottom: 15px;">{titulo}</h1>
-            <p style="font-size: 18px; line-height: 1.5; white-space: pre-line; margin-top: 0;">
+            <p style="font-size: 16px; line-height: 1.5; white-space: pre-line; margin-top: 0;">
                 {corpo}
             </p>
         </div>
