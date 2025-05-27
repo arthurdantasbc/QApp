@@ -538,7 +538,11 @@ def mostrar_inf(textos):
         st.markdown(f"{textos['info_inf']}")
 
 def main():
-    st.set_page_config(page_title="qxplore", layout="wide")
+    st.set_page_config(
+    page_title="qxplore",
+    page_icon="pesq.png",
+    layout="wide"
+)
 
     aplicar_css_botoes()
 
@@ -637,6 +641,7 @@ def main():
     # 4 - referências em expander
 
     mostrar_logo_topo()
+    
         
     # Ajuda
     mostrar_otim(textos_otim)
