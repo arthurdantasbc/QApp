@@ -1061,7 +1061,9 @@ def main():
             
         # Botão de Reset
         if st.button('Reset'):
-            st.session_state.clear()  # Limpa variáveis da sessão
+            for key in list(st.session_state.keys()):
+                del st.session_state[key]
+            st.experimental_rerun()
             
         with st.sidebar:
             if st.button("Voltar para Página Inicial"):
