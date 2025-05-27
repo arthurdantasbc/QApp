@@ -101,7 +101,7 @@ TEXTOS = {
         "instancia_recebida": "Instância recebida:",
         "idioma": "Escolha o idioma:", 
         "referencias_titulo": "Referências",
-        "referencias_intro": "Para conhecer mais sobre nossos trabalhos na área, consulte as referências abaixo:",
+        "referencias_intro": "Para conhecer mais sobre nossos trabalhos nas áreas, consulte as referências abaixo:",
         "info_ml": "Seção para descrever as técnicas de Machine Learning Quântico usadas.",
         "info_inf": "Seção para descrever as técnicas de Inferância Quântica usadas.",
         "titulo": "Seja bem-vindo ao <span style='color:#0d4376;'>QXplore</span>!",
@@ -119,7 +119,7 @@ TEXTOS = {
         "instancia_recebida": "Received instance:",
         "idioma": "Choose the language:", 
         "referencias_titulo": "References",
-        "referencias_intro": "To learn more about our work in this area, check the references below:", 
+        "referencias_intro": "To learn more about our work in this areas, check the references below:", 
         "info_ml": "Section describing the Quantum Machine Learning techniques used.",
         "info_inf": "Section describing the Quantum Inference techniques used.",
         "titulo": "Welcome to <span style='color:#0d4376;'>QXplore</span>!",
@@ -245,9 +245,6 @@ TEXTOS_OPT = {
 
         "vqe_nome": "VQE",
         "vqe_desc": "Variational Quantum Eigensolver is a hybrid quantum-classical algorithm that uses a variational quantum circuit to find the lowest energy state of a Hamiltonian, but it requires more parameters and may take longer computational time compared to QAOA.",
-        "modo_leitura_label": "Data input mode:",
-        "modo_leitura_manual": "Manual",
-        "modo_leitura_upload": "Upload",
         "ajuda_upload_botao": "Show upload help",
         "ajuda_upload_texto": """
         <div style="background-color: #f9f9f9; margin: 0; padding: 8px; border-radius: 3px; border: 1px solid #ddd; max-width: 850px; font-size: 14px;">
@@ -326,6 +323,9 @@ TEXTOS_OPT = {
         "opcoes_otimizadores": ["SPSA", "COBYLA"], 
         "inserir_shots": "Enter the number of shots:",
         "area_de_aplicacao": "Areas of Application:",
+        "modo_leitura_label": "Select the data input mode:",
+        "modo_leitura_manual": "Manual input (enter the data manually)",
+        "modo_leitura_upload": "File upload (.txt file)",
     }
 }
 
