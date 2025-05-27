@@ -223,6 +223,7 @@ TEXTOS_OPT = {
         "selecionar_otimizador": "Selecione o otimizador:",
         "opcoes_otimizadores": ["SPSA", "COBYLA"],
         "inserir_shots": "Insira o número de shots:",
+        "area_de_aplicacao": "Áreas de Aplicação:",
     },
     "en": {
         "idioma": "Language",
@@ -323,7 +324,8 @@ TEXTOS_OPT = {
         "tipo_inicializacao": "Select the initialization method:",
         "selecionar_otimizador": "Select the optimizer:",
         "opcoes_otimizadores": ["SPSA", "COBYLA"], 
-        "inserir_shots": "Enter the number of shots:"
+        "inserir_shots": "Enter the number of shots:",
+        "area_de_aplicacao": "Areas of Application:",
     }
 }
 
@@ -508,18 +510,19 @@ def formatar_tempo(segundos, textos_otim):
     )
 
 def mostrar_otim(textos_otim):
-    with st.sidebar(f"### {textos_otim['area']}")
-    with st.sidebar.expander(textos_otim["pagina_otimizacao"]):        
-        st.markdown(f"#### {textos_otim['problema_rap']}")
-        st.markdown(f"{textos_otim['descricao_rap']}")
+    with st.sidebar:
+        st.markdown(f"### {textos_otim['area_de_aplicacao']}")
+        with st.sidebar.expander(textos_otim["pagina_otimizacao"]):        
+            st.markdown(f"#### {textos_otim['problema_rap']}")
+            st.markdown(f"{textos_otim['descricao_rap']}")
 
-        st.markdown(f"#### {textos_otim['algoritmos']}")
+            st.markdown(f"#### {textos_otim['algoritmos']}")
 
-        st.markdown(f"**{'QAOA'}**: {textos_otim['qaoa_desc']}")
-        st.markdown(f"**{'VQE'}**: {textos_otim['vqe_desc']}")
+            st.markdown(f"**QAOA**: {textos_otim['qaoa_desc']}")
+            st.markdown(f"**VQE**: {textos_otim['vqe_desc']}")
 
-        st.markdown(f"#### {textos_otim['inicializacoes_titulo']}")
-        st.markdown(textos_otim['inicializacoes_descricao'])
+            st.markdown(f"#### {textos_otim['inicializacoes_titulo']}")
+            st.markdown(textos_otim['inicializacoes_descricao'])
         
 def mostrar_ml(textos):
     with st.sidebar.expander(textos["pagina_ml"]):
