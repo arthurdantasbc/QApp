@@ -1061,13 +1061,12 @@ def main():
             
         # Botão de Reset
         if st.button('Reset'):
-            st.experimental_rerun()
+            st.session_state.clear()  # Limpa variáveis da sessão
             
         with st.sidebar:
             if st.button("Voltar para Página Inicial"):
                 st.session_state.page = 'inicio'
-
-
+                st.experimental_rerun()
         
 
     elif st.session_state['pagina'] == 'ml':
