@@ -555,11 +555,17 @@ def main():
     
         st.markdown(
             """
-            <h1 style="text-align: center;">
-                Explore Quantum Computing with <span style="color:#0d4376;">QXplore!</span><br>
-            <h3>
-            <p style="text-align: center; font-size:18px;">
-                Select your language to get started / Selecione seu idioma para começar:
+            <div style="text-align: center;">
+                <h1 style="margin-bottom: 10px;">
+                    Explore Quantum Computing with <span style="color:#0d4376;">QXplore!</span>
+                </h1>
+                <h2 style="margin-top: 0; font-weight: normal;">
+                    Explore a Computação Quântica com <span style="color:#0d4376;">QXplore!</span>
+                </h2>
+                <p style="font-size:18px; margin-top: 5px;">
+                    Select your language to get started / Selecione seu idioma para começar:
+                </p>
+            </div>
             """,
             unsafe_allow_html=True
         )
