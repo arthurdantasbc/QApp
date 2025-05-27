@@ -556,11 +556,11 @@ def main():
         st.markdown(
             """
             <h1 style="text-align: center;">
-                Welcome to <span style="color:#0d4376;">QXplore!</span><br>
-                Bem-vindo ao <span style="color:#0d4376;">QXplore!</span>
+                Explore Quantum Computing with <span style="color:#0d4376;">QXplore!</span><br>
+                Explore a Computação Quântica com <span style="color:#0d4376;">QXplore!</span>
             </h1>
             <p style="text-align: center; font-size:18px;">
-                Select your preferred language / Selecione o idioma desejado :
+                Select your language to get started / Selecione seu idioma para começar:
             </p>
             """,
             unsafe_allow_html=True
