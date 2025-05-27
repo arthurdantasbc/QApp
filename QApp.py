@@ -133,7 +133,7 @@ TEXTOS = {
 TEXTOS_OPT = {
     "pt": {
         "idioma": "Idioma",
-        "insira_dados": "Insira os dados solicitados:",
+        "insira_dados": "Insira os dados do problema a ser analisado:",
         "instancia": "Instância fornecida:",
         "carregar_arquivo": "Carregar arquivo:",
         "minutos": "minutos",
@@ -232,6 +232,7 @@ TEXTOS_OPT = {
         "modo_leitura_upload": "File upload (.txt file)",
         "minutos": "minutes",
         "minutos_e_segundos": "minutes and {segundos} seconds",
+        "insira_dados": "Enter the problem data to be analyzed:",
 
         # Help section
         "problema_rap": "Redundancy Allocation Problem (RAP):",
