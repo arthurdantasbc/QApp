@@ -556,12 +556,12 @@ def main():
         st.markdown(
             """
             <div style="text-align: center;">
-                <h1 style="margin-bottom: 10px;">
+                <p style="font-size:32px; margin-bottom: 5px; font-weight: bold;">
                     Explore Quantum Computing with <span style="color:#0d4376;">QXplore!</span>
-                </h1>
-                <h2 style="margin-top: 0; font-weight: normal;">
+                </p>
+                <p style="font-size:28px; margin-top: 0px; margin-bottom: 5px; font-weight: bold;">
                     Explore a Computação Quântica com <span style="color:#0d4376;">QXplore!</span>
-                </h2>
+                </p>
                 <p style="font-size:18px; margin-top: 5px;">
                     Select your language to get started / Selecione seu idioma para começar:
                 </p>
