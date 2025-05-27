@@ -1058,14 +1058,9 @@ def main():
                 st.subheader(textos_otim['medidas_energia'])
                 st.write(f"{textos_otim['media_energia']}:", media_energia)
                 st.write(f"{textos_otim['desvio_padrao_energia']}:", desvio_padrao_energia)
-            
-        if st.button('Reset'):
-            for key in list(st.session_state.keys()):
-                del st.session_state[key]
-            st.write("Variáveis da sessão limpas.")
                     
         with st.sidebar:
-            if st.button("Voltar para Página Inicial"):
+            if st.button("Página Inicial"):
                 st.session_state.page = 'inicio'
 
 
