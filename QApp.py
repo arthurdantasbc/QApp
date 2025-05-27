@@ -1059,11 +1059,17 @@ def main():
                 st.write(f"{textos_otim['media_energia']}:", media_energia)
                 st.write(f"{textos_otim['desvio_padrao_energia']}:", desvio_padrao_energia)
             
-        if st.button('Reset'):
+        if st.button('Resetar App'):
+            # Apaga todas as variáveis da sessão
             for key in list(st.session_state.keys()):
                 del st.session_state[key]
-            st.experimental_rerun()
-            return
+            # Marca flag de reset para garantir que página inicial será exibida
+            st.session_state.reset_flag = True
+    
+        # Se reset flag estiver setada, inicializa estado
+        if st.session_state.get('reset_flag', False):
+            st.session_state.page = 'inicio'
+            st.session_state.reset_flag = False  # limpa flag após reset
             
         with st.sidebar:
             if st.button("Voltar para Página Inicial"):
