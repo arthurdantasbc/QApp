@@ -106,8 +106,8 @@ TEXTOS = {
         "info_inf": "Seção para descrever as técnicas de Inferância Quântica usadas.",
         "titulo": "Seja bem-vindo ao <span style='color:#0d4376;'>QXplore</span>!",
          "corpo": (
-                "Este aplicativo foi feito para ajudar você a conhecer e usar computação quântica em três áreas importantes.\n"
-                "Escolha qual quer explorar e veja na prática como essa tecnologia pode resolver problemas do dia a dia."
+             "Este aplicativo foi feito para ajudar você a conhecer e usar computação quântica em três áreas importantes.\n\n"
+             "Escolha uma dessas áreas para explorar e veja como essa tecnologia pode ajudar a resolver problemas do dia a dia."
             ),
     },
     "en": {
@@ -124,8 +124,8 @@ TEXTOS = {
         "info_inf": "Section describing the Quantum Inference techniques used.",
         "titulo": "Welcome to <span style='color:#0d4376;'>QXplore</span>!",
             "corpo": (
-                "This application was created to help you learn and use quantum computing in three key areas.\n"
-                "Choose what you want to explore and see in practice how this technology can solve everyday problems."
+                "This application was created to help you learn and use quantum computing in three key areas.\n\n"
+                "Choose one of these areas to explore and see how this technology can help solve everyday problems."
             )
     }
 }
