@@ -927,6 +927,19 @@ def main():
                         componentes_otimos.append(qaoa_result.x)
                         st.write(qaoa_result)
 
+                        # Opção 1 - Pega o circuito da função ansatz do QAOA
+                        qaoa_circuit = Mmes.ansatz
+                        
+                        # Alternativa (se funcionar na sua versão):
+                        # problem_qubo = QuadraticProgramToQubo().convert(qubo)
+                        # qaoa_circuit = qaoa.get_circuit(problem_qubo)
+                        
+                        # Desenha e mostra
+                        buf = io.BytesIO()
+                        qaoa_circuit.draw(output='mpl').savefig(buf, format='png', bbox_inches='tight')
+                        buf.seek(0)
+                        st.image(buf, caption="Circuito QAOA")
+
                 energia_otimizada = min(energias)
                 confiabilidade = 1 - math.exp(energia_otimizada)
                 media_energia = np.mean(energias)
@@ -965,10 +978,8 @@ def main():
                 st.write(f"{textos_otim['media_energia']}:", media_energia)
                 st.write(f"{textos_otim['desvio_padrao_energia']}:", desvio_padrao_energia)
 
-                st.subheader("Circuito Quântico Gerado:")
-                
                 # Opção 1 - Pega o circuito da função ansatz do QAOA
-                qaoa_circuit = qaoa.ansatz
+                qaoa_circuit = Mmes.ansatz
                 
                 # Alternativa (se funcionar na sua versão):
                 # problem_qubo = QuadraticProgramToQubo().convert(qubo)
