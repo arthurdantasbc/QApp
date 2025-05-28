@@ -229,6 +229,7 @@ TEXTOS_OPT = {
         "opcoes_otimizadores": ["SPSA", "COBYLA"],
         "inserir_shots": "Insira o número de shots:",
         "area_de_aplicacao": "Áreas de Aplicação:",
+        "circuito_quantico": "Circuito Quântico",
     },
     "en": {
         "idioma": "Language",
@@ -287,6 +288,7 @@ TEXTOS_OPT = {
         "resultados": "Results",
         "energia_otima": "Optimal Energy",
         "confiabilidade_otima": "Optimal Reliability",
+        "circuito_quantico": "Quantum Circuit",
         "componentes_solucao": "Solution Components",
         "custo_total": "Total Cost of the Solution",
         "medidas_energia": "Descriptive Measures of Energy",
@@ -929,26 +931,20 @@ def main():
                         tempos_execucao.append(end - start)
                         componentes_otimos.append(qaoa_result.x)
                         st.write(qaoa_result)
-                        
-                        qaoa_circuit = mes.ansatz
-                        fig = plt.figure(figsize=(4, 6)) 
-                        ax = fig.add_subplot(111)
-                        qaoa_circuit.draw(output='mpl', ax=ax)
-                        buf = io.BytesIO()
-                        plt.savefig(buf, format='png', bbox_inches='tight')
-                        buf.seek(0)
-                        st.subheader("Circuito Quântico Gerado:")
-                        st.image(buf, caption="Circuito QAOA",  use_container_width=False)
-                        plt.close(fig)
 
-                        st.subheader("Quantum Circuit:")
-                        fig = plt.figure(figsize=(6, 4))
-                        ax = fig.add_subplot(111)
-                        mes.ansatz.draw(output='mpl', ax=ax)
-                        
-                        st.pyplot(fig)  # Mostra no Streamlit
-                        plt.close(fig)
-                        
+                        if i == (rodadas-1): 
+                            st.subheader("Quantum Circuit:")
+                            qaoa_circuit = mes.ansatz
+                            fig = plt.figure(figsize=(6, 8)) 
+                            ax = fig.add_subplot(111)
+                            qaoa_circuit.draw(output='mpl', ax=ax)
+                            buf = io.BytesIO()
+                            plt.savefig(buf, format='png', bbox_inches='tight')
+                            buf.seek(0)
+                            st.subheader("circuito_quantico")
+                            st.image(buf, caption="QAOA",  use_container_width=False)
+                            plt.close(fig)
+
                 energia_otimizada = min(energias)
                 confiabilidade = 1 - math.exp(energia_otimizada)
                 media_energia = np.mean(energias)
