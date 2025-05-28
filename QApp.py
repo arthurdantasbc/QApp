@@ -985,7 +985,7 @@ def main():
                 with col2:
                     st.metric(label=textos_otim['confiabilidade_otima'], value=round(confiabilidade, 4))
                     st.metric(label=textos_otim['custo_total'], value=custo_total)
-                    st.metric(label= textos_otim['componentes_solucao'], value= componentes_formatados)
+                    st.write(f"{textos_otim['componentes_solucao']}: {componentes_formatados}")
                 
                 st.subheader(textos_otim['medidas_energia'])
                 st.write(f"{textos_otim['media_energia']}: {round(media_energia, 4)}")
@@ -1091,6 +1091,7 @@ def main():
             
                 pesos = cjk
                 custo_total = sum(c * p for c, p in zip(componentes_variaveis, pesos))
+                componentes_formatados = [int(v) for v in componentes_variaveis]
             
                 loading_placeholder.empty()
                 st.subheader(textos_otim['resultados'])
