@@ -928,6 +928,24 @@ def main():
                         tempos_execucao.append(end - start)
                         componentes_otimos.append(qaoa_result.x)
                         st.write(qaoa_result)
+
+                        
+                        # Cria a figura do circuito com matplotlib
+                        fig = plt.figure(figsize=(6, 4))  # Ajusta o tamanho da imagem
+                        ax = fig.add_subplot(111)
+                        qaoa_circuit.draw(output='mpl', ax=ax)  # Desenha no eixo ax
+                        
+                        # Salva a figura em um buffer
+                        buf = io.BytesIO()
+                        plt.savefig(buf, format='png', bbox_inches='tight')
+                        buf.seek(0)
+                        
+                        # Mostra no Streamlit
+                        st.image(buf, caption="Circuito QAOA", use_column_width=False)
+                        
+                        # Fecha a figura para não sobrecarregar
+                        plt.close(fig)
+
                     
 
                 energia_otimizada = min(energias)
