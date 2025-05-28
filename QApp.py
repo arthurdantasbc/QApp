@@ -15,6 +15,8 @@ import math
 from math import exp
 from pyDOE2 import lhs
 from sklearn.cluster import KMeans
+import io
+
 
 parametros_treino=[
     [5.64955258, 5.13768523],
