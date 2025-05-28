@@ -912,6 +912,9 @@ def main():
                             """,
                             unsafe_allow_html=True
                         )
+
+
+                        st.markdown(f"<div class='counter'>{textos_otim['rodada']} {i + 1} / {rodadas}</div>", unsafe_allow_html=True)
                         algorithm_globals.random_seed = 10598
 
                         if otimizador == textos_otim["opcoes_otimizadores"][0]:  # SPSA
@@ -978,11 +981,11 @@ def main():
                 
                 with col1:
                     st.metric(label=textos_otim['energia_otima'], value=round(energia_otimizada, 4))
-                    st.metric(label=textos_otim['confiabilidade_otima'], value=round(confiabilidade, 4))
-                
+
                 with col2:
+                    st.metric(label=textos_otim['confiabilidade_otima'], value=round(confiabilidade, 4))
                     st.metric(label=textos_otim['custo_total'], value=custo_total)
-                    st.write(f"{textos_otim['componentes_solucao']}: {componentes_formatados}")
+                    st.metric(label= textos_otim['componentes_solucao'], value= componentes_formatados)
                 
                 st.subheader(textos_otim['medidas_energia'])
                 st.write(f"{textos_otim['media_energia']}: {round(media_energia, 4)}")
@@ -1095,9 +1098,9 @@ def main():
                 
                 with col1:
                     st.metric(label=textos_otim['energia_otima'], value=round(energia_otimizada, 4))
-                    st.metric(label=textos_otim['confiabilidade_otima'], value=round(confiabilidade, 4))
                 
                 with col2:
+                    st.metric(label=textos_otim['confiabilidade_otima'], value=round(confiabilidade, 4))
                     st.metric(label=textos_otim['custo_total'], value=custo_total)
                     st.write(f"{textos_otim['componentes_solucao']}: {componentes_formatados}")
                 
