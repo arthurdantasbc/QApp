@@ -929,22 +929,19 @@ def main():
                         componentes_otimos.append(qaoa_result.x)
                         st.write(qaoa_result)
 
+                                
+                        # Opção 1 - Pega o circuito da função ansatz do QAOA
+                        qaoa_circuit = mes.ansatz
                         
-                        # Cria a figura do circuito com matplotlib
-                        fig = plt.figure(figsize=(6, 4))  # Ajusta o tamanho da imagem
-                        ax = fig.add_subplot(111)
-                        qaoa_circuit.draw(output='mpl', ax=ax)  # Desenha no eixo ax
+                        # Alternativa (se funcionar na sua versão):
+                        # problem_qubo = QuadraticProgramToQubo().convert(qubo)
+                        # qaoa_circuit = qaoa.get_circuit(problem_qubo)
                         
-                        # Salva a figura em um buffer
                         buf = io.BytesIO()
-                        plt.savefig(buf, format='png', bbox_inches='tight')
+                        circuit_draw = qaoa_circuit.draw(output='mpl', figsize=(6, 4))  # Tamanho menor
+                        circuit_draw.savefig(buf, format='png', bbox_inches='tight')
                         buf.seek(0)
-                        
-                        # Mostra no Streamlit
-                        st.image(buf, caption="Circuito QAOA", use_column_width=False)
-                        
-                        # Fecha a figura para não sobrecarregar
-                        plt.close(fig)
+                        st.image(buf, caption="Circuito QAOA")
 
                     
 
