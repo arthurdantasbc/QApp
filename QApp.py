@@ -928,7 +928,7 @@ def main():
                         st.write(qaoa_result)
 
                         # Opção 1 - Pega o circuito da função ansatz do QAOA
-                        qaoa_circuit = Mmes.ansatz
+                        qaoa_circuit = mes.ansatz
                         
                         # Alternativa (se funcionar na sua versão):
                         # problem_qubo = QuadraticProgramToQubo().convert(qubo)
@@ -979,7 +979,7 @@ def main():
                 st.write(f"{textos_otim['desvio_padrao_energia']}:", desvio_padrao_energia)
 
                 # Opção 1 - Pega o circuito da função ansatz do QAOA
-                qaoa_circuit = Mmes.ansatz
+                qaoa_circuit = mes.ansatz
                 
                 # Alternativa (se funcionar na sua versão):
                 # problem_qubo = QuadraticProgramToQubo().convert(qubo)
