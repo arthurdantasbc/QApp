@@ -929,13 +929,27 @@ def main():
                         componentes_otimos.append(qaoa_result.x)
                         st.write(qaoa_result)
                         
+                        # Gera o circuito
                         qaoa_circuit = mes.ansatz
                         
+                        # Cria uma figura do matplotlib com tamanho desejado
+                        fig = plt.figure(figsize=(6, 4))  # ⬅️ Aqui você ajusta o tamanho (largura, altura)
+                        ax = fig.add_subplot(111)
+                        
+                        # Desenha o circuito no eixo criado
+                        qaoa_circuit.draw(output='mpl', ax=ax)
+                        
+                        # Salva em buffer
                         buf = io.BytesIO()
-                        circuit_draw = qaoa_circuit.draw(output='mpl')  # Tamanho menor
-                        circuit_draw.savefig(buf, format='png', bbox_inches='tight')
+                        plt.savefig(buf, format='png', bbox_inches='tight')
                         buf.seek(0)
-                        st.image(buf, caption="Circuito QAOA")
+                        
+                        # Exibe no Streamlit
+                        st.subheader("Circuito Quântico Gerado:")
+                        st.image(buf, caption="Circuito QAOA", use_column_width=False)
+                        
+                        # Fecha a figura para liberar memória
+                        plt.close(fig)
                         
                 energia_otimizada = min(energias)
                 confiabilidade = 1 - math.exp(energia_otimizada)
