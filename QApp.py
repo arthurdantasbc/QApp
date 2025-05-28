@@ -928,23 +928,15 @@ def main():
                         tempos_execucao.append(end - start)
                         componentes_otimos.append(qaoa_result.x)
                         st.write(qaoa_result)
-
-                                
-                        # Opção 1 - Pega o circuito da função ansatz do QAOA
+                        
                         qaoa_circuit = mes.ansatz
                         
-                        # Alternativa (se funcionar na sua versão):
-                        # problem_qubo = QuadraticProgramToQubo().convert(qubo)
-                        # qaoa_circuit = qaoa.get_circuit(problem_qubo)
-                        
                         buf = io.BytesIO()
-                        circuit_draw = qaoa_circuit.draw(output='mpl', figsize=(6, 4))  # Tamanho menor
+                        circuit_draw = qaoa_circuit.draw(output='mpl')  # Tamanho menor
                         circuit_draw.savefig(buf, format='png', bbox_inches='tight')
                         buf.seek(0)
                         st.image(buf, caption="Circuito QAOA")
-
-                    
-
+                        
                 energia_otimizada = min(energias)
                 confiabilidade = 1 - math.exp(energia_otimizada)
                 media_energia = np.mean(energias)
@@ -982,20 +974,6 @@ def main():
                 st.subheader(textos_otim['medidas_energia'])
                 st.write(f"{textos_otim['media_energia']}:", media_energia)
                 st.write(f"{textos_otim['desvio_padrao_energia']}:", desvio_padrao_energia)
-
-                # Opção 1 - Pega o circuito da função ansatz do QAOA
-                qaoa_circuit = mes.ansatz
-                
-                # Alternativa (se funcionar na sua versão):
-                # problem_qubo = QuadraticProgramToQubo().convert(qubo)
-                # qaoa_circuit = qaoa.get_circuit(problem_qubo)
-                
-                buf = io.BytesIO()
-                circuit_draw = qaoa_circuit.draw(output='mpl', figsize=(6, 4))  # Tamanho menor
-                circuit_draw.savefig(buf, format='png', bbox_inches='tight')
-                buf.seek(0)
-                st.image(buf, caption="Circuito QAOA")
-
 
             elif modo_algoritmo == 'VQE':
                 time_vqe = 0
