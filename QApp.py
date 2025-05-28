@@ -973,14 +973,19 @@ def main():
                                                 
                 loading_placeholder.empty()  # Remove the loading GIF
                 st.subheader(textos_otim['resultados'])
-                st.write(f"{textos_otim['energia_otima']}:", energia_otimizada)
-                st.write(f"{textos_otim['confiabilidade_otima']}:", confiabilidade)
-                st.write(f"{textos_otim['componentes_solucao']}:", componentes_variaveis)
-                st.write(f"{textos_otim['custo_total']}:", custo_total)
-                st.write("")
+                col1, col2 = st.columns(2)
+                
+                with col1:
+                    st.metric(label=textos_otim['energia_otima'], value=round(energia_otimizada, 4))
+                    st.metric(label=textos_otim['confiabilidade_otima'], value=round(confiabilidade, 4))
+                
+                with col2:
+                    st.metric(label=textos_otim['custo_total'], value=custo_total)
+                    st.write(f"{textos_otim['componentes_solucao']}: {componentes_variaveis}")
+                
                 st.subheader(textos_otim['medidas_energia'])
-                st.write(f"{textos_otim['media_energia']}:", media_energia)
-                st.write(f"{textos_otim['desvio_padrao_energia']}:", desvio_padrao_energia)
+                st.write(f"{textos_otim['media_energia']}: {round(media_energia, 4)}")
+                st.write(f"{textos_otim['desvio_padrao_energia']}: {round(desvio_padrao_energia, 4)}")
 
             elif modo_algoritmo == 'VQE':
                 time_vqe = 0
