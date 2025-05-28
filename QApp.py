@@ -933,7 +933,7 @@ def main():
                         st.write(qaoa_result)
 
                         if i == (rodadas-1): 
-                            st.subheader("Quantum Circuit:")
+                            st.subheader(textos_otim["circuito_quantico"])
                             qaoa_circuit = mes.ansatz
                             fig = plt.figure(figsize=(6, 8)) 
                             ax = fig.add_subplot(111)
@@ -941,7 +941,6 @@ def main():
                             buf = io.BytesIO()
                             plt.savefig(buf, format='png', bbox_inches='tight')
                             buf.seek(0)
-                            st.subheader("circuito_quantico")
                             st.image(buf, caption="QAOA",  use_container_width=False)
                             plt.close(fig)
 
@@ -1047,6 +1046,18 @@ def main():
                         energias.append(vqe_result.fval)
                         tempos_execucao.append(end - start)
                         componentes_otimos.append(vqe_result.x)
+
+                        if i == (rodadas-1): 
+                            st.subheader(textos_otim["circuito_quantico"])
+                            vqe_circuit = mes.ansatz
+                            fig = plt.figure(figsize=(6, 8)) 
+                            ax = fig.add_subplot(111)
+                            vqe_circuit.draw(output='mpl', ax=ax)
+                            buf = io.BytesIO()
+                            plt.savefig(buf, format='png', bbox_inches='tight')
+                            buf.seek(0)
+                            st.image(buf, caption="VQE",  use_container_width=False)
+                            plt.close(fig)
             
                 energia_otimizada = min(energias)
                 confiabilidade = 1 - math.exp(energia_otimizada)
