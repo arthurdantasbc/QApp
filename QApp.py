@@ -965,14 +965,17 @@ def main():
                 st.write(f"{textos_otim['desvio_padrao_energia']}:", desvio_padrao_energia)
 
                 st.subheader("Circuito Quântico Gerado:")
-
-                # Gera o circuito QAOA associado
-                problem_qubo = QuadraticProgramToQubo().convert(qubo)
-                circuit = qaoa.get_circuit(problem_qubo)
                 
-                # Desenhar circuito como imagem e mostrar no Streamlit
+                # Opção 1 - Pega o circuito da função ansatz do QAOA
+                qaoa_circuit = qaoa.ansatz
+                
+                # Alternativa (se funcionar na sua versão):
+                # problem_qubo = QuadraticProgramToQubo().convert(qubo)
+                # qaoa_circuit = qaoa.get_circuit(problem_qubo)
+                
+                # Desenha e mostra
                 buf = io.BytesIO()
-                circuit.draw(output='mpl').savefig(buf, format='png', bbox_inches='tight')
+                qaoa_circuit.draw(output='mpl').savefig(buf, format='png', bbox_inches='tight')
                 buf.seek(0)
                 st.image(buf, caption="Circuito QAOA")
 
