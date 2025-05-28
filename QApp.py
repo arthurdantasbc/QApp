@@ -928,19 +928,7 @@ def main():
                         tempos_execucao.append(end - start)
                         componentes_otimos.append(qaoa_result.x)
                         st.write(qaoa_result)
-
-                        # Opção 1 - Pega o circuito da função ansatz do QAOA
-                        qaoa_circuit = mes.ansatz
-                        
-                        # Alternativa (se funcionar na sua versão):
-                        # problem_qubo = QuadraticProgramToQubo().convert(qubo)
-                        # qaoa_circuit = qaoa.get_circuit(problem_qubo)
-                        
-                        # Desenha e mostra
-                        buf = io.BytesIO()
-                        qaoa_circuit.draw(output='mpl').savefig(buf, format='png', bbox_inches='tight')
-                        buf.seek(0)
-                        st.image(buf, caption="Circuito QAOA")
+                    
 
                 energia_otimizada = min(energias)
                 confiabilidade = 1 - math.exp(energia_otimizada)
@@ -987,11 +975,12 @@ def main():
                 # problem_qubo = QuadraticProgramToQubo().convert(qubo)
                 # qaoa_circuit = qaoa.get_circuit(problem_qubo)
                 
-                # Desenha e mostra
                 buf = io.BytesIO()
-                qaoa_circuit.draw(output='mpl').savefig(buf, format='png', bbox_inches='tight')
+                circuit_draw = qaoa_circuit.draw(output='mpl', figsize=(6, 4))  # Tamanho menor
+                circuit_draw.savefig(buf, format='png', bbox_inches='tight')
                 buf.seek(0)
                 st.image(buf, caption="Circuito QAOA")
+
 
             elif modo_algoritmo == 'VQE':
                 time_vqe = 0
