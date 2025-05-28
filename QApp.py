@@ -930,30 +930,18 @@ def main():
                         componentes_otimos.append(qaoa_result.x)
                         st.write(qaoa_result)
                         
-                        # Gera o circuito
                         qaoa_circuit = mes.ansatz
-                        
-                        # Cria uma figura do matplotlib com tamanho desejado
-                        fig = plt.figure(figsize=(4, 6))  # ⬅️ Aqui você ajusta o tamanho (largura, altura)
+                        fig = plt.figure(figsize=(4, 6)) 
                         ax = fig.add_subplot(111)
-                        
-                        # Desenha o circuito no eixo criado
                         qaoa_circuit.draw(output='mpl', ax=ax)
-                        
-                        # Salva em buffer
                         buf = io.BytesIO()
                         plt.savefig(buf, format='png', bbox_inches='tight')
                         buf.seek(0)
-                        
-                        # Exibe no Streamlit
                         st.subheader("Circuito Quântico Gerado:")
-                        st.image(buf, caption="Circuito QAOA",  use_container_width==False)
-                        
-                        # Fecha a figura para liberar memória
+                        st.image(buf, caption="Circuito QAOA",  use_container_width=False)
                         plt.close(fig)
 
                         st.subheader("Quantum Circuit:")
-
                         fig = plt.figure(figsize=(6, 4))
                         ax = fig.add_subplot(111)
                         mes.ansatz.draw(output='mpl', ax=ax)
