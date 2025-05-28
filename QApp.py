@@ -16,6 +16,7 @@ from math import exp
 from pyDOE2 import lhs
 from sklearn.cluster import KMeans
 import io
+import matplotlib.pyplot as plt
 
 
 parametros_treino=[
