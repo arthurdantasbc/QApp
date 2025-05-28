@@ -964,6 +964,18 @@ def main():
                 st.write(f"{textos_otim['media_energia']}:", media_energia)
                 st.write(f"{textos_otim['desvio_padrao_energia']}:", desvio_padrao_energia)
 
+                st.subheader("Circuito Quântico Gerado:")
+
+                # Gera o circuito QAOA associado
+                problem_qubo = QuadraticProgramToQubo().convert(qubo)
+                circuit = qaoa.get_circuit(problem_qubo)
+                
+                # Desenhar circuito como imagem e mostrar no Streamlit
+                buf = io.BytesIO()
+                circuit.draw(output='mpl').savefig(buf, format='png', bbox_inches='tight')
+                buf.seek(0)
+                st.image(buf, caption="Circuito QAOA")
+
             elif modo_algoritmo == 'VQE':
                 time_vqe = 0
                 energias = []
