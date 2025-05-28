@@ -229,6 +229,7 @@ TEXTOS_OPT = {
     },
     "en": {
         "idioma": "Language",
+        "carregar_arquivo": "Upload file:",
         "modo_leitura_label": "Select the data input mode:",
         "modo_leitura_manual": "Manual input (manually fill the data)",
         "modo_leitura_upload": "File upload (.txt file)",
