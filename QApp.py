@@ -934,7 +934,7 @@ def main():
                         qaoa_circuit = mes.ansatz
                         
                         # Cria uma figura do matplotlib com tamanho desejado
-                        fig = plt.figure(figsize=(6, 4))  # ⬅️ Aqui você ajusta o tamanho (largura, altura)
+                        fig = plt.figure(figsize=(4, 6))  # ⬅️ Aqui você ajusta o tamanho (largura, altura)
                         ax = fig.add_subplot(111)
                         
                         # Desenha o circuito no eixo criado
@@ -947,9 +947,18 @@ def main():
                         
                         # Exibe no Streamlit
                         st.subheader("Circuito Quântico Gerado:")
-                        st.image(buf, caption="Circuito QAOA", use_column_width=False)
+                        st.image(buf, caption="Circuito QAOA",  use_container_width==False)
                         
                         # Fecha a figura para liberar memória
+                        plt.close(fig)
+
+                        st.subheader("Quantum Circuit:")
+
+                        fig = plt.figure(figsize=(6, 4))
+                        ax = fig.add_subplot(111)
+                        mes.ansatz.draw(output='mpl', ax=ax)
+                        
+                        st.pyplot(fig)  # Mostra no Streamlit
                         plt.close(fig)
                         
                 energia_otimizada = min(energias)
