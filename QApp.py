@@ -1002,14 +1002,13 @@ def main():
                     st.metric(label=textos_otim['custo_total'], value=custo_total)
                     st.markdown(
                         f"""
-                        <div style="display: flex; align-items: center;">
-                            <span>{textos_otim['componentes_solucao']}:</span>
-                            <span style="margin-left: 3px; font-size: 24px; font-weight: bold;">{componentes_formatados}</span>
+                        <div>
+                            <span>{textos_otim['componentes_solucao']}:</span><br>
+                            <span style="font-size: 32px; font-weight: normal; margin-left: 0;">{componentes_formatados}</span>
                         </div>
                         """,
                         unsafe_allow_html=True
-                    )
-                                    
+                    )       
                 st.subheader(textos_otim['medidas_energia'])
                 st.markdown(f"**{textos_otim['media_energia']}:** {round(media_energia, 4)}")
                 st.markdown(f"**{textos_otim['desvio_padrao_energia']}:** {round(desvio_padrao_energia, 4)}")
