@@ -956,7 +956,7 @@ def main():
                             st.markdown(
                                 f"""
                                 <div style="display: flex; justify-content: center;">
-                                    <img src="data:image/png;base64,{data}" alt="QAOA Circuit" style="max-width: 100%;">
+                                    <img src="data:image/png;base64,{data}" alt="QAOA" style="max-width: 100%;">
                                 </div>
                                 """,
                                 unsafe_allow_html=True
@@ -1000,7 +1000,7 @@ def main():
                 with col2:
                     st.metric(label=textos_otim['confiabilidade_otima'], value=round(confiabilidade, 4))
                     st.metric(label=textos_otim['custo_total'], value=custo_total)
-                    st.write(f"{textos_otim['componentes_solucao']}: \n\n {componentes_formatados}")
+                    st.write(f"{textos_otim['componentes_solucao']} \n\n {componentes_formatados}")
                 
                 st.subheader(textos_otim['medidas_energia'])
                 st.write(f"{textos_otim['media_energia']}: {round(media_energia, 4)}")
