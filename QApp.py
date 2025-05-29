@@ -1003,12 +1003,12 @@ def main():
                     st.markdown(
                         f"""
                         <div>
-                            <span>{textos_otim['componentes_solucao']}</span><br>
+                            <span style="font-size: 16px; font-weight: normal;">{textos_otim['componentes_solucao']}</span><br>
                             <span style="font-size: 32px; font-weight: normal; margin-left: 0;">{componentes_formatados}</span>
                         </div>
                         """,
                         unsafe_allow_html=True
-                    )       
+                    )
                 st.subheader(textos_otim['medidas_energia'])
                 st.markdown(f"**{textos_otim['media_energia']}:** {round(media_energia, 4)}")
                 st.markdown(f"**{textos_otim['desvio_padrao_energia']}:** {round(desvio_padrao_energia, 4)}")
