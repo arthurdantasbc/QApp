@@ -996,14 +996,14 @@ def main():
                 
                 with col1:
                     st.metric(label=textos_otim['energia_otima'], value=round(energia_otimizada, 4))
+                    st.metric(label=textos_otim['confiabilidade_otima'], value=round(confiabilidade, 4))
 
                 with col2:
-                    st.metric(label=textos_otim['confiabilidade_otima'], value=round(confiabilidade, 4))
                     st.metric(label=textos_otim['custo_total'], value=custo_total)
                     st.markdown(
                         f"""
                         <div>
-                            <span>{textos_otim['componentes_solucao']}:</span><br>
+                            <span>{textos_otim['componentes_solucao']}</span><br>
                             <span style="font-size: 32px; font-weight: normal; margin-left: 0;">{componentes_formatados}</span>
                         </div>
                         """,
@@ -1121,15 +1121,22 @@ def main():
                 
                 with col1:
                     st.metric(label=textos_otim['energia_otima'], value=round(energia_otimizada, 4))
-                
-                with col2:
                     st.metric(label=textos_otim['confiabilidade_otima'], value=round(confiabilidade, 4))
+
+                with col2:
                     st.metric(label=textos_otim['custo_total'], value=custo_total)
-                    st.write(f"{textos_otim['componentes_solucao']}: {componentes_formatados}")
-                
+                    st.markdown(
+                        f"""
+                        <div>
+                            <span>{textos_otim['componentes_solucao']}</span><br>
+                            <span style="font-size: 32px; font-weight: normal; margin-left: 0;">{componentes_formatados}</span>
+                        </div>
+                        """,
+                        unsafe_allow_html=True
+                    )       
                 st.subheader(textos_otim['medidas_energia'])
-                st.write(f"{textos_otim['media_energia']}: {round(media_energia, 4)}")
-                st.write(f"{textos_otim['desvio_padrao_energia']}: {round(desvio_padrao_energia, 4)}")
+                st.markdown(f"**{textos_otim['media_energia']}:** {round(media_energia, 4)}")
+                st.markdown(f"**{textos_otim['desvio_padrao_energia']}:** {round(desvio_padrao_energia, 4)}")
                 
         with st.sidebar:
             if st.button(textos["ini"]):
