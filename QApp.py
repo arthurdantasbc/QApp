@@ -17,6 +17,7 @@ from pyDOE2 import lhs
 from sklearn.cluster import KMeans
 import io
 import matplotlib.pyplot as plt
+import base64
 
 
 parametros_treino=[
@@ -934,18 +935,32 @@ def main():
                         tempos_execucao.append(end - start)
                         componentes_otimos.append(qaoa_result.x)
                         st.write(qaoa_result)
-
-                        if i == (rodadas-1): 
+                        
+                        if i == (rodadas - 1):
                             st.subheader(textos_otim["circuito_quantico"])
                             qaoa_circuit = mes.ansatz
-                            fig = plt.figure(figsize=(6, 8)) 
+                        
+                            fig = plt.figure(figsize=(6, 8))
                             ax = fig.add_subplot(111)
                             qaoa_circuit.draw(output='mpl', ax=ax)
+                        
                             buf = io.BytesIO()
                             plt.savefig(buf, format='png', bbox_inches='tight')
                             buf.seek(0)
-                            st.image(buf, caption="QAOA",  use_container_width=False)
                             plt.close(fig)
+                        
+                            # Converter a imagem em base64
+                            data = base64.b64encode(buf.read()).decode("utf-8")
+                        
+                            # Exibir a imagem centralizada
+                            st.markdown(
+                                f"""
+                                <div style="display: flex; justify-content: center;">
+                                    <img src="data:image/png;base64,{data}" alt="QAOA Circuit" style="max-width: 100%;">
+                                </div>
+                                """,
+                                unsafe_allow_html=True
+                            )
 
                 energia_otimizada = min(energias)
                 confiabilidade = 1 - math.exp(energia_otimizada)
@@ -985,7 +1000,7 @@ def main():
                 with col2:
                     st.metric(label=textos_otim['confiabilidade_otima'], value=round(confiabilidade, 4))
                     st.metric(label=textos_otim['custo_total'], value=custo_total)
-                    st.write(f"{textos_otim['componentes_solucao']}: {componentes_formatados}")
+                    st.write(f"{textos_otim['componentes_solucao']}: \n\n {componentes_formatados}")
                 
                 st.subheader(textos_otim['medidas_energia'])
                 st.write(f"{textos_otim['media_energia']}: {round(media_energia, 4)}")
