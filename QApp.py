@@ -406,13 +406,13 @@ def mostrar_introducao_e_titulo(textos):
         unsafe_allow_html=True
     )
 
-def botao_voltar(pagina_destino="menu_principal"):
+def botao_voltar(pagina_destino="inicio"):
     st.markdown(
         """
         <style>
         #botao-voltar {
             position: fixed;
-            top: 20px;
+            top: 60px;
             left: 20px;
             z-index: 1000;
             background-color: #0d4376;
