@@ -770,10 +770,10 @@ def main():
         elif modo_leitura == textos_otim["modo_leitura_upload"]:
             if st.button(textos_otim["ajuda_upload_botao"]):
                 st.markdown(textos_otim["ajuda_upload_texto"], unsafe_allow_html=True)
-                st.markdown(textos_download["download_text"], unsafe_allow_html=True)
+                st.markdown(textos_otim["download_text"], unsafe_allow_html=True)
     
                 st.download_button(
-                    label=textos_download["download_label"],
+                    label=textos_otim["download_label"],
                     data=conteudo_arquivo,
                     file_name="testeapp.txt",
                     mime="text/csv"
