@@ -100,7 +100,7 @@ TEXTOS = {
         "intro": "Este aplicativo foi criado para incentivar o uso da computação quântica em três áreas distintas, apresentadas a seguir.\nEscolha a área que deseja explorar e descubra as possibilidades oferecidas por essa tecnologia inovadora.",
         "pagina_otimizacao": "Otimização Quântica",
         "pagina_inferencia": "Inferência Quântica",
-        "pagina_ml": "Machine Learning Quântico",
+        "pagina_ml": "Aprendizagem de Máquina Quântico",
         "instancia_input": "Digite alguma coisa para testar a instância:",
         "instancia_recebida": "Instância recebida:",
         "idioma": "Escolha o idioma:", 
@@ -235,7 +235,7 @@ TEXTOS_OPT = {
         "inserir_shots": "Insira o número de shots:",
         "area_de_aplicacao": "Áreas de Aplicação:",
         "circuito_quantico": "Circuito Quântico",
-        "download_label": "Baixar arquivo",
+        "Baixar": "Baixar arquivo",
         "download_text": "Caso deseje, faça o download do arquivo de teste exemplificado para usar ou visualizar."
     },
     "en": {
@@ -344,7 +344,7 @@ TEXTOS_OPT = {
         "modo_leitura_label": "Select the data input mode:",
         "modo_leitura_manual": "Manual input (enter the data manually)",
         "modo_leitura_upload": "File upload (.txt file)",
-        "download_label": "Download file",
+        "Baixar": "Download file",
         "download_text": "If you wish, download the sample test file to use or visualize.",
     }
 }
@@ -406,11 +406,11 @@ def mostrar_introducao_e_titulo(textos):
         unsafe_allow_html=True
     )
 
-def botao_voltar(pagina_destino="inicio"):
+def botao_voltar_fixo(pagina_destino="menu_principal"):
     st.markdown(
-        f"""
+        """
         <style>
-        #botao-voltar {{
+        #botao-voltar {
             position: fixed;
             top: 20px;
             left: 20px;
@@ -426,41 +426,33 @@ def botao_voltar(pagina_destino="inicio"):
             cursor: pointer;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
             transition: all 0.3s ease;
-        }}
-        #botao-voltar:hover {{
+        }
+        #botao-voltar:hover {
             background-color: #07294a;
             transform: scale(1.1) rotate(-2deg);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-        }}
+        }
         </style>
-        <form action="" method="post">
-            <button id="botao-voltar" onclick="fetch('', {{method: 'POST'}}).then(() => window.location.reload()); return false;">←</button>
-        </form>
+        <button id="botao-voltar">←</button>
+        <script>
+        const botao = document.getElementById("botao-voltar");
+        botao.onclick = () => {
+            const url = new URL(window.location);
+            url.searchParams.set('voltar', '1');
+            window.location.href = url.toString();
+        }
+        </script>
         """,
-        unsafe_allow_html=True
+        unsafe_allow_html=True,
     )
 
-    # Lógica de redirecionamento
-    if "voltar_clicado" not in st.session_state:
-        st.session_state["voltar_clicado"] = False
+    params = st.experimental_get_query_params()  # Para compatibilidade momentânea
+    params = st.query_params  # Atual recomendado
 
-    voltar = st.experimental_get_query_params().get("voltar", [None])[0]
-    if voltar == "1" or st.session_state["voltar_clicado"]:
+    if params.get("voltar") == ["1"]:
         st.session_state["pagina"] = pagina_destino
-        st.session_state["voltar_clicado"] = False
-    else:
-        js = """<script>
-        const botao = document.getElementById("botao-voltar");
-        if (botao) {
-            botao.onclick = function() {
-                const url = new URL(window.location);
-                url.searchParams.set('voltar', '1');
-                window.location.href = url;
-                return false;
-            };
-        }
-        </script>"""
-        st.markdown(js, unsafe_allow_html=True)
+        # Limpa o parâmetro para evitar loop
+        st.experimental_set_query_params()
 
     
 def mostrar_referencias(textos, textos_otim):
@@ -851,7 +843,7 @@ def main():
                 st.markdown(textos_otim["ajuda_upload_texto"], unsafe_allow_html=True)
 
                 st.download_button(
-                    label="Download arquivo de teste",
+                    label="texto_otim["Baixar"]",
                     data=conteudo_arquivo,
                     file_name="testeapp.txt",
                     mime="text/plain"
