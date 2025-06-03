@@ -114,6 +114,7 @@ TEXTOS = {
              "Escolha uma dessas áreas para explorar e veja como essa tecnologia pode ajudar a resolver problemas do dia a dia."
             ),
         "ini": "Página incial", 
+        "pagina_referencias": "Referências"
     },
     "en": {
         "intro": "This application was developed to promote the use of quantum computing in three distinct areas, described below.\nSelect the area you want to explore and discover the possibilities offered by this innovative technology.",
@@ -133,6 +134,7 @@ TEXTOS = {
                 "Choose one of these areas to explore and see how this technology can help solve everyday problems."
             ),
         "ini": "Homepage",
+        "pagina_referencias": "References"
     }
 }
 
@@ -437,6 +439,14 @@ def mostrar_cartoes_de_area(textos):
             st.session_state['pagina'] = 'inferencia'
     with col5:
         st.write("")
+
+    # Linha extra com botão de Referências centralizado
+    st.markdown("<br>", unsafe_allow_html=True)  # Espaço vertical
+    col_ref1, col_ref2, col_ref3 = st.columns([1, 2, 1])
+    with col_ref2:
+        if st.button("textos["pagina_referencias"], key="referencias_btn"):
+            st.session_state['pagina'] = 'referencias'
+
 
 def ler_manualmente(textos):
     valor = st.text_input(textos["instancia_input"])
