@@ -1233,17 +1233,29 @@ def main():
             if st.button(textos["ini"]):
                 st.session_state['pagina'] = 'inicio'
 
-
     elif st.session_state['pagina'] == 'ml':
         st.subheader(textos["pagina_ml"])
         st.write("Arthur")
+
+        with st.sidebar:
+            if st.button(textos["ini"]):
+                st.session_state['pagina'] = 'inicio'
+    
 
     elif st.session_state['pagina'] == 'inferencia':
         st.subheader(textos["pagina_inferencia"])
         st.write("Lavínia")
 
+        with st.sidebar:
+            if st.button(textos["ini"]):
+                st.session_state['pagina'] = 'inicio'
+
     elif st.session_state['pagina'] == 'referencias':
         mostrar_referencias(textos, textos_otim)
+
+        with st.sidebar:
+            if st.button(textos["ini"]):
+                st.session_state['pagina'] = 'inicio'
 
 if __name__ == "__main__":
     main()
