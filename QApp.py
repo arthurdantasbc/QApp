@@ -446,8 +446,7 @@ def botao_voltar(pagina_destino="menu_principal"):
         unsafe_allow_html=True,
     )
 
-    params = st.experimental_get_query_params()  # Para compatibilidade momentânea
-    params = st.query_params  # Atual recomendado
+    params = st.query_params
 
     if params.get("voltar") == ["1"]:
         st.session_state["pagina"] = pagina_destino
