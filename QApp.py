@@ -843,7 +843,7 @@ def main():
                 st.markdown(textos_otim["ajuda_upload_texto"], unsafe_allow_html=True)
 
                 st.download_button(
-                    label="texto_otim["Baixar"]",
+                    label=textos_otim["Baixar"],
                     data=conteudo_arquivo,
                     file_name="testeapp.txt",
                     mime="text/plain"
