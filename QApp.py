@@ -773,6 +773,14 @@ def main():
             if st.button(textos_otim["ajuda_upload_botao"]):
                 st.markdown(textos_otim["ajuda_upload_texto"], unsafe_allow_html=True)
                 st.markdown(textos_otim["download_text"], unsafe_allow_html=True)
+
+                # Quadro para o botão de download
+                st.markdown("""
+                <div style="background-color: #f9f9f9; margin-top: 10px; padding: 10px; border-radius: 3px; border: 1px solid #ddd; max-width: 850px;">
+                    <h4 style="color: #333; font-size: 16px; margin-bottom: 8px;">Arquivo de Teste</h4>
+                    <p style="font-size: 14px; margin-bottom: 6px;">Clique no botão abaixo para baixar um arquivo de teste já formatado:</p>
+                </div>
+                """, unsafe_allow_html=True)
     
                 st.download_button(
                     label="Download arquivo de teste",
