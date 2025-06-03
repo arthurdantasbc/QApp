@@ -182,6 +182,8 @@ TEXTOS_OPT = {
                 <li style="font-size: 14px;"><code>C_of</code>: Limite de custo total;</li>
             </ul>
             <p style="margin: 1px; font-size: 14px;">Certifique-se de que o arquivo siga exatamente este formato para que os dados sejam lidos corretamente.</p>
+            </ul>
+            <p style="margin: 1px; font-size: 14px;">Clique no botão abaixo para baixar um arquivo de teste já formatado:</p>
         </div>
         """,
         "botao_mostrar_instancia": "Mostrar instância",
@@ -233,7 +235,7 @@ TEXTOS_OPT = {
         "inserir_shots": "Insira o número de shots:",
         "area_de_aplicacao": "Áreas de Aplicação:",
         "circuito_quantico": "Circuito Quântico",
-        "download_label": "Baixar arquivo de exemplo",
+        "download_label": "Baixar arquivo",
         "download_text": "Caso deseje, faça o download do arquivo de teste exemplificado para usar ou visualizar."
     },
     "en": {
@@ -276,6 +278,8 @@ TEXTOS_OPT = {
                 <li style="font-size: 14px;"><code>C_of</code>: Total cost limit;</li>
             </ul>
             <p style="margin: 1px; font-size: 14px;">Make sure the file follows exactly this format so the data is read correctly.</p>
+            </ul>
+            <p style="margin: 1px; font-size: 14px;">Click the button below to download a pre-formatted test file:</p>
         </div>
         """,
         "botao_mostrar_instancia": "Show instance",
@@ -340,7 +344,7 @@ TEXTOS_OPT = {
         "modo_leitura_label": "Select the data input mode:",
         "modo_leitura_manual": "Manual input (enter the data manually)",
         "modo_leitura_upload": "File upload (.txt file)",
-        "download_label": "Download sample file",
+        "download_label": "Download file",
         "download_text": "If you wish, download the sample test file to use or visualize.",
     }
 }
@@ -364,6 +368,22 @@ def aplicar_css_botoes():
             margin-top: 10px !important;
         }
         div.stButton > button:hover {
+            background-color: #07294a !important;
+        }
+        
+        /* Aplica o mesmo estilo ao botão de download */
+        div.stDownloadButton > button {
+            background-color: #0d4376 !important;
+            color: white !important;
+            width: 150px !important;
+            height: 80px !important;
+            border-radius: 8px !important;
+            font-size: 16px !important;
+            font-weight: 600 !important;
+            transition: background-color 0.1s ease !important;
+            margin-top: 10px !important;
+        }
+        div.stDownloadButton > button:hover {
             background-color: #07294a !important;
         }
         </style>
@@ -772,16 +792,7 @@ def main():
         elif modo_leitura == textos_otim["modo_leitura_upload"]:
             if st.button(textos_otim["ajuda_upload_botao"]):
                 st.markdown(textos_otim["ajuda_upload_texto"], unsafe_allow_html=True)
-                st.markdown(textos_otim["download_text"], unsafe_allow_html=True)
 
-                # Quadro para o botão de download
-                st.markdown("""
-                <div style="background-color: #f9f9f9; margin-top: 10px; padding: 10px; border-radius: 3px; border: 1px solid #ddd; max-width: 850px;">
-                    <h4 style="color: #333; font-size: 16px; margin-bottom: 8px;">Arquivo de Teste</h4>
-                    <p style="font-size: 14px; margin-bottom: 6px;">Clique no botão abaixo para baixar um arquivo de teste já formatado:</p>
-                </div>
-                """, unsafe_allow_html=True)
-    
                 st.download_button(
                     label="Download arquivo de teste",
                     data=conteudo_arquivo,
