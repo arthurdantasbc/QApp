@@ -698,9 +698,9 @@ def main():
     )
 
     # Atualiza o idioma no estado se o usuário mudar pelo selectbox
-    if idioma_selecionado == "Português" and st.session_state.lang != "pt":
+    if idioma_selecionado == "🇧🇷 Português" and st.session_state.lang != "pt":
         st.session_state.lang = "pt"
-    elif idioma_selecionado == "English" and st.session_state.lang != "en":
+    elif idioma_selecionado == "🇺🇸 English" and st.session_state.lang != "en":
         st.session_state.lang = "en"
 
     lang = st.session_state.lang
