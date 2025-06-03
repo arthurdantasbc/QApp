@@ -723,7 +723,7 @@ def main():
         """, unsafe_allow_html=True)
     
         # Leitura de dados
-        # Leitura de dados
+       
         modo_leitura = st.radio(
             textos_otim["modo_leitura_label"],
             (textos_otim["modo_leitura_manual"], textos_otim["modo_leitura_upload"]),
@@ -746,52 +746,52 @@ def main():
                 mostrar_instancia(dados, textos_otim)
         
             if len(dados[0]) != 1:
-                modo_algoritmo = st.radio(textos_otim["selecionar_algoritmo"], ('QAOA', 'VQE'))
+                col_alg, col_param = st.columns(2)
         
-                if modo_algoritmo == 'VQE':
-                    tipo_circuito = st.radio(
-                        textos_otim["selecionar_tipo_circuito"], 
-                        (textos_otim["real_amplitudes"], textos_otim["two_local"])
-                    )
+                with col_alg:
+                    modo_algoritmo = st.radio(textos_otim["selecionar_algoritmo"], ('QAOA', 'VQE'))
         
-                    if tipo_circuito == textos_otim["two_local"]:
-                        col1, col2 = st.columns(2)
-        
-                        with col1:
-                            rotacao_escolhida = st.multiselect(
-                                textos_otim["selecionar_rotacao"],
-                                textos_otim["opcoes_rotacao"]
-                            )
-                        with col2:
-                            entanglement_escolhido = st.multiselect(
-                                textos_otim["selecionar_emaranhamento"],
-                                textos_otim["opcoes_emaranhamento"]
-                            )
-        
-                    tipo_inicializacao = st.radio(
-                        textos_otim["tipo_inicializacao"],
-                        textos_otim["tipos_inicializacao_vqe"]
-                    )
-        
-                    if tipo_inicializacao in ['Ponto Fixo', 'Fixed Point']:
-                        numero_ponto_fixo = st.number_input(
-                            textos_otim["inserir_ponto_fixo"], step=0.1
+                    if modo_algoritmo == 'VQE':
+                        tipo_circuito = st.radio(
+                            textos_otim["selecionar_tipo_circuito"], 
+                            (textos_otim["real_amplitudes"], textos_otim["two_local"])
                         )
         
-                elif modo_algoritmo == 'QAOA':
-                    tipo_inicializacao = st.radio(
-                        textos_otim["tipo_inicializacao"],
-                        textos_otim["tipos_inicializacao_qaoa"]
-                    )
+                        if tipo_circuito == textos_otim["two_local"]:
+                            col_rot, col_ent = st.columns(2)
+                            with col_rot:
+                                rotacao_escolhida = st.multiselect(
+                                    textos_otim["selecionar_rotacao"],
+                                    textos_otim["opcoes_rotacao"]
+                                )
+                            with col_ent:
+                                entanglement_escolhido = st.multiselect(
+                                    textos_otim["selecionar_emaranhamento"],
+                                    textos_otim["opcoes_emaranhamento"]
+                                )
         
-                    if tipo_inicializacao in ['Ponto Fixo', 'Fixed Point']:
-                        numero_ponto_fixo = st.number_input(
-                            textos_otim["inserir_ponto_fixo"], step=0.1
+                        tipo_inicializacao = st.radio(
+                            textos_otim["tipo_inicializacao"],
+                            textos_otim["tipos_inicializacao_vqe"]
                         )
         
-                # Agrupar otimizador + camadas + rodadas + shots
-                col1, col2 = st.columns(2)
-                with col1:
+                        if tipo_inicializacao in ['Ponto Fixo', 'Fixed Point']:
+                            numero_ponto_fixo = st.number_input(
+                                textos_otim["inserir_ponto_fixo"], step=0.1
+                            )
+        
+                    elif modo_algoritmo == 'QAOA':
+                        tipo_inicializacao = st.radio(
+                            textos_otim["tipo_inicializacao"],
+                            textos_otim["tipos_inicializacao_qaoa"]
+                        )
+        
+                        if tipo_inicializacao in ['Ponto Fixo', 'Fixed Point']:
+                            numero_ponto_fixo = st.number_input(
+                                textos_otim["inserir_ponto_fixo"], step=0.1
+                            )
+        
+                with col_param:
                     otimizador = st.radio(
                         textos_otim["selecionar_otimizador"],
                         textos_otim["opcoes_otimizadores"]
@@ -799,14 +799,12 @@ def main():
                     camadas = st.number_input(
                         textos_otim["inserir_camadas"], min_value=1, max_value=3, value=1
                     )
-                with col2:
                     rodadas = st.number_input(
                         textos_otim["inserir_rodadas"], min_value=1, value=1
                     )
                     shots = st.number_input(
                         textos_otim["inserir_shots"], min_value=100, value=1000
                     )
-
                 
         if st.button(textos_otim['executar']):
 
