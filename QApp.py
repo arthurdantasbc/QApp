@@ -444,7 +444,7 @@ def mostrar_cartoes_de_area(textos):
     st.markdown("<br>", unsafe_allow_html=True)  # Espaço vertical
     col_ref1, col_ref2, col_ref3 = st.columns([1, 2, 1])
     with col_ref2:
-        if st.button("textos["pagina_referencias"], key="referencias_btn"):
+        if st.button(textos["pagina_referencias"], key="referencias_btn"):
             st.session_state['pagina'] = 'referencias'
 
 
@@ -1188,6 +1188,9 @@ def main():
     elif st.session_state['pagina'] == 'inferencia':
         st.subheader(textos["pagina_inferencia"])
         st.write("Lavínia")
+
+    elif st.session_state['pagina'] == 'referencias':
+        mostrar_referencias(textos)
 
 if __name__ == "__main__":
     main()
