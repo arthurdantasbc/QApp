@@ -765,6 +765,8 @@ def main():
         )
         
         dados = []
+        with open("testeapp.txt", "r", encoding="utf-8") as f:
+            conteudo_arquivo = f.read()
         if modo_leitura == textos_otim["modo_leitura_manual"]:
             dados = ler_manualmente(textos_otim)
         elif modo_leitura == textos_otim["modo_leitura_upload"]:
@@ -773,10 +775,10 @@ def main():
                 st.markdown(textos_otim["download_text"], unsafe_allow_html=True)
     
                 st.download_button(
-                    label=textos_otim["download_label"],
+                    label="Download arquivo de teste",
                     data=conteudo_arquivo,
                     file_name="testeapp.txt",
-                    mime="text/csv"
+                    mime="text/plain"
                 )
             dados = ler_do_drive(textos_otim)
         
