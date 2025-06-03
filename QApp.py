@@ -233,6 +233,8 @@ TEXTOS_OPT = {
         "inserir_shots": "Insira o número de shots:",
         "area_de_aplicacao": "Áreas de Aplicação:",
         "circuito_quantico": "Circuito Quântico",
+        "download_label": "Baixar arquivo de exemplo",
+        "download_text": "Caso deseje, faça o download do arquivo de teste exemplificado para usar ou visualizar."
     },
     "en": {
         "idioma": "Language",
@@ -338,6 +340,8 @@ TEXTOS_OPT = {
         "modo_leitura_label": "Select the data input mode:",
         "modo_leitura_manual": "Manual input (enter the data manually)",
         "modo_leitura_upload": "File upload (.txt file)",
+        "download_label": "Download sample file",
+        "download_text": "If you wish, download the sample test file to use or visualize.",
     }
 }
 
@@ -514,16 +518,16 @@ def mostrar_instancia(instancia, textos_otim):
     C_of = instancia[0][6]
     
     # Dados gerais em uma linha de colunas
-    col1, col2, col3, col4 = st.columns(4)
+        
+    col1, col2, col3, col4, col5 = st.columns(5)
     col1.metric("s", s)
     col2.metric("nj_max", nj_max)
     col3.metric("nj_min", nj_min)
     col4.metric("ctj_of", ctj_of)
-    
-    st.markdown("---")  # Separador visual
+    col5.metric("C_of", C_of)
     
     # Mostrar Rjk_of e cjk_of lado a lado em uma tabela organizada
-    st.write("### Valores de Rjk_of e cjk_of")
+    st.write("#### Valores de Rjk_of e cjk_of")
     col1, col2 = st.columns(2)
     
     with col1:
@@ -537,7 +541,6 @@ def mostrar_instancia(instancia, textos_otim):
             st.write(f"{i}: {val}")
     
     st.markdown("---")
-    st.write(f"**C_of:** {C_of}")
 
 
 def ler_do_drive(textos_otim):
@@ -767,6 +770,14 @@ def main():
         elif modo_leitura == textos_otim["modo_leitura_upload"]:
             if st.button(textos_otim["ajuda_upload_botao"]):
                 st.markdown(textos_otim["ajuda_upload_texto"], unsafe_allow_html=True)
+                st.markdown(textos_download["download_text"], unsafe_allow_html=True)
+    
+                st.download_button(
+                    label=textos_download["download_label"],
+                    data=conteudo_arquivo,
+                    file_name="testeapp.txt",
+                    mime="text/csv"
+                )
             dados = ler_do_drive(textos_otim)
         
         # Verifica se os dados estão válidos
