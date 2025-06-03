@@ -693,14 +693,14 @@ def main():
     idioma_atual = "Português" if st.session_state.lang == "pt" else "English"
     idioma_selecionado = st.sidebar.selectbox(
         "Language / Idioma:",
-        ("🇺🇸 English", "🇧🇷 Português"),
+        ("🇺🇸 English (UK)", "🇧🇷 Português (BR)"),
         index=0 if idioma_atual == "English"  else 1
     )
 
     # Atualiza o idioma no estado se o usuário mudar pelo selectbox
-    if idioma_selecionado == "🇧🇷 Português" and st.session_state.lang != "pt":
+    if idioma_selecionado == "🇧🇷 Português (BR)" and st.session_state.lang != "pt":
         st.session_state.lang = "pt"
-    elif idioma_selecionado == "🇺🇸 English" and st.session_state.lang != "en":
+    elif idioma_selecionado == "🇺🇸 English (US)" and st.session_state.lang != "en":
         st.session_state.lang = "en"
 
     lang = st.session_state.lang
