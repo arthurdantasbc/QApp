@@ -672,7 +672,6 @@ def main():
     mostrar_otim(textos_otim)
     mostrar_ml(textos)
     mostrar_inf(textos)
-    mostrar_referencias(textos)
 
     if 'pagina' not in st.session_state:
         st.session_state['pagina'] = 'inicio'
