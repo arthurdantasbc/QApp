@@ -383,7 +383,7 @@ def mostrar_introducao_e_titulo(textos):
     )
 
     
-def mostrar_referencias(textos):
+def mostrar_referencias(textos, textos_otim):
     st.title(textos.get("pagina_referencias_titulo", "Referências"))
 
     st.header(textos_otim["pagina_otimizacao"])
@@ -1188,7 +1188,7 @@ def main():
         st.write("Lavínia")
 
     elif st.session_state['pagina'] == 'referencias':
-        mostrar_referencias(textos)
+        mostrar_referencias(textos, textos_otim)
 
 if __name__ == "__main__":
     main()
