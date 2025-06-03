@@ -407,45 +407,6 @@ def mostrar_introducao_e_titulo(textos):
     )
 
 def botao_voltar():
-    st.markdown(
-        """
-        <style>
-        #botao-voltar {
-            position: fixed;
-            top: 60px;
-            left: 20px;
-            z-index: 1000;
-            background-color: #0d4376;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 48px;
-            height: 48px;
-            font-size: 22px;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-        }
-        #botao-voltar:hover {
-            background-color: #07294a;
-            transform: scale(1.1) rotate(-2deg);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-        }
-        </style>
-        <button id="botao-voltar">←</button>
-        <script>
-        const botao = document.getElementById("botao-voltar");
-        botao.onclick = () => {
-            const url = new URL(window.location);
-            url.searchParams.set('voltar', '1');
-            window.location.href = url.toString();
-        }
-        </script>
-        """,
-        unsafe_allow_html=True,
-    )
-
     paginas = ['inicio', 'otimizacao', 'ml', 'inferencia', 'referencias']
     atual = st.session_state.get('pagina', 'inicio')
     indice_atual = paginas.index(atual)
@@ -454,10 +415,34 @@ def botao_voltar():
     else:
         pagina_anterior = paginas[0]
 
-    if st.button("← Voltar"):
+    st.markdown("""
+    <style>
+    div.stButton > button {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #0d4376;
+        color: white;
+        font-size: 24px;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    div.stButton > button:hover {
+        background-color: #07294a;
+        transform: scale(1.1) rotate(-5deg);
+        box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+    if st.button("←", key="botao_voltar", help="Voltar à página anterior"):
         st.session_state['pagina'] = pagina_anterior
-        # Para forçar a atualização, mude outra chave qualquer do estado
-        st.session_state['reload_flag'] = not st.session_state.get('reload_flag', False)
+        st.experimental_rerun()
 
     
 def mostrar_referencias(textos, textos_otim):
