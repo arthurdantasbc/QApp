@@ -723,12 +723,13 @@ def main():
         """, unsafe_allow_html=True)
     
         # Leitura de dados
+        # Leitura de dados
         modo_leitura = st.radio(
             textos_otim["modo_leitura_label"],
             (textos_otim["modo_leitura_manual"], textos_otim["modo_leitura_upload"]),
             key=f"modo_leitura_{lang}"
         )
-    
+        
         dados = []
         if modo_leitura == textos_otim["modo_leitura_manual"]:
             dados = ler_manualmente(textos_otim)
@@ -736,54 +737,76 @@ def main():
             if st.button(textos_otim["ajuda_upload_botao"]):
                 st.markdown(textos_otim["ajuda_upload_texto"], unsafe_allow_html=True)
             dados = ler_do_drive(textos_otim)
-    
+        
         # Verifica se os dados estão válidos
         if (modo_leitura == textos_otim["modo_leitura_manual"] and len(dados[0]) == 7) or \
            (modo_leitura == textos_otim["modo_leitura_upload"] and dados):
-    
+        
             if st.button(textos_otim["botao_mostrar_instancia"]):
                 mostrar_instancia(dados, textos_otim)
-    
+        
             if len(dados[0]) != 1:
                 modo_algoritmo = st.radio(textos_otim["selecionar_algoritmo"], ('QAOA', 'VQE'))
-    
+        
                 if modo_algoritmo == 'VQE':
                     tipo_circuito = st.radio(
                         textos_otim["selecionar_tipo_circuito"], 
                         (textos_otim["real_amplitudes"], textos_otim["two_local"])
                     )
-                    
+        
                     if tipo_circuito == textos_otim["two_local"]:
-                        # Escolha das portas de rotação
-                        opcoes_rotacao = textos_otim["opcoes_rotacao"]
-                        rotacao_escolhida = st.multiselect(textos_otim["selecionar_rotacao"], opcoes_rotacao)
-                    
-                        # Escolha das portas de emaranhamento
-                        opcoes_entanglement = textos_otim["opcoes_emaranhamento"]
-                        entanglement_escolhido = st.multiselect(textos_otim["selecionar_emaranhamento"], opcoes_entanglement)
-                    
+                        col1, col2 = st.columns(2)
+        
+                        with col1:
+                            rotacao_escolhida = st.multiselect(
+                                textos_otim["selecionar_rotacao"],
+                                textos_otim["opcoes_rotacao"]
+                            )
+                        with col2:
+                            entanglement_escolhido = st.multiselect(
+                                textos_otim["selecionar_emaranhamento"],
+                                textos_otim["opcoes_emaranhamento"]
+                            )
+        
                     tipo_inicializacao = st.radio(
                         textos_otim["tipo_inicializacao"],
                         textos_otim["tipos_inicializacao_vqe"]
                     )
-                    
-                    # Verificação do ponto fixo
+        
                     if tipo_inicializacao in ['Ponto Fixo', 'Fixed Point']:
-                        numero_ponto_fixo = st.number_input(textos_otim["inserir_ponto_fixo"], step=0.1)
-                
+                        numero_ponto_fixo = st.number_input(
+                            textos_otim["inserir_ponto_fixo"], step=0.1
+                        )
+        
                 elif modo_algoritmo == 'QAOA':
                     tipo_inicializacao = st.radio(
                         textos_otim["tipo_inicializacao"],
                         textos_otim["tipos_inicializacao_qaoa"]
                     )
-                
+        
                     if tipo_inicializacao in ['Ponto Fixo', 'Fixed Point']:
-                        numero_ponto_fixo = st.number_input(textos_otim["inserir_ponto_fixo"], step=0.1)
+                        numero_ponto_fixo = st.number_input(
+                            textos_otim["inserir_ponto_fixo"], step=0.1
+                        )
+        
+                # Agrupar otimizador + camadas + rodadas + shots
+                col1, col2 = st.columns(2)
+                with col1:
+                    otimizador = st.radio(
+                        textos_otim["selecionar_otimizador"],
+                        textos_otim["opcoes_otimizadores"]
+                    )
+                    camadas = st.number_input(
+                        textos_otim["inserir_camadas"], min_value=1, max_value=3, value=1
+                    )
+                with col2:
+                    rodadas = st.number_input(
+                        textos_otim["inserir_rodadas"], min_value=1, value=1
+                    )
+                    shots = st.number_input(
+                        textos_otim["inserir_shots"], min_value=100, value=1000
+                    )
 
-                otimizador = st.radio(textos_otim["selecionar_otimizador"],textos_otim["opcoes_otimizadores"])
-                camadas = st.number_input(textos_otim["inserir_camadas"], min_value=1, max_value=3, value=1)
-                rodadas = st.number_input(textos_otim["inserir_rodadas"], min_value=1, value=1)
-                shots = st.number_input(textos_otim["inserir_shots"], min_value=100, value=1000)
                 
         if st.button(textos_otim['executar']):
 
