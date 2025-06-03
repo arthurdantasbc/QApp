@@ -406,6 +406,62 @@ def mostrar_introducao_e_titulo(textos):
         unsafe_allow_html=True
     )
 
+def botao_voltar_fixo(pagina_destino="inicio"):
+    st.markdown(
+        f"""
+        <style>
+        #botao-voltar {{
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background-color: #0d4376;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            font-size: 22px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }}
+        #botao-voltar:hover {{
+            background-color: #07294a;
+            transform: scale(1.1) rotate(-2deg);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }}
+        </style>
+        <form action="" method="post">
+            <button id="botao-voltar" onclick="fetch('', {{method: 'POST'}}).then(() => window.location.reload()); return false;">←</button>
+        </form>
+        """,
+        unsafe_allow_html=True
+    )
+
+    # Lógica de redirecionamento
+    if "voltar_clicado" not in st.session_state:
+        st.session_state["voltar_clicado"] = False
+
+    voltar = st.experimental_get_query_params().get("voltar", [None])[0]
+    if voltar == "1" or st.session_state["voltar_clicado"]:
+        st.session_state["pagina"] = pagina_destino
+        st.session_state["voltar_clicado"] = False
+    else:
+        js = """<script>
+        const botao = document.getElementById("botao-voltar");
+        if (botao) {
+            botao.onclick = function() {
+                const url = new URL(window.location);
+                url.searchParams.set('voltar', '1');
+                window.location.href = url;
+                return false;
+            };
+        }
+        </script>"""
+        st.markdown(js, unsafe_allow_html=True)
+
     
 def mostrar_referencias(textos, textos_otim):
     st.title(textos.get("pagina_referencias_titulo", "Referências"))
@@ -727,6 +783,7 @@ def main():
 
     elif st.session_state['pagina'] == 'otimizacao':
         st.subheader(textos["pagina_otimizacao"])
+        botao_voltar()
         
         # Aplica estilos personalizados
         st.markdown("""
