@@ -406,7 +406,7 @@ def mostrar_introducao_e_titulo(textos):
         unsafe_allow_html=True
     )
 
-def botao_voltar(pagina_destino="inicio"):
+def botao_voltar():
     st.markdown(
         """
         <style>
@@ -446,12 +446,18 @@ def botao_voltar(pagina_destino="inicio"):
         unsafe_allow_html=True,
     )
 
-    params = st.query_params
+    paginas = ['inicio', 'otimizacao', 'ml', 'inferencia', 'referencias']
+    atual = st.session_state.get('pagina', 'inicio')
+    indice_atual = paginas.index(atual)
+    if indice_atual > 0:
+        pagina_anterior = paginas[indice_atual - 1]
+    else:
+        pagina_anterior = paginas[0]
 
-    if params.get("voltar") == ["1"]:
-        st.session_state["pagina"] = pagina_destino
-        # Limpa o parâmetro para evitar loop
-        st.experimental_set_query_params()
+    if st.button("← Voltar"):
+        st.session_state['pagina'] = pagina_anterior
+        # Para forçar a atualização, mude outra chave qualquer do estado
+        st.session_state['reload_flag'] = not st.session_state.get('reload_flag', False)
 
     
 def mostrar_referencias(textos, textos_otim):
@@ -660,6 +666,7 @@ def main():
     page_icon="pesq.png",
     layout="wide"
 )
+    botao_voltar()
 
     aplicar_css_botoes()
 
