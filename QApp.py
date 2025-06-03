@@ -406,7 +406,7 @@ def mostrar_introducao_e_titulo(textos):
         unsafe_allow_html=True
     )
 
-def botao_voltar_fixo(pagina_destino="menu_principal"):
+def botao_voltar(pagina_destino="menu_principal"):
     st.markdown(
         """
         <style>
