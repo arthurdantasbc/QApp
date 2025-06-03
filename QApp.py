@@ -454,13 +454,18 @@ def mostrar_logo_topo():
         st.image("qxplore.png", width=600)
         
 #Otimização
+
 def ler_manualmente(textos_otim):
     st.write(textos_otim["insira_dados"])
 
-    s = st.number_input(f"{textos_otim['s']}:", step=1, min_value=1)
-    nj_max = st.number_input(f"{textos_otim['nj_max']}:", step=1, min_value=1)
-    nj_min = st.number_input(f"{textos_otim['nj_min']}:",  step=1, min_value=0)
-    ctj_of = st.number_input(f"{textos_otim['ctj_of']}:", step=1, min_value=1)
+    # Organizar inputs principais em 2 colunas
+    col1, col2 = st.columns(2)
+    with col1:
+        s = st.number_input(f"{textos_otim['s']}:", step=1, min_value=1)
+        nj_min = st.number_input(f"{textos_otim['nj_min']}:", step=1, min_value=0)
+    with col2:
+        nj_max = st.number_input(f"{textos_otim['nj_max']}:", step=1, min_value=1)
+        ctj_of = st.number_input(f"{textos_otim['ctj_of']}:", step=1, min_value=1)
 
     st.markdown(f"**{textos_otim['lista_componentes']}**")
 
@@ -468,27 +473,30 @@ def ler_manualmente(textos_otim):
     cjk_of = []
 
     for i in range(int(ctj_of)):
-        Rjk_of.append(
-            st.number_input(f"{textos_otim['confiabilidade']} [{i+1}]:", 
-                            key=f'Rjk_of_{i}', 
-                            step=0.001, 
-                            min_value=0.000, 
-                            max_value=1.0, 
-                            format="%.8f")
-        )
-        cjk_of.append(
-            st.number_input(f"{textos_otim['custo']} [{i+1}]:", 
-                            key=f'cjk_of_{i}', 
-                            step=1, 
-                            min_value=0)
-        )
+        col_r, col_c = st.columns(2)
+        with col_r:
+            Rjk_of.append(
+                st.number_input(f"{textos_otim['confiabilidade']} [{i+1}]:", 
+                                key=f'Rjk_of_{i}', 
+                                step=0.001, 
+                                min_value=0.000, 
+                                max_value=1.0, 
+                                format="%.8f")
+            )
+        with col_c:
+            cjk_of.append(
+                st.number_input(f"{textos_otim['custo']} [{i+1}]:", 
+                                key=f'cjk_of_{i}', 
+                                step=1, 
+                                min_value=0)
+            )
 
+    # Input final em destaque
     C_of = st.number_input(f"{textos_otim['custo_total_limite']}:", step=1, min_value=1)
 
     dados = [[s, nj_max, nj_min, ctj_of, Rjk_of, cjk_of, C_of]]
-
     return dados
-
+    
 def mostrar_instancia(instancia, textos_otim):
     st.subheader(textos_otim["instancia"])
     st.write("s:", instancia[0][0])
