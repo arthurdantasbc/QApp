@@ -384,10 +384,10 @@ def mostrar_introducao_e_titulo(textos):
 
     
 def mostrar_referencias(textos):
-    st.sidebar.markdown(f"{textos['referencias_intro']}")
+    st.title(textos.get("pagina_referencias_titulo", "Referências"))
 
-    with st.sidebar.expander(textos.get("referencias_titulo", "Referências")):
-        st.markdown("""
+    st.header(textos_otim["pagina_otimizacao"])
+    st.markdown("""
 - **Araújo, L. M. M., Lins, I., Aichele, D., Maior, C., Moura, M., & Droguett, E. (2022).**  
   *Review of Quantum(-Inspired) Optimization Methods for System Reliability Problems.*  
   16th International Probabilistic Safety Assessment and Management Conference - PSAM 16.
@@ -419,8 +419,8 @@ def mostrar_referencias(textos):
 - **Lins, I., Araújo, L., Maior, C., Teixeira, E., Bezerra, P., Moura, M., & Droguett, E. (2023).**  
   *Quantum Optimization for Redundancy Allocation Problem Considering Various Subsystems.*  
   33th European Safety and Reliability (ESREL) Conference.
-        """)
-
+    """)
+    
 def mostrar_cartoes_de_area(textos):
     col1, col2, col3, col4, col5 = st.columns(5)
     with col1:
@@ -433,6 +433,10 @@ def mostrar_cartoes_de_area(textos):
         st.image("ml3.png", width=150)
         if st.button(textos["pagina_ml"], key="ml_btn"):
             st.session_state['pagina'] = 'ml'
+
+        if st.button(textos["pagina_referencias"], key="referencias_btn"):
+            st.session_state['pagina'] = 'referencias'
+            
     with col4:
         st.image("infer3.png", width=150)
         if st.button(textos["pagina_inferencia"], key="inferencia_btn"):
@@ -440,12 +444,6 @@ def mostrar_cartoes_de_area(textos):
     with col5:
         st.write("")
 
-    # Linha extra com botão de Referências centralizado
-    st.markdown("<br>", unsafe_allow_html=True)  # Espaço vertical
-    col_ref1, col_ref2, col_ref3 = st.columns([1, 2, 1])
-    with col_ref2:
-        if st.button(textos["pagina_referencias"], key="referencias_btn"):
-            st.session_state['pagina'] = 'referencias'
 
 
 def ler_manualmente(textos):
