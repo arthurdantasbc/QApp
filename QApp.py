@@ -405,45 +405,6 @@ def mostrar_introducao_e_titulo(textos):
         """,
         unsafe_allow_html=True
     )
-
-def botao_voltar():
-    paginas = ['inicio', 'otimizacao', 'ml', 'inferencia', 'referencias']
-    atual = st.session_state.get('pagina', 'inicio')
-    indice_atual = paginas.index(atual)
-    if indice_atual > 0:
-        pagina_anterior = paginas[indice_atual - 1]
-    else:
-        pagina_anterior = paginas[0]
-
-    st.markdown("""
-    <style>
-    div.stButton > button {
-        position: fixed;
-        top: 20px;
-        left: 20px;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background-color: #0d4376;
-        color: white;
-        font-size: 24px;
-        font-weight: bold;
-        cursor: pointer;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-        transition: background-color 0.3s ease, transform 0.3s ease;
-    }
-    div.stButton > button:hover {
-        background-color: #07294a;
-        transform: scale(1.1) rotate(-5deg);
-        box-shadow: 0 6px 12px rgba(0,0,0,0.3);
-    }
-    </style>
-    """, unsafe_allow_html=True)
-
-    if st.button("←", key="botao_voltar", help="Voltar à página anterior"):
-        st.session_state['pagina'] = pagina_anterior
-        st.experimental_rerun()
-
     
 def mostrar_referencias(textos, textos_otim):
     st.title(textos.get("pagina_referencias_titulo", "Referências"))
@@ -651,7 +612,6 @@ def main():
     page_icon="pesq.png",
     layout="wide"
 )
-    botao_voltar()
 
     aplicar_css_botoes()
 
@@ -766,7 +726,6 @@ def main():
 
     elif st.session_state['pagina'] == 'otimizacao':
         st.subheader(textos["pagina_otimizacao"])
-        botao_voltar()
         
         # Aplica estilos personalizados
         st.markdown("""
